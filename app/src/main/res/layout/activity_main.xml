@@ -97,7 +97,7 @@
                         android:id="@+id/imgTransaksi"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/baseline_attach_money_24"
+                        android:src="@drawable/salary"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -108,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:text="Transaksi"
                         android:textSize="14sp"
-                        android:fontFamily="@font/montserratRegular"
+                        android:fontFamily="@font/montserratregular"
                         app:layout_constraintTop_toBottomOf="@id/imgTransaksi"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -129,7 +129,7 @@
                         android:id="@+id/imgPelanggan"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/baseline_groups_2_24"
+                        android:src="@drawable/rating"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -139,7 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pelanggan"
-                        android:fontFamily="@font/montserratRegular"
+                        android:fontFamily="@font/montserratregular"
                         android:textSize="14sp"
                         app:layout_constraintTop_toBottomOf="@id/imgPelanggan"
                         app:layout_constraintStart_toStartOf="parent"
@@ -161,7 +161,7 @@
                         android:id="@+id/imgLaporan"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/baseline_event_note_24"
+                        android:src="@drawable/report"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -172,7 +172,7 @@
                         android:layout_height="wrap_content"
                         android:text="Laporan"
                         android:textSize="14sp"
-                        android:fontFamily="@font/montserratRegular"
+                        android:fontFamily="@font/montserratregular"
                         app:layout_constraintTop_toBottomOf="@id/imgLaporan"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -181,5 +181,29 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvservice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Siap melayani pelanggan dengan setulus hati"
+        android:fontFamily="@font/monsterratbold"
+        app:layout_constraintTop_toBottomOf="@id/cardEstimation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/jangankecewakanpelanggan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jangan kecewakan pelanggan!"
+        android:fontFamily="@font/montserratregular"
+        app:layout_constraintTop_toBottomOf="@id/tvservice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
