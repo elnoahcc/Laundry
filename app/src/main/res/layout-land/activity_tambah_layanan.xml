@@ -228,20 +228,19 @@
     <!-- CardView untuk Paket Spesial -->
     <androidx.cardview.widget.CardView
         android:id="@+id/paketspecial"
-        android:layout_width="355dp"
-        android:layout_height="wrap_content"
+        android:layout_width="255dp"
+        android:layout_height="285dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="18dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         android:backgroundTint="#128c7e"
-
-        app:layout_constraintTop_toBottomOf="@id/cucisetrika"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginStart="50dp"
+        app:layout_constraintStart_toEndOf="@id/cucibiasa"
+        app:layout_constraintTop_toBottomOf="@id/textjudul">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp"
             android:gravity="center">
