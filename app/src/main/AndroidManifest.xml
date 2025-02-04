@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Laundry"
         tools:targetApi="31">
         <activity
+            android:name=".Layanan.TambahLayanan"
+            android:exported="false" />
+        <activity
             android:name=".pelanggan.TambahPelanggan"
             android:exported="false" />
         <activity
