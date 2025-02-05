@@ -82,7 +82,7 @@
         android:backgroundTint="#128c7e"
         app:layout_constraintStart_toEndOf="@id/cvsetrika"
         app:layout_constraintTop_toBottomOf="@id/textjudul"
-        android:layout_marginStart="50dp">
+        android:layout_marginStart="60dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -182,7 +182,7 @@
         android:layout_marginTop="18dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="60dp"
         app:layout_constraintTop_toBottomOf="@id/cucibiasa"
         app:layout_constraintStart_toEndOf="@id/cucisetrika"
         android:backgroundTint="#128c7e">
@@ -228,13 +228,13 @@
     <!-- CardView untuk Paket Spesial -->
     <androidx.cardview.widget.CardView
         android:id="@+id/paketspecial"
-        android:layout_width="355dp"
+        android:layout_width="358dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="18dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        android:backgroundTint="#128c7e"
+        android:backgroundTint="#25d366"
 
         app:layout_constraintTop_toBottomOf="@id/cucisetrika"
         app:layout_constraintStart_toStartOf="parent">
@@ -242,37 +242,37 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:gravity="center">
+            android:padding="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Paket Spesial 🎆"
                 android:fontFamily="@font/interextrabold"
+                android:text="Paket Spesial"
+                android:textColor="@color/white"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/inter"
                 android:text="Layanan cuci + setrika + one day service"
-                android:fontFamily="@font/inter"
-                android:textSize="14sp"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rp 50.000/kg"
-                android:fontFamily="@font/inter"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/white"/>
+                android:fontFamily="@font/inter"
+                android:text="Rp 50.000/kg"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

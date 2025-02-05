@@ -24,16 +24,25 @@
             android:fontFamily="@font/inter"
             />
         <TextView
-            android:id="@+id/tvDataNamaPelanggan"
+            android:id="@+id/tvDataNamaPegawai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/interextrabold"
-            android:text="Nama Pelanggan"
+            android:text="Nama Pegawai"
             android:textSize="24sp"
             android:layout_marginTop="16dp"
             />
         <TextView
-            android:id="@+id/tvDataNoHpPelanggan"
+        android:id="@+id/tvDataAlamatPegawai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter"
+        android:text="Alamat"
+        android:textSize="16sp"
+        android:paddingTop="8dp"
+        />
+        <TextView
+            android:id="@+id/tvDataNoHpPegawai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
@@ -42,7 +51,7 @@
             android:paddingTop="8dp"
             />
         <TextView
-            android:id="@+id/tvDataTerdaftarPelanggan"
+            android:id="@+id/tvDataTerdaftarPegawai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
@@ -51,14 +60,15 @@
             android:paddingTop="8dp"
             />
         <TextView
-            android:id="@+id/tvDataAlamatPelanggan"
+            android:id="@+id/tvDataCabangPegawai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
-            android:text="Alamat"
+            android:text="Cabang"
             android:textSize="16sp"
             android:paddingTop="8dp"
             />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +78,7 @@
             >
             <Button
                 android:layout_weight="1"
-                android:id="@+id/btDataHubungiPelanggan"
+                android:id="@+id/btDataHubungiPegawai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#22c55e"
@@ -78,7 +88,7 @@
                 android:layout_marginRight="5dp"/>
             <Button
                 android:layout_weight="1"
-                android:id="@+id/btDataLihatPelanggan"
+                android:id="@+id/btDataLihatPegawai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#f59e0b"

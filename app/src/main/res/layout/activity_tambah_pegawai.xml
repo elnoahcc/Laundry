@@ -5,17 +5,17 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pelanggan.TambahPelanggan"
+    tools:context=".Pegawai.TambahPegawai"
     android:background="#075e54">
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_title_pegawai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="130dp"
         android:fontFamily="@font/interblack"
         android:padding="10dp"
-        android:text="TAMBAH PELANGGAN"
+        android:text="TAMBAH PEGAWAI"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_nama"
+        android:id="@+id/tv_nama_pegawai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -33,10 +33,10 @@
         android:textColor="@color/white"
         app:layout_constraintMarginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title_pegawai" />
 
     <EditText
-        android:id="@+id/et_nama"
+        android:id="@+id/et_nama_pegawai"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_margin="10dp"
@@ -48,10 +48,10 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_nama" />
+        app:layout_constraintTop_toBottomOf="@id/tv_nama_pegawai" />
 
     <TextView
-        android:id="@+id/tv_alamat"
+        android:id="@+id/tv_alamat_pegawai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -60,10 +60,10 @@
         android:textColor="@color/white"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_nama" />
+        app:layout_constraintTop_toBottomOf="@id/et_nama_pegawai" />
 
     <EditText
-        android:id="@+id/et_alamat"
+        android:id="@+id/et_alamat_pegawai"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_margin="10dp"
@@ -75,10 +75,10 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_alamat" />
+        app:layout_constraintTop_toBottomOf="@id/tv_alamat_pegawai" />
 
     <TextView
-        android:id="@+id/tv_hp"
+        android:id="@+id/tv_hp_pegawai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -87,26 +87,25 @@
         android:textColor="@color/white"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_alamat" />
+        app:layout_constraintTop_toBottomOf="@id/et_alamat_pegawai" />
 
     <EditText
-        android:id="@+id/et_hp"
+        android:id="@+id/et_hp_pegawai"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_margin="10dp"
         android:background="@drawable/rounded_et"
         android:fontFamily="@font/inter"
         android:hint="No HP Aktif"
+        android:textSize="12dp"
         android:inputType="phone"
         android:padding="10dp"
-        android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_hp"
-        tools:ignore="TextSizeCheck" />
+        app:layout_constraintTop_toBottomOf="@id/tv_hp_pegawai" />
 
     <TextView
-        android:id="@+id/tv_cabang"
+        android:id="@+id/tv_cabang_pegawai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -115,7 +114,7 @@
         android:textColor="@color/white"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_hp" />
+        app:layout_constraintTop_toBottomOf="@id/et_hp_pegawai" />
 
     <EditText
         android:id="@+id/et_cabang"
@@ -124,13 +123,13 @@
         android:layout_margin="10dp"
         android:background="@drawable/rounded_et"
         android:fontFamily="@font/inter"
-        android:hint="No HP Aktif"
+        android:hint="Cabang"
         android:textSize="12dp"
         android:inputType="phone"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_cabang" />
+        app:layout_constraintTop_toBottomOf="@id/tv_cabang_pegawai" />
 
     <Button
         android:id="@+id/btn_simpan"
