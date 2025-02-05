@@ -6,4 +6,24 @@
     <string name="card_pelanggan_hubungi">Hubungi</string>
     <string name="card_pelanggan_lihat">Lihat</string>
     <string name="card_pelanggan_cabang">Cabang</string>
+    <string name="card_pegawai_nama">Nama Pegawai</string>
+    <string name="card_pelanggan_nohp">No HP</string>
+    <string name="main_estimasi">Estimasi Hari Ini</string>
+    <string name="main_transaksi">Transaksi</string>
+    <string name="main_pelanggan">Pelanggan</string>
+    <string name="main_layanan">Layanan</string>
+    <string name="main_laporan">Laporan</string>
+    <string name="main_tambahan">Tambahan</string>
+    <string name="main_cabang">Cabang</string>
+    <string name="main_pegawai">Pegawai</string>
+    <string name="main_printer">Printer</string>
+    <string name="main_sentence1">Siap melayani pelanggan dengan setulus hati</string>
+    <string name="main_sentence2">Jangan kecewakan pelanggan!</string>
+    <string name="main_akun">Akun</string>
+    <string name="title_tambahpelanggan">Tambah Pelanggan</string>
+    <string name="hint_namalengkap">Nama Lengkap</string>
+    <string name="button_simpan">Simpan</string>
+    <string name="card_layanan_nama">Nama Layanan</string>
+    <string name="harga_layanan_main_card">Harga</string>
+    <string name="card_layanan_id">ID Layanan</string>
 </resources>

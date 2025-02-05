@@ -5,12 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    tools:context=".pelanggan.DataPelanggan"
-    android:background="#075e54">
+    tools:context=".Layanan.DataLayanan">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDATA_PELANGGAN"
+        android:id="@+id/rvDATA_LAYANAN"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="8dp"
@@ -18,10 +16,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="16dp"
-        tools:listitem="@layout/card_data_pelanggan" />
+        tools:listitem="@layout/card_data_layanan" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabDATA_PELANGGAN_TAMBAH"
+        android:id="@+id/fabDATA_PEGAWAI_LAYANAN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_person_add_24"
@@ -31,4 +29,5 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="Tambah Pelanggan" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

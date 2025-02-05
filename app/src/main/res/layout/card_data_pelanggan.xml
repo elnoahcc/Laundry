@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/interextrabold"
-            android:text="Nama Pelanggan"
+            android:text="@string/card_pelanggan_nama"
             android:textSize="24sp"
             android:layout_marginTop="16dp"
             />
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
-            android:text="No HP"
+            android:text="@string/card_pelanggan_nohp"
             android:textSize="16sp"
             android:paddingTop="8dp"
             />
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
-            android:text="Alamat"
+            android:text="@string/card_pelanggan_alamat"
             android:textSize="16sp"
             android:paddingTop="8dp"
             />
@@ -74,7 +74,7 @@
                 android:backgroundTint="#22c55e"
                 android:padding="16dp"
                 android:fontFamily="@font/inter"
-                android:text="Hubungi"
+                android:text="@string/card_pelanggan_hubungi"
                 android:layout_marginRight="5dp"/>
             <Button
                 android:layout_weight="1"
@@ -85,7 +85,7 @@
                 android:padding="16dp"
                 android:fontFamily="@font/inter"
                 android:layout_marginLeft="5dp"
-                android:text="Lihat"/>
+                android:text="@string/card_pelanggan_lihat"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

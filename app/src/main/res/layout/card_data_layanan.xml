@@ -17,50 +17,32 @@
         android:padding="16dp"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/tvDataIDPelanggan"
+            android:id="@+id/tvDataIDLayanan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/card_pelanggan_id"
+            android:text="@string/card_layanan_id"
             android:fontFamily="@font/inter"
             />
         <TextView
-            android:id="@+id/tvDataNamaPegawai"
+            android:id="@+id/tvDataNamaLayanan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/interextrabold"
-            android:text="@string/card_pegawai_nama"
+            android:text="@string/card_layanan_nama"
             android:textSize="24sp"
             android:layout_marginTop="16dp"
             />
         <TextView
-        android:id="@+id/tvDataAlamatPegawai"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/inter"
-        android:text="@string/card_pelanggan_alamat"
-        android:textSize="16sp"
-        android:paddingTop="8dp"
-        />
-        <TextView
-            android:id="@+id/tvDataNoHpPegawai"
+            android:id="@+id/tvDataHargaLayanan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
-            android:text="@string/card_pelanggan_nohp"
+            android:text="@string/harga_layanan_main_card"
             android:textSize="16sp"
             android:paddingTop="8dp"
             />
         <TextView
-            android:id="@+id/tvDataTerdaftarPegawai"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter"
-            android:text="Terdaftar"
-            android:textSize="16sp"
-            android:paddingTop="8dp"
-            />
-        <TextView
-            android:id="@+id/tvDataCabangPegawai"
+            android:id="@+id/tvDataCabangLayanan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"

@@ -1,29 +1,17 @@
-package com.elnoah.laundry.Pegawai
+package com.elnoah.laundry.Layanan
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.elnoah.laundry.R
-import com.elnoah.laundry.pelanggan.TambahPelanggan
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class DataPegawai : AppCompatActivity() {
+class DataLayanan : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_data_pegawai)
-
-        // Redirect ke halaman pelanggan
-        val pegawai = findViewById<FloatingActionButton>(R.id.fabDATA_PEGAWAI_TAMBAH)
-        pegawai.setOnClickListener {
-            val intent = Intent(this, TambahPegawai::class.java)
-            startActivity(intent)
-        }
-
-
+        setContentView(R.layout.activity_data_layanan)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
