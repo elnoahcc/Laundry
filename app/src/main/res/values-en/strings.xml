@@ -27,4 +27,7 @@
     <string name="card_layanan_nama">Service Name</string>
     <string name="harga_layanan_main_card">Fee</string>
     <string name="card_layanan_id">Service ID</string>
+    <string name="validasi_nama_pelanggan">Name is EMpty!</string>
+    <string name="sukses_simpan_pelanggan">Data Succeed</string>
+    <string name="gagal_simpan_pelanggan">Data Failed</string>
 </resources>

@@ -27,4 +27,7 @@
     <string name="card_layanan_nama">Nama Layanan</string>
     <string name="harga_layanan_main_card">Harga</string>
     <string name="card_layanan_id">ID Layanan</string>
+    <string name="validasi_nama_pelanggan">Nama masih losong!</string>
+    <string name="sukses_simpan_pelanggan">Data Sukses Disimpan!</string>
+    <string name="gagal_simpan_pelanggan">Data Gagal Disimpan</string>
 </resources>

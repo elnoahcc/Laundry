@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
+    android:id="@+id/CVDATA_PELANGGAN"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -56,6 +57,15 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
             android:text="@string/card_pelanggan_alamat"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            />
+        <TextView
+            android:id="@+id/tvDataCabangPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:text="@string/card_pelanggan_cabang"
             android:textSize="16sp"
             android:paddingTop="8dp"
             />
