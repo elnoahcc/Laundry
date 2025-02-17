@@ -8,9 +8,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/laundrymachine"
+        android:icon="@drawable/logolaundry"
         android:label="Laundry Elnoah"
-        android:roundIcon="@drawable/laundrymachine"
+        android:roundIcon="@drawable/logolaundry"
         android:supportsRtl="true"
         android:theme="@style/Theme.Laundry"
         tools:targetApi="31">
@@ -21,10 +21,10 @@
             android:name=".Layanan.DataLayanan"
             android:exported="false" />
         <activity
-            android:name=".Pegawai.TambahPegawai"
+            android:name=".pegawai.TambahPegawai"
             android:exported="true" />
         <activity
-            android:name=".Pegawai.DataPegawai"
+            android:name=".pegawai.DataPegawai"
             android:exported="false" />
         <activity
             android:name=".pelanggan.TambahPelanggan"

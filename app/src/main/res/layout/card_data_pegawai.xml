@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/CVDATA_PEGAWAI"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     cardElevation="4dp"
     android:orientation="vertical"
@@ -17,10 +18,10 @@
         android:padding="16dp"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/tvDataIDPelanggan"
+            android:id="@+id/tvDataIDPegawai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/card_pelanggan_id"
+            android:text="@string/card_pegawai_id"
             android:fontFamily="@font/inter"
             />
         <TextView

@@ -30,4 +30,10 @@
     <string name="validasi_nama_pelanggan">Name is EMpty!</string>
     <string name="sukses_simpan_pelanggan">Data Succeed</string>
     <string name="gagal_simpan_pelanggan">Data Failed</string>
+    <string name="validasi_alamat_pelanggan">Adress is Empty!</string>
+    <string name="validasi_nohp_pelanggan">Phone Number is Empty!</string>
+    <string name="validasi_cabang_pelanggan">The branch is Empty</string>
+    <string name="card_pegawai_id">Employee ID</string>
+    <string name="sukses_simpan_pegawai">Employee Data Saved</string>
+    <string name="gagal_simpan_pegawai">Employee Data Failed</string>
 </resources>

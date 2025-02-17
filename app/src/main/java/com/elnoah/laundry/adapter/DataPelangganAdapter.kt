@@ -12,16 +12,14 @@ import com.elnoah.laundry.modeldata.modelpelanggan
 import org.w3c.dom.Text
 
 
-class DataPelangganAdapter(private val listPelanggan: ArrayList<modelpelanggan>) : RecyclerView.Adapter<DataPelangganAdapter.ViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ViewHolder {
+class DataPelangganAdapter(private val listPelanggan: ArrayList<modelpelanggan>) :
+    RecyclerView.Adapter<DataPelangganAdapter.ViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_data_pelanggan, parent, false)
         return ViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
        val item = listPelanggan[position]
         holder.tvID.text = item.idPelanggan
@@ -30,13 +28,10 @@ class DataPelangganAdapter(private val listPelanggan: ArrayList<modelpelanggan>)
         holder.tvNoHP.text = item.noHPPelanggan
         holder.tvTerdaftar.text = item.terdaftar
         holder.cvCARD.setOnClickListener(){
-
         }
         holder.btHubungi.setOnClickListener{
-
         }
         holder.btLihat.setOnClickListener{
-
         }
     }
 

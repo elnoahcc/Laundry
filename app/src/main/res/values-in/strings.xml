@@ -27,7 +27,13 @@
     <string name="card_layanan_nama">Nama Layanan</string>
     <string name="harga_layanan_main_card">Harga</string>
     <string name="card_layanan_id">ID Layanan</string>
-    <string name="validasi_nama_pelanggan">Nama masih losong!</string>
+    <string name="validasi_nama_pelanggan">Nama masih kosong!</string>
     <string name="sukses_simpan_pelanggan">Data Sukses Disimpan!</string>
     <string name="gagal_simpan_pelanggan">Data Gagal Disimpan</string>
+    <string name="validasi_alamat_pelanggan">Alamat masih kosong!</string>
+    <string name="validasi_nohp_pelanggan">Nomor HP masih kosong!</string>
+    <string name="validasi_cabang_pelanggan">Cabang masih kosong</string>
+    <string name="card_pegawai_id">ID Pegawai</string>
+    <string name="sukses_simpan_pegawai">Data Pegawai Tersimpan!</string>
+    <string name="gagal_simpan_pegawai">Data Pegawai Gagal Disimpan</string>
 </resources>

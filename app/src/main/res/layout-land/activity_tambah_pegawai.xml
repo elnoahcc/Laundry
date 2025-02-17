@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Pegawai.TambahPegawai"
+    tools:context=".pegawai.TambahPegawai"
     android:background="#075e54">
 
     <TextView
@@ -17,7 +17,7 @@
         android:padding="10dp"
         android:text="TAMBAH PEGAWAI"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -29,7 +29,6 @@ class DataPelanggan : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_pelanggan)
-        enableEdgeToEdge()
         init()
         val layoutManager = LinearLayoutManager(this)
         layoutManager.reverseLayout = true
@@ -39,7 +38,7 @@ class DataPelanggan : AppCompatActivity() {
         pelangganList = arrayListOf<modelpelanggan>()
         getData()
 
-
+        enableEdgeToEdge()
 
         // Redirect ke halaman pelanggan
         val tambahPelanggan = findViewById<FloatingActionButton>(R.id.fabDATA_PELANGGAN_TAMBAH)
