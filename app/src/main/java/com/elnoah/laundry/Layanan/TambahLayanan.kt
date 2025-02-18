@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.elnoah.laundry.R
-import com.elnoah.laundry.modeldata.modelpegawai
+import com.elnoah.laundry.modeldata.modellayanan // Ubah nama model sesuai konteks
 import com.google.firebase.database.FirebaseDatabase
 
 class TambahLayanan : AppCompatActivity() {
@@ -21,12 +21,12 @@ class TambahLayanan : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tambah_layanan) // Ensure you set the correct layout
+        setContentView(R.layout.activity_tambah_layanan) // Pastikan layout yang benar
         init()
         enableEdgeToEdge()
         applyEdgeToEdge()
 
-        btSimpanLayanan.setOnClickListener { simpan() }
+        btSimpanLayanan.setOnClickListener { simpanLayanan() }
     }
 
     private fun init() {
@@ -44,47 +44,45 @@ class TambahLayanan : AppCompatActivity() {
     }
 
     private fun cekValidasi(): Boolean {
-        when {
-            etNamaLayanan.text.isEmpty() -> {
-                etNamaLayanan.error = getString(R.string.validasi_nama_pelanggan)
-                etNamaLayanan.requestFocus()
-                return false
-            }
-            etCabangLayanan.text.isEmpty() -> {
-                etCabangLayanan.error = getString(R.string.validasi_cabang_pelanggan)
-                etCabangLayanan.requestFocus()
-                return false
-            }
+        if (etNamaLayanan.text.isEmpty()) {
+            etNamaLayanan.error = getString(R.string.validasi_nama_pelanggan)
+            etNamaLayanan.requestFocus()
+            return false
+        }
+        if (etCabangLayanan.text.isEmpty()) {
+            etCabangLayanan.error = getString(R.string.validasi_cabang_pelanggan)
+            etCabangLayanan.requestFocus()
+            return false
         }
         return true
     }
 
-    private fun simpan() {
+    private fun simpanLayanan() {
         if (!cekValidasi()) return
 
         val layananBaru = myRef.push()
-        val pegawaiId = layananBaru.key ?: return
+        val layananId = layananBaru.key ?: return
         val timestamp = System.currentTimeMillis().toString()
 
-        val data = modelpegawai(
-            pegawaiId,
+        val data = modellayanan( // Ubah nama model sesuai konteks
+            layananId,
             etNamaLayanan.text.toString(),
             etCabangLayanan.text.toString(),
-            timestamp
+
         )
         layananBaru.setValue(data)
             .addOnSuccessListener {
                 Toast.makeText(
                     this,
-                    getString(R.string.sukses_simpan_pegawai),
+                    getString(R.string.sukses_simpan_pegawai), // Ubah string resource sesuai konteks
                     Toast.LENGTH_SHORT
                 ).show()
                 finish()
             }
-            .addOnFailureListener {
+            .addOnFailureListener { e ->
                 Toast.makeText(
                     this,
-                    getString(R.string.gagal_simpan_pegawai),
+                    getString(R.string.gagal_simpan_pegawai), // Tambahkan pesan error
                     Toast.LENGTH_SHORT
                 ).show()
             }
