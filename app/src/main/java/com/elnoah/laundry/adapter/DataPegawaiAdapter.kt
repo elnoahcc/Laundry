@@ -27,7 +27,6 @@ class DataPegawaiAdapter(private val listPegawai: List<modelpegawai>) :
         holder.tvAlamat.text = item.alamatPegawai
         holder.tvNoHP.text = item.noHPPegawai
         holder.tvTerdaftar.text = item.terdaftar
-
         holder.cvCARDPEGAWAI.setOnClickListener {
         }
         holder.btHubungi.setOnClickListener {

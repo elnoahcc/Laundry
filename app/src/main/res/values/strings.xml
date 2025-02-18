@@ -35,4 +35,8 @@
     <string name="card_pegawai_id">ID Pegawai</string>
     <string name="sukses_simpan_pegawai">Data Pegawai Tersimpan!</string>
     <string name="gagal_simpan_pegawai">Data Pegawai Gagal Disimpan</string>
+    <string name="validasi_nama_layanan">Nama layanan masih kosong</string>
+    <string name="validasi_cabang_layanan">Cabang layanan masih kosong</string>
+    <string name="sukses_simpan_layanan">Sukses Simpan Data Layanan</string>
+    <string name="gagal_simpan_layanan">Gagal Simpan Data Layanan</string>
 </resources>

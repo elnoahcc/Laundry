@@ -36,4 +36,8 @@
     <string name="card_pegawai_id">Employee ID</string>
     <string name="sukses_simpan_pegawai">Employee Data Saved</string>
     <string name="gagal_simpan_pegawai">Employee Data Failed</string>
+    <string name="validasi_nama_layanan">Service Name is empty</string>
+    <string name="validasi_cabang_layanan">Branch service is empty</string>
+    <string name="sukses_simpan_layanan">Service Data succesfull</string>
+    <string name="gagal_simpan_layanan">Service Data is unsuccesfully</string>
 </resources>

@@ -43,7 +43,7 @@ class DataLayanan : AppCompatActivity() {
         getData()
 
         fabDATA_LAYANAN_TAMBAH.setOnClickListener {
-            val intent = Intent(this, TambahPegawai::class.java)
+            val intent = Intent(this, TambahLayanan::class.java)
             startActivity(intent)
         }
 

@@ -16,32 +16,28 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        enableEdgeToEdge() // Panggil ini sebelum setContentView()
+
         setContentView(R.layout.activity_main)
 
-        enableEdgeToEdge()
-
         // Redirect ke halaman pelanggan
-        val appDataPelanggan = findViewById<ConstraintLayout>(R.id.clPelanggan)
-        appDataPelanggan.setOnClickListener {
-            val intent = Intent(this, DataPelanggan::class.java)
-            startActivity(intent)
+        findViewById<ConstraintLayout>(R.id.clPelanggan)?.setOnClickListener {
+            startActivity(Intent(this, DataPelanggan::class.java))
         }
 
         // Redirect ke halaman pegawai
-        val pegawai = findViewById<CardView>(R.id.cardPegawai)
-        pegawai.setOnClickListener {
-            val intent = Intent(this, DataPegawai::class.java)
-            startActivity(intent)
+        findViewById<CardView>(R.id.cardPegawai)?.setOnClickListener {
+            startActivity(Intent(this, DataPegawai::class.java))
         }
 
         // Redirect ke halaman layanan
-        val layanan = findViewById<CardView>(R.id.cardLayanan)
-        layanan.setOnClickListener {
-            val intent = Intent(this, DataLayanan::class.java)
-            startActivity(intent)
+        findViewById<CardView>(R.id.cardLayanan)?.setOnClickListener {
+            startActivity(Intent(this, DataLayanan::class.java))
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        // Atur padding agar sesuai dengan system bars
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets

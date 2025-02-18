@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.elnoah.laundry.R
-import com.elnoah.laundry.modeldata.modellayanan // Ubah nama model sesuai konteks
+import com.elnoah.laundry.modeldata.modellayanan // Pastikan model sesuai dengan struktur Firebase
 import com.google.firebase.database.FirebaseDatabase
 
 class TambahLayanan : AppCompatActivity() {
@@ -21,7 +21,7 @@ class TambahLayanan : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tambah_layanan) // Pastikan layout yang benar
+        setContentView(R.layout.activity_tambah_layanan) // Pastikan layout benar
         init()
         enableEdgeToEdge()
         applyEdgeToEdge()
@@ -45,12 +45,12 @@ class TambahLayanan : AppCompatActivity() {
 
     private fun cekValidasi(): Boolean {
         if (etNamaLayanan.text.isEmpty()) {
-            etNamaLayanan.error = getString(R.string.validasi_nama_pelanggan)
+            etNamaLayanan.error = getString(R.string.validasi_nama_layanan)
             etNamaLayanan.requestFocus()
             return false
         }
         if (etCabangLayanan.text.isEmpty()) {
-            etCabangLayanan.error = getString(R.string.validasi_cabang_pelanggan)
+            etCabangLayanan.error = getString(R.string.validasi_cabang_layanan)
             etCabangLayanan.requestFocus()
             return false
         }
@@ -58,33 +58,43 @@ class TambahLayanan : AppCompatActivity() {
     }
 
     private fun simpanLayanan() {
-        if (!cekValidasi()) return
+        try {
+            if (!cekValidasi()) return
 
-        val layananBaru = myRef.push()
-        val layananId = layananBaru.key ?: return
-        val timestamp = System.currentTimeMillis().toString()
+            val layananBaru = myRef.push()
+            val layananId = layananBaru.key
 
-        val data = modellayanan( // Ubah nama model sesuai konteks
-            layananId,
-            etNamaLayanan.text.toString(),
-            etCabangLayanan.text.toString(),
-
-        )
-        layananBaru.setValue(data)
-            .addOnSuccessListener {
-                Toast.makeText(
-                    this,
-                    getString(R.string.sukses_simpan_pegawai), // Ubah string resource sesuai konteks
-                    Toast.LENGTH_SHORT
-                ).show()
-                finish()
+            if (layananId == null) {
+                Toast.makeText(this, "Gagal mendapatkan ID layanan!", Toast.LENGTH_SHORT).show()
+                return
             }
-            .addOnFailureListener { e ->
-                Toast.makeText(
-                    this,
-                    getString(R.string.gagal_simpan_pegawai), // Tambahkan pesan error
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+
+            // Membuat objek data model untuk disimpan ke Firebase
+            val data = modellayanan(
+                layananId,
+                etNamaLayanan.text.toString(),
+                etCabangLayanan.text.toString()
+            )
+
+            // Menyimpan data ke Firebase
+            layananBaru.setValue(data)
+                .addOnSuccessListener {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.sukses_simpan_layanan),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    finish()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(
+                        this,
+                        getString(R.string.gagal_simpan_layanan) + ": " + e.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Terjadi kesalahan: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
     }
 }

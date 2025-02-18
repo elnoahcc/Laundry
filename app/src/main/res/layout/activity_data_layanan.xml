@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Layanan.DataLayanan">
+    tools:context=".Layanan.DataLayanan"
+    android:background="#075e54">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDATA_LAYANAN"

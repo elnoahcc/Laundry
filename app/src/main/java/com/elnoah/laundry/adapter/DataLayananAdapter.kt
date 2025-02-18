@@ -22,29 +22,31 @@ class DataLayananAdapter(private val listLayanan: List<modellayanan>) :
         val item = listLayanan[position]
         holder.tvID.text = item.idLayanan
         holder.tvNamaLayanan.text = item.namaLayanan
-        holder.tvCabang.text = item.idCabang  // Sesuaikan dengan model layanan
-
+        holder.tvCabangLayanan.text = item.idCabangLayanan
         holder.cvCARDLAYANAN.setOnClickListener {
-            // Tambahkan aksi klik
+            // Tambahkan aksi klik jika diperlukan
         }
+
         holder.btHubungi.setOnClickListener {
-            // Tambahkan aksi klik
+            // Tambahkan aksi untuk tombol hubungi
         }
+
         holder.btLihatLayanan.setOnClickListener {
-            // Tambahkan aksi klik
+            // Tambahkan aksi untuk tombol lihat layanan
         }
     }
 
-    override fun getItemCount(): Int {
-        return listLayanan.size
-    }
+
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cvCARDLAYANAN: View = itemView.findViewById(R.id.CVDATA_LAYANAN) // Ganti sesuai XML
+        val cvCARDLAYANAN: View = itemView.findViewById(R.id.CVDATA_LAYANAN)
         val tvID: TextView = itemView.findViewById(R.id.tvDataIDLayanan)
         val tvNamaLayanan: TextView = itemView.findViewById(R.id.tv_nama_layanan)
-        val tvCabang: TextView = itemView.findViewById(R.id.tv_cabang_layanan) // Sesuaikan dengan XML
+        val tvCabangLayanan: TextView = itemView.findViewById(R.id.tv_cabang_layanan)
         val btHubungi: Button = itemView.findViewById(R.id.btDataHubungiLayanan)
         val btLihatLayanan: Button = itemView.findViewById(R.id.btDataLihatLayanan)
     }
+    override fun getItemCount(): Int {
+    return listLayanan.size}
 }
+
