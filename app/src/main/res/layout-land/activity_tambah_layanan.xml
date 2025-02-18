@@ -16,9 +16,9 @@
         android:padding="10dp"
         android:text="TAMBAH LAYANAN"
         android:textColor="@color/white"
-        android:textSize="40sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -81,7 +81,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_harga_layanan" />
 
-
+    
 
     <TextView
         android:id="@+id/tv_cabang_layanan"
@@ -113,7 +113,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_cabang_layanan" />
 
     <Button
-        android:id="@+id/btn_simpan_layanan"
+        android:id="@+id/btn_simpan_pegawai"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

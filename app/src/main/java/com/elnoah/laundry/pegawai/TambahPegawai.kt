@@ -1,14 +1,13 @@
 package com.elnoah.laundry.pegawai
-
     import android.os.Bundle
     import android.widget.Button
     import android.widget.EditText
     import android.widget.Toast
     import androidx.activity.enableEdgeToEdge
     import androidx.appcompat.app.AppCompatActivity
-import com.elnoah.laundry.R
-import com.elnoah.laundry.modeldata.modelpegawai
-import com.google.firebase.database.FirebaseDatabase
+    import com.elnoah.laundry.R
+    import com.elnoah.laundry.modeldata.modelpegawai
+    import com.google.firebase.database.FirebaseDatabase
 
 class TambahPegawai : AppCompatActivity() {
     private val database = FirebaseDatabase.getInstance()

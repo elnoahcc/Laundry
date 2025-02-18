@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.elnoah.laundry.Layanan.DataLayanan
 import com.elnoah.laundry.pegawai.DataPegawai
 import com.elnoah.laundry.pelanggan.DataPelanggan
 
@@ -26,10 +27,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Redirect ke halaman pelanggan
+        // Redirect ke halaman pegawai
         val pegawai = findViewById<CardView>(R.id.cardPegawai)
         pegawai.setOnClickListener {
             val intent = Intent(this, DataPegawai::class.java)
+            startActivity(intent)
+        }
+
+        // Redirect ke halaman layanan
+        val layanan = findViewById<CardView>(R.id.cardLayanan)
+        layanan.setOnClickListener {
+            val intent = Intent(this, DataLayanan::class.java)
             startActivity(intent)
         }
 

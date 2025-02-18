@@ -9,7 +9,8 @@
     app:cardCornerRadius="20dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_marginBottom="10dp"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    android:id="@+id/CVDATA_LAYANAN">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,7 +61,7 @@
             >
             <Button
                 android:layout_weight="1"
-                android:id="@+id/btDataHubungiPegawai"
+                android:id="@+id/btDataHubungiLayanan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#22c55e"
@@ -70,7 +71,7 @@
                 android:layout_marginRight="5dp"/>
             <Button
                 android:layout_weight="1"
-                android:id="@+id/btDataLihatPegawai"
+                android:id="@+id/btDataLihatLayanan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#f59e0b"
