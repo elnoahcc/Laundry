@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.elnoah.laundry.R
 import com.elnoah.laundry.adapter.DataLayananAdapter
 import com.elnoah.laundry.modeldata.modellayanan
-import com.elnoah.laundry.pegawai.TambahPegawai
+import com.elnoah.laundry.Layanan.TambahLayanan
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

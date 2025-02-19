@@ -25,17 +25,16 @@ class TambahLayanan : AppCompatActivity() {
         init()
         enableEdgeToEdge()
         applyEdgeToEdge()
-
-        btSimpanLayanan.setOnClickListener { simpanLayanan() }
+        btSimpanLayanan.setOnClickListener {simpanLayanan()}
     }
 
-    private fun init() {
+    fun init() {
         etNamaLayanan = findViewById(R.id.et_nama_layanan)
         etCabangLayanan = findViewById(R.id.et_cabang_layanan)
         btSimpanLayanan = findViewById(R.id.btn_simpan_layanan)
     }
 
-    private fun applyEdgeToEdge() {
+     private fun applyEdgeToEdge() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -43,7 +42,7 @@ class TambahLayanan : AppCompatActivity() {
         }
     }
 
-    private fun cekValidasi(): Boolean {
+     fun cekValidasi(): Boolean {
         if (etNamaLayanan.text.isEmpty()) {
             etNamaLayanan.error = getString(R.string.validasi_nama_layanan)
             etNamaLayanan.requestFocus()
@@ -57,7 +56,7 @@ class TambahLayanan : AppCompatActivity() {
         return true
     }
 
-    private fun simpanLayanan() {
+     fun simpanLayanan() {
         try {
             if (!cekValidasi()) return
 

@@ -20,33 +20,38 @@ class DataLayananAdapter(private val listLayanan: List<modellayanan>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = listLayanan[position]
-        holder.tvID.text = item.idLayanan
-        holder.tvNamaLayanan.text = item.namaLayanan
-        holder.tvCabangLayanan.text = item.idCabangLayanan
-        holder.cvCARDLAYANAN.setOnClickListener {
-            // Tambahkan aksi klik jika diperlukan
+
+        // Pastikan data tidak null sebelum mengatur teks
+        holder.tvIdLayanan.text = item.idLayanan ?: "ID Tidak Tersedia"
+        holder.tvNamaLayanan.text = item.namaLayanan ?: "Nama Layanan Tidak Tersedia"
+        holder.tvCabangLayanan.text = item.idCabangLayanan ?: "Cabang Tidak Tersedia"
+
+        // Tambahkan aksi klik untuk cardView
+        holder.cardViewLayanan.setOnClickListener {
+            // Implementasikan aksi klik di sini
         }
 
+        // Tambahkan aksi klik untuk tombol hubungi
         holder.btHubungi.setOnClickListener {
-            // Tambahkan aksi untuk tombol hubungi
+            // Implementasikan aksi hubungi di sini
         }
 
+        // Tambahkan aksi klik untuk tombol lihat layanan
         holder.btLihatLayanan.setOnClickListener {
-            // Tambahkan aksi untuk tombol lihat layanan
+            // Implementasikan aksi lihat layanan di sini
         }
     }
 
-
+    override fun getItemCount(): Int {
+        return listLayanan.size
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cvCARDLAYANAN: View = itemView.findViewById(R.id.CVDATA_LAYANAN)
-        val tvID: TextView = itemView.findViewById(R.id.tvDataIDLayanan)
-        val tvNamaLayanan: TextView = itemView.findViewById(R.id.tv_nama_layanan)
-        val tvCabangLayanan: TextView = itemView.findViewById(R.id.tv_cabang_layanan)
+        val cardViewLayanan: View = itemView.findViewById(R.id.CVDATA_LAYANAN)
+        val tvIdLayanan: TextView = itemView.findViewById(R.id.tvDataIDLayanan)
+        val tvNamaLayanan: TextView = itemView.findViewById(R.id.tvDataNamaLayanan)
+        val tvCabangLayanan: TextView = itemView.findViewById(R.id.tvDataCabangLayanan)
         val btHubungi: Button = itemView.findViewById(R.id.btDataHubungiLayanan)
         val btLihatLayanan: Button = itemView.findViewById(R.id.btDataLihatLayanan)
     }
-    override fun getItemCount(): Int {
-    return listLayanan.size}
 }
-
