@@ -35,6 +35,12 @@ class DataPegawai : AppCompatActivity() {
         rvDATA_PEGAWAI.setHasFixedSize(true)
         pegawaiList = arrayListOf<modelpegawai>()
         getData()
+        val intent = Intent(this, TambahPegawai::class.java)
+        intent.putExtra("judul", "")
+        intent.putExtra("idPegawai","")
+        intent.putExtra("namaPegawai","")
+        intent.putExtra("idPegawai","")
+
         enableEdgeToEdge()
         // Redirect ke halaman pegawai
         val tambahPegawai = findViewById<FloatingActionButton>(R.id.fabDATA_PEGAWAI_TAMBAH)

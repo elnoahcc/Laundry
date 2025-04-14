@@ -1,6 +1,8 @@
 
 package com.elnoah.laundry.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +12,21 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.elnoah.laundry.R
 import com.elnoah.laundry.modeldata.modelpegawai
+import com.elnoah.laundry.pegawai.TambahPegawai
+import com.google.firebase.database.DatabaseReference
 
 class DataPegawaiAdapter(private val listPegawai: List<modelpegawai>) :
     RecyclerView.Adapter<DataPegawaiAdapter.ViewHolder>() {
+        lateinit var appContext: Context
+        lateinit var databaseReference: DatabaseReference
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_data_pegawai, parent, false)
+        appContext = parent.context
         return ViewHolder(view)
     }
 
@@ -28,6 +38,14 @@ class DataPegawaiAdapter(private val listPegawai: List<modelpegawai>) :
         holder.tvNoHP.text = item.noHPPegawai
         holder.tvTerdaftar.text = item.terdaftar
         holder.cvCARDPEGAWAI.setOnClickListener {
+            val intent = Intent(appContext, TambahPegawai::class.java)
+            intent.putExtra("Judul", "Edit Pegawai")
+            intent.putExtra("idPegawai", item.idPegawai)
+            intent.putExtra("namaPegawai", item.namaPegawai)
+            intent.putExtra("noHPPegawai", item.noHPPegawai)
+            intent.putExtra("alamatPegawai", item.alamatPegawai)
+            intent.putExtra("idCabang", item.idCabang)
+            appContext.startActivity(intent)
         }
         holder.btHubungi.setOnClickListener {
 

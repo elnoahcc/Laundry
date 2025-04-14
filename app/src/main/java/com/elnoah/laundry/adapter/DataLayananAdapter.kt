@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.elnoah.laundry.R
 import com.elnoah.laundry.modeldata.modellayanan
+import org.w3c.dom.Text
 
 class DataLayananAdapter(private val listLayanan: List<modellayanan>) :
     RecyclerView.Adapter<DataLayananAdapter.ViewHolder>() {
@@ -24,6 +25,7 @@ class DataLayananAdapter(private val listLayanan: List<modellayanan>) :
         // Pastikan data tidak null sebelum mengatur teks
         holder.tvIdLayanan.text = item.idLayanan ?: "ID Tidak Tersedia"
         holder.tvNamaLayanan.text = item.namaLayanan ?: "Nama Layanan Tidak Tersedia"
+        holder.tvHargaLayanan.text = item.hargaLayanan ?: "Harga Layanan Tidak Tersedia"
         holder.tvCabangLayanan.text = item.idCabangLayanan ?: "Cabang Tidak Tersedia"
 
         // Tambahkan aksi klik untuk cardView
@@ -50,6 +52,7 @@ class DataLayananAdapter(private val listLayanan: List<modellayanan>) :
         val cardViewLayanan: View = itemView.findViewById(R.id.CVDATA_LAYANAN)
         val tvIdLayanan: TextView = itemView.findViewById(R.id.tvDataIDLayanan)
         val tvNamaLayanan: TextView = itemView.findViewById(R.id.tvDataNamaLayanan)
+        val tvHargaLayanan: TextView = itemView.findViewById(R.id.tvDataHargaLayanan)
         val tvCabangLayanan: TextView = itemView.findViewById(R.id.tvDataCabangLayanan)
         val btHubungi: Button = itemView.findViewById(R.id.btDataHubungiLayanan)
         val btLihatLayanan: Button = itemView.findViewById(R.id.btDataLihatLayanan)

@@ -16,6 +16,7 @@ class TambahLayanan : AppCompatActivity() {
     private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference("layanan")
     private lateinit var etNamaLayanan: EditText
+    private lateinit var etHargaLayanan: EditText
     private lateinit var etCabangLayanan: EditText
     private lateinit var btSimpanLayanan: Button
 
@@ -31,6 +32,7 @@ class TambahLayanan : AppCompatActivity() {
     fun init() {
         etNamaLayanan = findViewById(R.id.et_nama_layanan)
         etCabangLayanan = findViewById(R.id.et_cabang_layanan)
+        etHargaLayanan = findViewById(R.id.et_harga_layanan)
         btSimpanLayanan = findViewById(R.id.btn_simpan_layanan)
     }
 
@@ -53,6 +55,11 @@ class TambahLayanan : AppCompatActivity() {
             etCabangLayanan.requestFocus()
             return false
         }
+         if (etHargaLayanan.text.isEmpty()) {
+             etHargaLayanan.error = getString(R.string.validasi_harga_layanan)
+             etHargaLayanan.requestFocus()
+             return false
+         }
         return true
     }
 
@@ -72,7 +79,8 @@ class TambahLayanan : AppCompatActivity() {
             val data = modellayanan(
                 layananId,
                 etNamaLayanan.text.toString(),
-                etCabangLayanan.text.toString()
+                etCabangLayanan.text.toString(),
+                etHargaLayanan.text.toString()
             )
 
             // Menyimpan data ke Firebase

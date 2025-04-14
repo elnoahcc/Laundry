@@ -40,4 +40,5 @@
     <string name="validasi_cabang_layanan">Cabang layanan masih kosong</string>
     <string name="sukses_simpan_layanan">Sukses Simpan Data Layanan</string>
     <string name="gagal_simpan_layanan">Gagal Simpan Data Layanan</string>
+    <string name="validasi_harga_layanan">Nominal harga belum dimasukkan</string>
 </resources>
