@@ -37,7 +37,11 @@ class DataPelanggan : AppCompatActivity() {
         rvDATA_PELANGGAN.setHasFixedSize(true)
         pelangganList = arrayListOf<modelpelanggan>()
         getData()
-
+        val intent = Intent(this, TambahPelanggan::class.java)
+        intent.putExtra("judul", "")
+        intent.putExtra("idPelanggan", "")
+        intent.putExtra("namaPelanggan", "")
+        intent.putExtra("idPelenggan", "")
         enableEdgeToEdge()
 
         // Redirect ke halaman pelanggan

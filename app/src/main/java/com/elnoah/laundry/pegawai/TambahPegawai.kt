@@ -32,6 +32,8 @@ class TambahPegawai : AppCompatActivity() {
 
         init()
         getData()
+        cekValidasi()
+        simpan()
 
         btSimpanP.setOnClickListener {
             if (isEditMode) {
