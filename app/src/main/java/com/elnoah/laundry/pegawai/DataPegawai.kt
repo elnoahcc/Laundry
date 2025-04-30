@@ -59,7 +59,7 @@ class DataPegawai : AppCompatActivity() {
 
     fun init() {
         rvDATA_PEGAWAI = findViewById(R.id.rvDATA_PEGAWAI)
-        fabDATA_PEGAWAI_TAMBAH = findViewById(R.id.fabDATA_PEGAWAI_TAMBAH)
+        fabDATA_PEGAWAI_TAMBAH = findViewById(R .id.fabDATA_PEGAWAI_TAMBAH)
     }
 
     fun getData() {

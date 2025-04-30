@@ -41,4 +41,9 @@
     <string name="sukses_simpan_layanan">Sukses Simpan Data Layanan</string>
     <string name="gagal_simpan_layanan">Gagal Simpan Data Layanan</string>
     <string name="validasi_harga_layanan">Nominal harga belum dimasukkan</string>
+    <string name="welcome_login">Selamat Datang</string>
+    <string name="subheading_login">Silahkan Login untuk Melanjutkan</string>
+    <string name="login_login">Masuk</string>
+    <string name="password_login">Kata Kunci</string>
+    <string name="terdaftar_pelanggan">Terdaftar</string>
 </resources>

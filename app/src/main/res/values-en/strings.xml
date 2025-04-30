@@ -41,4 +41,9 @@
     <string name="sukses_simpan_layanan">Service Data succesfull</string>
     <string name="gagal_simpan_layanan">Service Data is unsuccesfully</string>
     <string name="validasi_harga_layanan">Fee is not inputed</string>
+    <string name="welcome_login">Welcome</string>
+    <string name="subheading_login">Login to Access this App</string>
+    <string name="login_login">Login</string>
+    <string name="password_login">Password</string>
+    <string name="terdaftar_pelanggan">Registered</string>
 </resources>

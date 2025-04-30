@@ -14,41 +14,42 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Laundry"
         tools:targetApi="31">
-
-        <!-- Main Activity (Home Page) -->
+        <activity
+            android:name=".Transaksi.DataTransaksi"
+            android:exported="false" />
+        <activity
+            android:name=".laporan.DataLaporan"
+            android:exported="false" />
+        <activity
+            android:name=".login"
+            android:exported="false" /> <!-- Main Activity (Home Page) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Layanan Activities -->
+        </activity> <!-- Layanan Activities -->
         <activity
             android:name=".Layanan.TambahLayanan"
             android:exported="false" />
         <activity
             android:name=".Layanan.DataLayanan"
-            android:exported="false" />
-
-        <!-- Pegawai Activities -->
+            android:exported="false" /> <!-- Pegawai Activities -->
         <activity
             android:name=".pegawai.TambahPegawai"
             android:exported="false" />
         <activity
             android:name=".pegawai.DataPegawai"
-            android:exported="false" />
-
-        <!-- Pelanggan Activities -->
+            android:exported="false" /> <!-- Pelanggan Activities -->
         <activity
             android:name=".pelanggan.TambahPelanggan"
             android:exported="false" />
         <activity
             android:name=".pelanggan.DataPelanggan"
             android:exported="false" />
-
     </application>
 
 </manifest>

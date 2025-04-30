@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.elnoah.laundry.Layanan.DataLayanan
+import com.elnoah.laundry.laporan.DataLaporan
 import com.elnoah.laundry.pegawai.DataPegawai
 import com.elnoah.laundry.pelanggan.DataPelanggan
 
@@ -34,6 +35,11 @@ class MainActivity : AppCompatActivity() {
         // Redirect ke halaman layanan
         findViewById<CardView>(R.id.cardLayanan)?.setOnClickListener {
             startActivity(Intent(this, DataLayanan::class.java))
+        }
+
+        // Redirect ke halaman layanan
+        findViewById<ConstraintLayout>(R.id.clLaporan)?.setOnClickListener {
+            startActivity(Intent(this, DataLaporan::class.java))
         }
 
         // Atur padding agar sesuai dengan system bars
