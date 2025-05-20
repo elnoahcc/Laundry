@@ -6,152 +6,132 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".pegawai.TambahPegawai"
-    android:background="#075e54">
+    android:background="@color/white">
 
     <TextView
-        android:id="@+id/tv_title_pegawai"
-        android:layout_width="wrap_content"
+        android:id="@+id/header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/interblack"
-        android:padding="10dp"
-        android:text="TAMBAH PEGAWAI"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:layout_marginTop="130dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_nama_pegawai"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/inter"
-        android:text="@string/card_pegawai_nama"
-        android:textColor="@color/white"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_pegawai" />
-
-    <EditText
-        android:id="@+id/et_nama_pegawai"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/rounded_et"
-        android:fontFamily="@font/inter"
-        android:hint="@string/hint_namalengkap"
-        android:textColor="@color/black"
-        android:autofillHints="name"
-        android:textSize="14sp"
-        android:inputType="textPersonName"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_nama_pegawai" />
-
-    <TextView
-        android:id="@+id/tv_alamat_pegawai"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/inter"
-        android:text="@string/card_pelanggan_alamat"
-        android:textColor="@color/white"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_nama_pegawai" />
-
-    <EditText
-        android:id="@+id/et_alamat_pegawai"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/rounded_et"
-        android:fontFamily="@font/inter"
-        android:hint="@string/card_pelanggan_alamat"
-        android:textColor="@color/black"
-        android:autofillHints="postalAddress"
-        android:textSize="14sp"
-        android:inputType="textPostalAddress"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_alamat_pegawai" />
-
-    <TextView
-        android:id="@+id/tv_hp_pegawai"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/inter"
-        android:text="@string/card_pelanggan_nohp"
-        android:textColor="@color/white"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_alamat_pegawai" />
-
-    <EditText
-        android:id="@+id/et_hp_pegawai"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/rounded_et"
-        android:fontFamily="@font/inter"
-        android:hint="@string/card_pelanggan_nohp"
-        android:textColor="@color/black"
-        android:autofillHints="phone"
-        android:textSize="14sp"
-        android:inputType="phone"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_hp_pegawai" />
-
-    <TextView
-        android:id="@+id/tv_cabang_pegawai"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/inter"
-        android:text="@string/card_pelanggan_cabang"
-        android:textColor="@color/white"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_hp_pegawai" />
-
-    <EditText
-        android:id="@+id/et_cabang_pegawai"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/rounded_et"
-        android:fontFamily="@font/inter"
-        android:hint="@string/card_pelanggan_cabang"
-        android:textSize="12sp"
-        android:textColor="@color/black"
-        android:autofillHints="organization"
-        android:inputType="text"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_cabang_pegawai" />
-
-    <Button
-        android:id="@+id/btn_simpan_pegawai"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:text="Tambah Pegawai"
         android:fontFamily="@font/interextrabold"
-        android:text="@string/button_simpan"
-        android:textSize="14dp"
-        android:backgroundTint="#25d366"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-       android:layout_marginTop="16dp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_cabang_pegawai" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingTop="24dp"
+        />
+    <LinearLayout
+        android:id="@+id/containerNama"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="20dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/card_pegawai_nama"
+            android:fontFamily="@font/inter"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+        <EditText
+            android:id="@+id/etTambahNamaPegawai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/card_pegawai_nama"
+            android:textAlignment="textStart"
+            android:padding="16dp"
+            android:background="@drawable/rounded_et"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/containerAlamat"
+        app:layout_constraintTop_toBottomOf="@id/containerNama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="20dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/card_pelanggan_alamat"
+            android:fontFamily="@font/inter"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+        <EditText
+            android:id="@+id/etTambahAlamatPegawai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/card_pelanggan_alamat"
+            android:textAlignment="textStart"
+            android:padding="16dp"
+            android:background="@drawable/rounded_et"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/containerNoHp"
+        app:layout_constraintTop_toBottomOf="@id/containerAlamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="20dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/card_pelanggan_nohp"
+            android:fontFamily="@font/inter"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+        <EditText
+            android:id="@+id/etTambahNoHpPegawai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/card_pelanggan_nohp"
+            android:inputType="phone"
+            android:textAlignment="textStart"
+            android:padding="16dp"
+            android:background="@drawable/rounded_et"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/containerCabang"
+        app:layout_constraintTop_toBottomOf="@id/containerNoHp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="20dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_cabang"
+            android:fontFamily="@font/inter"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+        <EditText
+            android:id="@+id/etTambahCabangPegawai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/main_cabang"
+            android:textAlignment="textStart"
+            android:padding="16dp"
+            android:background="@drawable/rounded_et"/>
+    </LinearLayout>
+    <Button
+        app:layout_constraintTop_toBottomOf="@id/containerCabang"
+        android:layout_marginHorizontal="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_simpan"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:layout_marginTop="32dp"
+        android:id="@+id/btnSimpanPegawai"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

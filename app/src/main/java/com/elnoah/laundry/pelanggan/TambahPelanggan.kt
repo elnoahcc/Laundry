@@ -39,11 +39,11 @@ class TambahPelanggan : AppCompatActivity() {
         }
 
         // Inisialisasi View
-        etNama = findViewById(R.id.et_nama)
-        etAlamat = findViewById(R.id.et_alamat)
-        etNoHP = findViewById(R.id.et_hp)
-        etCabang = findViewById(R.id.et_cabang)
-        btSimpan = findViewById(R.id.btn_simpan)
+        etNama = findViewById(R.id.etTambahNamaPelanggan)
+        etAlamat = findViewById(R.id.etTambahAlamatPelanggan)
+        etNoHP = findViewById(R.id.etTambahNoHpPelanggan)
+        etCabang = findViewById(R.id.etTambahCabangPelanggan)
+        btSimpan = findViewById(R.id.btnSimpanPelanggan)
 
         // Set event listener untuk tombol simpan
         btSimpan.setOnClickListener {

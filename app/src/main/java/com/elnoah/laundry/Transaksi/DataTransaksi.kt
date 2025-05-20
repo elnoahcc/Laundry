@@ -78,14 +78,14 @@ class DataTransaksi : AppCompatActivity() {
         }
     }
     fun init() {
-        tvPelangganNama = findViewById(R.id.tvNamaPelanggan)
-        tvPelangganNoHP = findViewById(R.id.tvPelangganNoHP)
-        tvLayananNama = findViewById(R.id.tvNamaLayanan)
-        tvLayananHarga = findViewById(R.id.tvLayananHarga)
-        rvLayananTambahan = findViewById(R.id.rvLayananTambahan)
-        btnPilihPelanggan = findViewById(R.id.btnPilihPelanggan)
-        btnPilihLayanan = findViewById(R.id.btnPilihLayanan)
-        btnTambahan = findViewById(R.id.btnTambahan)
+        tvPelangganNama = findViewById(R.id.tv_nama_pelanggan)
+        tvPelangganNoHP = findViewById(R.id.tv_no_hp)
+        tvLayananNama = findViewById(R.id.tv_nama_layanan)
+        tvLayananHarga = findViewById(R.id.tv_harga_layanan)
+        rvLayananTambahan = findViewById(R.id.rv_layanan_tambahan)
+        btnPilihPelanggan = findViewById(R.id.btn_pilih_pelanggan)
+        btnPilihLayanan = findViewById(R.id.btn_pilih_layanan)
+        btnTambahan = findViewById(R.id.btn_tambahan)
     }
     @Deprecated( "This method has been deprecated in favor of using the Activity Result API")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -93,8 +93,8 @@ class DataTransaksi : AppCompatActivity() {
         if (requestCode == pilihPelanggan) {
             if (resultCode == RESULT_OK && data != null) {
                 idPelanggan = data.getStringExtra("idPelanggan").toString()
-                val nama = data.getStringExtra("nama")
-                val nomorHP = data.getStringExtra("noHP")
+                val nama = data.getStringExtra("namaPelanggan")
+                val nomorHP = data.getStringExtra("noHPPelanggan")
 
                 tvPelangganNama.text = "Nama Pelanggan : $nama"
                 tvPelangganNoHP.text = "No HP : $nomorHP"

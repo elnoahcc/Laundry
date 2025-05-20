@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/CVDATA_PEGAWAI"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    cardElevation="4dp"
+    android:layout_width="match_parent"
+    android:id="@+id/CVDATA_PEGAWAI"
+    android:layout_height="wrap_content"
+    app:cardElevation="4dp"
     android:orientation="vertical"
     app:layout_constraintTop_toTopOf="parent"
     app:cardCornerRadius="20dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginBottom="10dp"
-    android:layout_marginTop="10dp">
-
+    android:layout_marginTop="16dp"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,14 +33,14 @@
             android:layout_marginTop="16dp"
             />
         <TextView
-        android:id="@+id/tvDataAlamatPegawai"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/inter"
-        android:text="@string/card_pelanggan_alamat"
-        android:textSize="16sp"
-        android:paddingTop="8dp"
-        />
+            android:id="@+id/tvDataAlamatPegawai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:text="Alamat"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            />
         <TextView
             android:id="@+id/tvDataNoHpPegawai"
             android:layout_width="match_parent"
@@ -52,20 +51,20 @@
             android:paddingTop="8dp"
             />
         <TextView
-            android:id="@+id/tvDataTerdaftarPegawai"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter"
-            android:text="Terdaftar"
-            android:textSize="16sp"
-            android:paddingTop="8dp"
-            />
-        <TextView
             android:id="@+id/tvDataCabangPegawai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
-            android:text="@string/card_pelanggan_cabang"
+            android:text="Cabang"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            />
+        <TextView
+            android:id="@+id/tvDataTerdaftarPegawai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:text="@string/terdaftar_pelanggan"
             android:textSize="16sp"
             android:paddingTop="8dp"
             />
@@ -89,7 +88,7 @@
                 android:layout_marginRight="5dp"/>
             <Button
                 android:layout_weight="1"
-                android:id="@+id/btDataLihatPegawai"
+                android:id="@+id/btnDataLihatPegawai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#f59e0b"

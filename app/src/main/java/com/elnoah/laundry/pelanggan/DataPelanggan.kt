@@ -30,7 +30,7 @@ class DataPelanggan : AppCompatActivity() {
 
     private fun init() {
         rvDataPelanggan = findViewById(R.id.rvDATA_PELANGGAN)
-        fabTambahPelanggan = findViewById(R.id.fabDATA_PELANGGAN_TAMBAH)
+        fabTambahPelanggan = findViewById(R.id.fab_DATA_PELANGGAN_TAMBAH)
 
         rvDataPelanggan.layoutManager = LinearLayoutManager(this)
     }

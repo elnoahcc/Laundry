@@ -10,7 +10,7 @@
 
     <!-- Search Bar -->
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/svCariDataLayanan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:queryHint="Cari Data Pelanggan"

@@ -4,100 +4,114 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main"
     android:orientation="vertical"
     android:padding="16dp"
-    android:layout_margin="20dp">
+    android:layout_margin="20dp"
+    android:id="@+id/main"
+    android:background="#FFF4F9">
 
-    <!-- Data Pelanggan -->
-    <TextView
-        android:text="Data Pelanggan"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#333"
-        android:fontFamily="@font/interblack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/tvNamaPelanggan"
-        android:text="Nama Pelanggan:"
-        android:fontFamily="@font/inter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/tvPelangganNoHP"
-        android:text="No HP:"
-        android:fontFamily="@font/inter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/btnPilihPelanggan"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="Pilih Pelanggan"
-        android:fontFamily="@font/inter"
-        android:textColor="#fff"
-        android:backgroundTint="#4CCEFF"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_button"/>
-
-    <!-- Layanan Utama -->
-    <TextView
-        android:text="Layanan Utama"
-        android:fontFamily="@font/interextrabold"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#333"
-        android:layout_marginTop="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/tvNamaLayanan"
-        android:text="Nama Layanan:"
-        android:fontFamily="@font/inter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/tvLayananHarga"
-        android:text="Harga:"
-        android:fontFamily="@font/inter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/btnPilihLayanan"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="Pilih Layanan"
-        android:fontFamily="@font/inter"
-        android:textColor="#fff"
-        android:backgroundTint="#4CCEFF"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_button"/>
-
-    <!-- Layanan Tambahan -->
-    <TextView
-        android:text="Layanan Tambahan"
-        android:fontFamily="@font/interextrabold"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#333"
-        android:layout_marginTop="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!-- RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvLayananTambahan"
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="8dp"/>
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Data Pelanggan -->
+            <TextView
+                android:text="Data Pelanggan"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#333"
+                android:fontFamily="@font/interextrabold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_nama_pelanggan"
+                android:text="Nama Pelanggan:"
+                android:fontFamily="@font/inter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_no_hp"
+                android:text="No HP:"
+                android:fontFamily="@font/inter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <Button
+                android:id="@+id/btn_pilih_pelanggan"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Pilih Pelanggan"
+                android:fontFamily="@font/interextrabold"
+                android:textColor="#fff"
+                android:backgroundTint="#4CCEFF"
+                android:layout_marginTop="8dp"
+                />
+
+            <!-- Layanan Utama -->
+            <TextView
+                android:text="Layanan Utama"
+                android:fontFamily="@font/interextrabold"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#333"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_nama_layanan"
+                android:text="Nama Layanan:"
+                android:fontFamily="@font/inter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_harga_layanan"
+                android:text="Harga:"
+                android:fontFamily="@font/inter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btn_pilih_layanan"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Pilih Layanan"
+                android:textColor="#fff"
+                android:backgroundTint="#4CCEFF"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/interextrabold"
+                />
+
+            <!-- Layanan Tambahan -->
+            <TextView
+                android:text="Layanan Tambahan"
+                android:fontFamily="@font/interextrabold"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#333"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <!-- RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_layanan_tambahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <!-- Tombol Bawah -->
     <LinearLayout
@@ -109,15 +123,14 @@
         android:weightSum="2">
 
         <Button
-            android:id="@+id/btnTambahan"
+            android:id="@+id/btn_tambahan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Tambahan"
-            android:fontFamily="@font/inter"
             android:textColor="#fff"
-            android:backgroundTint="#FFC107"
-            android:background="@drawable/rounded_button"/>
+            android:backgroundTint="#f59e0b"
+            />
 
         <Button
             android:id="@+id/btn_proses"
@@ -125,10 +138,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Proses"
-            android:fontFamily="@font/inter"
             android:textColor="#fff"
-            android:backgroundTint="#4CAF50"
-            android:background="@drawable/rounded_button"
+            android:backgroundTint="#22c55e"
             android:layout_marginStart="8dp"/>
     </LinearLayout>
 

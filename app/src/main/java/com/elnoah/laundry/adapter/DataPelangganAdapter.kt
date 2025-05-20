@@ -52,7 +52,7 @@ class DataPelangganAdapter(private val listPelanggan: ArrayList<modelpelanggan>)
         val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangPelanggan)
         val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPelanggan) // Tampilkan tanggal terdaftar
         val btHubungi: Button = itemView.findViewById(R.id.btDataHubungiPelanggan)
-        val btLihat: Button = itemView.findViewById(R.id.btDataLihatPelanggan)
+        val btLihat: Button = itemView.findViewById(R.id.btnDataLihatPelanggan)
     }
 }
 

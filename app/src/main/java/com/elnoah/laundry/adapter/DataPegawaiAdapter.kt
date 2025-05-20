@@ -54,6 +54,6 @@ class DataPegawaiAdapter(private val listPegawai: ArrayList<modelpegawai>) :
         val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangPegawai)
         val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPegawai)
         val btHubungi: Button = itemView.findViewById(R.id.btDataHubungiPegawai)
-        val btLihat: Button = itemView.findViewById(R.id.btDataLihatPelanggan)
+        val btLihat: Button = itemView.findViewById(R.id.btnDataLihatPegawai)
     }
 }

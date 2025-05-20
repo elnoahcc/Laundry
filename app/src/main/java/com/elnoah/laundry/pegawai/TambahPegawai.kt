@@ -30,11 +30,11 @@ class TambahPegawai : AppCompatActivity() {
         setContentView(R.layout.activity_tambah_pegawai)
 
         // Inisialisasi View
-        etNama = findViewById(R.id.et_nama_pegawai)
-        etAlamat = findViewById(R.id.et_alamat_pegawai)
-        etNoHP = findViewById(R.id.et_hp_pegawai)
-        etCabang = findViewById(R.id.et_cabang_pegawai)
-        btSimpan = findViewById(R.id.btn_simpan_pegawai)
+        etNama = findViewById(R.id.etTambahNamaPegawai)
+        etAlamat = findViewById(R.id.etTambahAlamatPegawai)
+        etNoHP = findViewById(R.id.etTambahNoHpPegawai)
+        etCabang = findViewById(R.id.etTambahCabangPegawai)
+        btSimpan = findViewById(R.id.btnSimpanPegawai)
 
         // Set event listener untuk tombol simpan
         btSimpan.setOnClickListener {

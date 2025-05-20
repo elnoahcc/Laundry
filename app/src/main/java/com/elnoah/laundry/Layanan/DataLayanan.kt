@@ -29,7 +29,7 @@ class DataLayanan : AppCompatActivity() {
 
     private fun init() {
         rvDataLayanan = findViewById(R.id.rvDATA_LAYANAN)
-        fabTambahLayanan = findViewById(R.id.fabDATA_LAYANAN_TAMBAH)
+        fabTambahLayanan = findViewById(R.id.fabTambahLayanan)
 
         rvDataLayanan.layoutManager = LinearLayoutManager(this)
     }

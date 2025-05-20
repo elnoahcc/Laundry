@@ -30,10 +30,10 @@ class TambahLayanan : AppCompatActivity() {
         setContentView(R.layout.activity_tambah_layanan)
 
         // Inisialisasi View
-        etNama = findViewById(R.id.et_nama_layanan)
-        etHarga = findViewById(R.id.et_harga_layanan)
-        etCabang = findViewById(R.id.et_cabang_layanan)
-        btSimpan = findViewById(R.id.btn_simpan_layanan)
+        etNama = findViewById(R.id.etTambahNamaLayanan)
+        etHarga = findViewById(R.id.etTambahHargaLayanan)
+        etCabang = findViewById(R.id.etTambahCabangLayanan)
+        btSimpan = findViewById(R.id.btnSimpanLayanan)
 
         // Set event listener untuk tombol simpan
         btSimpan.setOnClickListener {
