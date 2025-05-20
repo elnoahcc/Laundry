@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="#FAF6F9">
+
+    <!-- Search Bar -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Cari Data Pelanggan"
+        android:iconifiedByDefault="false"
+        android:background="@android:color/white"
+        android:layout_marginBottom="8dp"
+        android:elevation="4dp"/>
+
+    <!-- RecyclerView for list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDATA_TRANSAKSI_LAYANAN"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="16dp"
+        tools:listitem="@layout/card_data_transaksi_layanan" />
+</LinearLayout>

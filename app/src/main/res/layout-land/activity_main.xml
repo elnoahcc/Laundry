@@ -5,15 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#128C7E">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tvhello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello Elnoah"
-        android:textColor="@color/white"
+        android:textColor="#075E54"
         android:textStyle="bold"
         android:textSize="20dp"
         android:fontFamily="@font/interblack"
@@ -102,7 +101,7 @@
                         android:id="@+id/imgAkun"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/accountsettings"
+                        android:src="@drawable/account"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                          />

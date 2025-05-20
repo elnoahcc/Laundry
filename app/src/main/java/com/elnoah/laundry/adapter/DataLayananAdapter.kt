@@ -10,7 +10,7 @@ import com.elnoah.laundry.R
 import com.elnoah.laundry.modeldata.modellayanan
 import org.w3c.dom.Text
 
-class DataLayananAdapter(private val listLayanan: List<modellayanan>) :
+class DataLayananAdapter(private val listLayanan: ArrayList<modellayanan>) :
     RecyclerView.Adapter<DataLayananAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,27 +21,12 @@ class DataLayananAdapter(private val listLayanan: List<modellayanan>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = listLayanan[position]
+        holder.tvDataIDLayanan.text = item.idLayanan ?: ""
+        holder.tvNama.text = item.namaLayanan ?: ""
+        holder.tvHarga.text = item.hargaLayanan ?: ""
+        holder.tvTerdaftar.text = "Terdaftar: ${item.tanggalTerdaftar ?: "-"}"
+        holder.tvCabang.text = "Cabang ${item.cabangLayanan ?: "Tidak Ada Cabang"}"
 
-        // Pastikan data tidak null sebelum mengatur teks
-        holder.tvIdLayanan.text = item.idLayanan ?: "ID Tidak Tersedia"
-        holder.tvNamaLayanan.text = item.namaLayanan ?: "Nama Layanan Tidak Tersedia"
-        holder.tvHargaLayanan.text = item.hargaLayanan ?: "Harga Layanan Tidak Tersedia"
-        holder.tvCabangLayanan.text = item.idCabangLayanan ?: "Cabang Tidak Tersedia"
-
-        // Tambahkan aksi klik untuk cardView
-        holder.cardViewLayanan.setOnClickListener {
-            // Implementasikan aksi klik di sini
-        }
-
-        // Tambahkan aksi klik untuk tombol hubungi
-        holder.btHubungi.setOnClickListener {
-            // Implementasikan aksi hubungi di sini
-        }
-
-        // Tambahkan aksi klik untuk tombol lihat layanan
-        holder.btLihatLayanan.setOnClickListener {
-            // Implementasikan aksi lihat layanan di sini
-        }
     }
 
     override fun getItemCount(): Int {
@@ -49,12 +34,10 @@ class DataLayananAdapter(private val listLayanan: List<modellayanan>) :
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cardViewLayanan: View = itemView.findViewById(R.id.CVDATA_LAYANAN)
-        val tvIdLayanan: TextView = itemView.findViewById(R.id.tvDataIDLayanan)
-        val tvNamaLayanan: TextView = itemView.findViewById(R.id.tvDataNamaLayanan)
-        val tvHargaLayanan: TextView = itemView.findViewById(R.id.tvDataHargaLayanan)
-        val tvCabangLayanan: TextView = itemView.findViewById(R.id.tvDataCabangLayanan)
-        val btHubungi: Button = itemView.findViewById(R.id.btDataHubungiLayanan)
-        val btLihatLayanan: Button = itemView.findViewById(R.id.btDataLihatLayanan)
+        val tvDataIDLayanan: TextView = itemView.findViewById(R.id.tvDataIDLayanan)
+        val tvNama: TextView = itemView.findViewById(R.id.tvDataNamaLayanan)
+        val tvHarga: TextView = itemView.findViewById(R.id.tvDataHargaLayanan)
+        val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangLayanan)
+        val tvTerdaftar: TextView = itemView.findViewById(R.id.tv_Terdaftar)
     }
 }

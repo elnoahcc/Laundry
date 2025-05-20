@@ -21,32 +21,52 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class DataPelanggan : AppCompatActivity() {
-    val database = FirebaseDatabase.getInstance()
-    val myRef = database.getReference("pelanggan")
-    lateinit var rvDATA_PELANGGAN: RecyclerView
-    lateinit var fabDATA_PELANGGAN_TAMBAH: FloatingActionButton
-    lateinit var pelangganList: ArrayList<modelpelanggan>
+    private val database = FirebaseDatabase.getInstance()
+    private val myRef = database.getReference("pelanggan")
+
+    private lateinit var rvDataPelanggan: RecyclerView
+    private lateinit var fabTambahPelanggan: FloatingActionButton
+    private lateinit var pelangganList: ArrayList<modelpelanggan>
+
+    private fun init() {
+        rvDataPelanggan = findViewById(R.id.rvDATA_PELANGGAN)
+        fabTambahPelanggan = findViewById(R.id.fabDATA_PELANGGAN_TAMBAH)
+
+        rvDataPelanggan.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun getDATA() {
+        val query = myRef.orderByChild("idPelanggan").limitToLast(100)
+        query.addValueEventListener(object : ValueEventListener { // Ganti addListenerForSingleValueEvent
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    pelangganList.clear()
+                    for (dataSnapshot in snapshot.children) {
+                        val pelanggan = dataSnapshot.getValue(modelpelanggan::class.java)
+                        pelanggan?.let { pelangganList.add(it) }
+                    }
+                    val adapter = DataPelangganAdapter(pelangganList)
+                    rvDataPelanggan.adapter = adapter
+                    adapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+            }
+        })
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_data_pelanggan)
-        init()
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.reverseLayout = true
-        layoutManager.stackFromEnd = true
-        rvDATA_PELANGGAN.layoutManager=layoutManager
-        rvDATA_PELANGGAN.setHasFixedSize(true)
-        pelangganList = arrayListOf<modelpelanggan>()
-        getData()
-        val intent = Intent(this, TambahPelanggan::class.java)
-        intent.putExtra("judul", "")
-        intent.putExtra("idPelanggan", "")
-        intent.putExtra("namaPelanggan", "")
-        intent.putExtra("idPelenggan", "")
         enableEdgeToEdge()
+        setContentView(R.layout.activity_data_pelanggan)
 
-        // Redirect ke halaman pelanggan
-        val tambahPelanggan = findViewById<FloatingActionButton>(R.id.fabDATA_PELANGGAN_TAMBAH)
-        tambahPelanggan.setOnClickListener {
+        pelangganList = ArrayList()
+        init()
+        getDATA()
+
+        fabTambahPelanggan.setOnClickListener {
             val intent = Intent(this, TambahPelanggan::class.java)
             startActivity(intent)
         }
@@ -56,30 +76,5 @@ class DataPelanggan : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
-    fun init(){
-        rvDATA_PELANGGAN = findViewById(R.id.rvDATA_PELANGGAN)
-        fabDATA_PELANGGAN_TAMBAH = findViewById(R.id.fabDATA_PELANGGAN_TAMBAH)
-    }
-    fun getData() {
-        val query = myRef.orderByChild("idPelanggan").limitToLast(100)
-        query.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-               if (snapshot.exists()){
-                   pelangganList.clear()
-                   for (dataSnapshot in snapshot.children){
-                       val pegawai = dataSnapshot.getValue(modelpelanggan::class.java)
-                       pelangganList.add(pegawai!!)
-                   }
-                   val adapter = DataPelangganAdapter(pelangganList)
-                   rvDATA_PELANGGAN.adapter = adapter
-                   adapter.notifyDataSetChanged()
-               }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@DataPelanggan,error.message,Toast.LENGTH_SHORT)
-            }
-        })
     }
 }

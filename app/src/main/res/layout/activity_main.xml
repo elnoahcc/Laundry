@@ -5,22 +5,21 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#128C7E">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tvhello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello Elnoah"
+        android:text="Hello Elnoah!"
         android:textStyle="bold"
-        android:textSize="20dp"
-        android:textColor="@color/white"
+        android:textSize="50dp"
+        android:textColor="#075E54"
         android:fontFamily="@font/interblack"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="30dp"/>
+        android:layout_marginTop="100dp" />
 
     <TextView
         android:id="@+id/date"
@@ -28,13 +27,12 @@
         android:layout_height="wrap_content"
         android:text="Rabu, 23 Januari 2025"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="#075E54"
         android:fontFamily="@font/interextrabold"
         app:layout_constraintTop_toBottomOf="@id/tvhello"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="30dp"
         tools:ignore="MissingConstraints"/>
 
     <androidx.cardview.widget.CardView
@@ -46,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
 
@@ -199,7 +197,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/inter"
         android:text="@string/main_sentence1"
-        android:textColor="@color/white"
+        android:textColor="#075E54"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.587"
         app:layout_constraintStart_toStartOf="parent"
@@ -209,7 +207,7 @@
         android:id="@+id/jangankecewakanpelanggan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="#075E54"
         android:text="@string/main_sentence2"
         android:fontFamily="@font/inter"
         app:layout_constraintTop_toBottomOf="@id/tvservice"
@@ -243,7 +241,7 @@
                 android:id="@+id/imgAkun"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/accountsettings"
+                android:src="@drawable/account"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -255,6 +253,7 @@
                 android:text="@string/main_akun"
                 android:fontFamily="@font/inter"
                 android:textSize="14sp"
+                android:textColor="@color/white"
                 android:gravity="center"
                 app:layout_constraintTop_toBottomOf="@id/imgAkun"
                 app:layout_constraintStart_toStartOf="parent"
@@ -303,6 +302,7 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="@string/main_layanan"
+                android:textColor="@color/white"
                 android:fontFamily="@font/inter"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -350,6 +350,7 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="@string/main_tambahan"
+                android:textColor="@color/white"
                 android:fontFamily="@font/inter"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -396,6 +397,7 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="@string/main_pegawai"
+                android:textColor="@color/white"
                 android:fontFamily="@font/inter"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -443,6 +445,7 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="@string/main_cabang"
+                android:textColor="@color/white"
                 android:fontFamily="@font/inter"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -492,6 +495,7 @@
                 android:gravity="center"
                 android:text="@string/main_printer"
                 android:fontFamily="@font/inter"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -1,10 +1,10 @@
 package com.elnoah.laundry.modeldata
 
 class modelpegawai(
-val idPegawai: String? = null,
-val namaPegawai: String? = null,
-val alamatPegawai: String? = null,
-val noHPPegawai:String? = null,
-val idCabang:String? = null,
-val terdaftar: String? = null
+    val idPegawai: String = "",
+    val namaPegawai: String = "",
+    val alamatPegawai: String = "",
+    val noHPPegawai: String = "",
+    val cabangPegawai: String = "",
+    val tanggalTerdaftar: String? = ""
 )

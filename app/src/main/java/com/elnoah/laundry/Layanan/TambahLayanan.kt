@@ -11,97 +11,93 @@ import androidx.core.view.WindowInsetsCompat
 import com.elnoah.laundry.R
 import com.elnoah.laundry.modeldata.modellayanan // Pastikan model sesuai dengan struktur Firebase
 import com.google.firebase.database.FirebaseDatabase
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class TambahLayanan : AppCompatActivity() {
+
     private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference("layanan")
-    private lateinit var etNamaLayanan: EditText
-    private lateinit var etHargaLayanan: EditText
-    private lateinit var etCabangLayanan: EditText
-    private lateinit var btSimpanLayanan: Button
+
+    private lateinit var etNama: EditText
+    private lateinit var etHarga: EditText
+    private lateinit var etCabang: EditText
+    private lateinit var btSimpan: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tambah_layanan) // Pastikan layout benar
-        init()
-        enableEdgeToEdge()
-        applyEdgeToEdge()
-        btSimpanLayanan.setOnClickListener {simpanLayanan()}
-    }
+        setContentView(R.layout.activity_tambah_layanan)
 
-    fun init() {
-        etNamaLayanan = findViewById(R.id.et_nama_layanan)
-        etCabangLayanan = findViewById(R.id.et_cabang_layanan)
-        etHargaLayanan = findViewById(R.id.et_harga_layanan)
-        btSimpanLayanan = findViewById(R.id.btn_simpan_layanan)
-    }
+        // Inisialisasi View
+        etNama = findViewById(R.id.et_nama_layanan)
+        etHarga = findViewById(R.id.et_harga_layanan)
+        etCabang = findViewById(R.id.et_cabang_layanan)
+        btSimpan = findViewById(R.id.btn_simpan_layanan)
 
-     private fun applyEdgeToEdge() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { view, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        // Set event listener untuk tombol simpan
+        btSimpan.setOnClickListener {
+            validasi()
         }
     }
 
-     fun cekValidasi(): Boolean {
-        if (etNamaLayanan.text.isEmpty()) {
-            etNamaLayanan.error = getString(R.string.validasi_nama_layanan)
-            etNamaLayanan.requestFocus()
-            return false
+    private fun validasi() {
+        val nama = etNama.text.toString().trim()
+        val harga = etHarga.text.toString().trim()
+        val cabang = etCabang.text.toString().trim()
+
+        if (nama.isEmpty()) {
+            etNama.error = getString(R.string.validasi_nama_layanan)
+            etNama.requestFocus()
+            return
         }
-        if (etCabangLayanan.text.isEmpty()) {
-            etCabangLayanan.error = getString(R.string.validasi_cabang_layanan)
-            etCabangLayanan.requestFocus()
-            return false
+        if (harga.isEmpty()) {
+            etHarga.error = getString(R.string.validasi_harga_layanan)
+            etHarga.requestFocus()
+            return
         }
-         if (etHargaLayanan.text.isEmpty()) {
-             etHargaLayanan.error = getString(R.string.validasi_harga_layanan)
-             etHargaLayanan.requestFocus()
-             return false
-         }
-        return true
+        if (cabang.isEmpty()) {
+            etCabang.error = getString(R.string.validasi_cabang_layanan)
+            etCabang.requestFocus()
+            return
+        }
+
+        // Jika semua validasi lolos, simpan data
+        simpan(nama, harga, cabang)
     }
 
-     fun simpanLayanan() {
-        try {
-            if (!cekValidasi()) return
+    private fun simpan(nama: String, harga: String, cabang: String) {
+        val layananBaru = myRef.push()
+        val layananId = layananBaru.key ?: return
 
-            val layananBaru = myRef.push()
-            val layananId = layananBaru.key
+        // Tambahkan tanggal saat ini
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val tanggalTerdaftar = sdf.format(Date())
 
-            if (layananId == null) {
-                Toast.makeText(this, "Gagal mendapatkan ID layanan!", Toast.LENGTH_SHORT).show()
-                return
+        val data = modellayanan(
+            idLayanan = layananId,
+            namaLayanan = nama,
+            hargaLayanan = harga,
+            cabangLayanan = cabang,
+            tanggalTerdaftar = tanggalTerdaftar
+        )
+
+        layananBaru.setValue(data)
+            .addOnSuccessListener {
+                Toast.makeText(
+                    this,
+                    getString(R.string.sukses_simpan_pelanggan),
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
             }
-
-            // Membuat objek data model untuk disimpan ke Firebase
-            val data = modellayanan(
-                layananId,
-                etNamaLayanan.text.toString(),
-                etCabangLayanan.text.toString(),
-                etHargaLayanan.text.toString()
-            )
-
-            // Menyimpan data ke Firebase
-            layananBaru.setValue(data)
-                .addOnSuccessListener {
-                    Toast.makeText(
-                        this,
-                        getString(R.string.sukses_simpan_layanan),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    finish()
-                }
-                .addOnFailureListener { e ->
-                    Toast.makeText(
-                        this,
-                        getString(R.string.gagal_simpan_layanan) + ": " + e.message,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-        } catch (e: Exception) {
-            Toast.makeText(this, "Terjadi kesalahan: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
+            .addOnFailureListener {
+                Toast.makeText(
+                    this,
+                    getString(R.string.gagal_simpan_pelanggan),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
     }
 }
+

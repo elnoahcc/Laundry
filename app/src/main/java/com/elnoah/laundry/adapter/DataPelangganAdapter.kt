@@ -20,35 +20,39 @@ class DataPelangganAdapter(private val listPelanggan: ArrayList<modelpelanggan>)
             .inflate(R.layout.card_data_pelanggan, parent, false)
         return ViewHolder(view)
     }
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-       val item = listPelanggan[position]
-        holder.tvID.text = item.idPelanggan
-        holder.tvNama.text = item.namaPelanggan
-        holder.tvAlamat.text = item.alamatPelanggan
-        holder.tvNoHP.text = item.noHPPelanggan
-        holder.tvTerdaftar.text = item.terdaftar
-        holder.cvCARD.setOnClickListener(){
-        }
-        holder.btHubungi.setOnClickListener{
-        }
-        holder.btLihat.setOnClickListener{
-        }
-    }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cvCARD = itemView.findViewById<View>(R.id.CVDATA_PELANGGAN)
-        val tvID = itemView.findViewById<TextView>(R.id.tvDataIDPelanggan)
-        val tvNama = itemView.findViewById<TextView>(R.id.tvDataNamaPelanggan)
-        val tvAlamat = itemView.findViewById<TextView>(R.id.tvDataAlamatPelanggan)
-        val tvNoHP = itemView.findViewById<TextView>(R.id.tvDataNoHpPelanggan)
-        val tvTerdaftar = itemView.findViewById<TextView>(R.id.tvDataTerdaftarPelanggan)
-        val btHubungi = itemView.findViewById<Button>(R.id.btDataHubungiPelanggan)
-        val btLihat = itemView.findViewById<Button>(R.id.btDataLihatPelanggan)
-        val idCabang = itemView.findViewById<TextView>(R.id.tvDataCabangLayanan)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = listPelanggan[position]
+        holder.tvDataIDPelanggan.text = item.idPelanggan ?: ""
+        holder.tvNama.text = item.namaPelanggan ?: ""
+        holder.tvAlamat.text = item.alamatPelanggan ?: ""
+        holder.tvNoHP.text = item.noHPPelanggan ?: ""
+        holder.tvTerdaftar.text = "Terdaftar: ${item.tanggalTerdaftar ?: "-"}"
+        holder.tvCabang.text = "Cabang ${item.cabangPelanggan ?: "Tidak Terdaftar"}"
+
+
+        holder.btHubungi.setOnClickListener {
+            // Tambahkan aksi klik untuk menghubungi pelanggan
+        }
+
+        holder.btLihat.setOnClickListener {
+            // Tambahkan aksi klik untuk melihat detail pelanggan
+        }
     }
 
     override fun getItemCount(): Int {
         return listPelanggan.size
+    }
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvDataIDPelanggan: TextView = itemView.findViewById(R.id.tvDataIDPelanggan)
+        val tvNama: TextView = itemView.findViewById(R.id.tvDataNamaPelanggan)
+        val tvAlamat: TextView = itemView.findViewById(R.id.tvDataAlamatPelanggan)
+        val tvNoHP: TextView = itemView.findViewById(R.id.tvDataNoHpPelanggan)
+        val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangPelanggan)
+        val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPelanggan) // Tampilkan tanggal terdaftar
+        val btHubungi: Button = itemView.findViewById(R.id.btDataHubungiPelanggan)
+        val btLihat: Button = itemView.findViewById(R.id.btDataLihatPelanggan)
     }
 }
 

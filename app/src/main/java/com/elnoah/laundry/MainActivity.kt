@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.elnoah.laundry.Layanan.DataLayanan
+import com.elnoah.laundry.Transaksi.DataTransaksi
 import com.elnoah.laundry.laporan.DataLaporan
 import com.elnoah.laundry.pegawai.DataPegawai
 import com.elnoah.laundry.pelanggan.DataPelanggan
@@ -25,6 +26,14 @@ class MainActivity : AppCompatActivity() {
         // Redirect ke halaman pelanggan
         findViewById<ConstraintLayout>(R.id.clPelanggan)?.setOnClickListener {
             startActivity(Intent(this, DataPelanggan::class.java))
+        }
+
+        findViewById<ConstraintLayout>(R.id.clTransaksi)?.setOnClickListener {
+            startActivity(Intent(this, DataTransaksi::class.java))
+        }
+
+        findViewById<ConstraintLayout>(R.id.clLaporan)?.setOnClickListener {
+            startActivity(Intent(this, DataLaporan::class.java))
         }
 
         // Redirect ke halaman pegawai

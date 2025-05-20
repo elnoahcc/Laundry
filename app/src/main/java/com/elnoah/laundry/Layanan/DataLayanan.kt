@@ -22,44 +22,19 @@ import com.google.firebase.database.ValueEventListener
 class DataLayanan : AppCompatActivity() {
     private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference("layanan")
-    private lateinit var rvDATA_LAYANAN: RecyclerView
-    private lateinit var fabDATA_LAYANAN_TAMBAH: FloatingActionButton
+
+    private lateinit var rvDataLayanan: RecyclerView
+    private lateinit var fabTambahLayanan: FloatingActionButton
     private lateinit var layananList: ArrayList<modellayanan>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_data_layanan)
-
-        init()
-
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.reverseLayout = true
-        layoutManager.stackFromEnd = true
-        rvDATA_LAYANAN.layoutManager = layoutManager
-        rvDATA_LAYANAN.setHasFixedSize(true)
-
-        layananList = arrayListOf()
-        getData()
-
-        fabDATA_LAYANAN_TAMBAH.setOnClickListener {
-            val intent = Intent(this, TambahLayanan::class.java)
-            startActivity(intent)
-        }
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-    }
-
     private fun init() {
-        rvDATA_LAYANAN = findViewById(R.id.rvDATA_LAYANAN)
-        fabDATA_LAYANAN_TAMBAH = findViewById(R.id.fabDATA_LAYANAN_TAMBAH)
+        rvDataLayanan = findViewById(R.id.rvDATA_LAYANAN)
+        fabTambahLayanan = findViewById(R.id.fabDATA_LAYANAN_TAMBAH)
+
+        rvDataLayanan.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun getData() {
+    private fun getDATA() {
         val query = myRef.orderByChild("idLayanan").limitToLast(100)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -70,14 +45,35 @@ class DataLayanan : AppCompatActivity() {
                         layanan?.let { layananList.add(it) }
                     }
                     val adapter = DataLayananAdapter(layananList)
-                    rvDATA_LAYANAN.adapter = adapter
+                    rvDataLayanan.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@DataLayanan, error.message, Toast.LENGTH_SHORT).show()
+                // Handle error
             }
         })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_data_layanan)
+
+        layananList = ArrayList()
+        init()
+        getDATA()
+
+        fabTambahLayanan.setOnClickListener {
+            val intent = Intent(this, TambahLayanan::class.java)
+            startActivity(intent)
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
     }
 }
