@@ -1,4 +1,10 @@
 package com.elnoah.laundry.modeldata
 
-class modeltransaksitambahan {
-}
+import java.io.Serializable
+
+class modeltransaksitambahan(
+    val idLayanan: String? = "",
+    val namaLayanan: String? = "",
+    val hargaLayanan: String? = "",
+    val tanggalTerdaftar: String? = ""
+) : Serializable

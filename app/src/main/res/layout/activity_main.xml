@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:layout_margin="8dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -14,7 +15,6 @@
         android:text="Hello Elnoah!"
         android:textStyle="bold"
         android:textSize="50dp"
-        android:textColor="#075E54"
         android:fontFamily="@font/interblack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,9 +25,7 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rabu, 23 Januari 2025"
         android:textStyle="bold"
-        android:textColor="#075E54"
         android:fontFamily="@font/interextrabold"
         app:layout_constraintTop_toBottomOf="@id/tvhello"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +38,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
-        app:cardBackgroundColor="#075E54"
         app:layout_constraintTop_toBottomOf="@id/date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +56,6 @@
                 android:layout_height="wrap_content"
                 android:text="Estimasi Hari Ini"
                 android:fontFamily="@font/interblack"
-                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -102,7 +98,7 @@
                         android:id="@+id/imgTransaksi"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/salary"
+                        android:src="@drawable/transaksibaru"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -112,7 +108,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/main_transaksi"
-                        android:textColor="@color/white"
                         android:textSize="14sp"
                         android:fontFamily="@font/inter"
                         app:layout_constraintTop_toBottomOf="@id/imgTransaksi"
@@ -135,7 +130,7 @@
                         android:id="@+id/imgPelanggan"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/rating"
+                        android:src="@drawable/pelanggan"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -147,7 +142,7 @@
                         android:text="@string/main_pelanggan"
                         android:fontFamily="@font/inter"
                         android:textSize="14sp"
-                        android:textColor="@color/white"
+
                         app:layout_constraintTop_toBottomOf="@id/imgPelanggan"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -179,7 +174,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/main_laporan"
                         android:textSize="14sp"
-                        android:textColor="@color/white"
                         android:fontFamily="@font/inter"
                         app:layout_constraintTop_toBottomOf="@id/imgLaporan"
                         app:layout_constraintStart_toStartOf="parent"
@@ -197,7 +191,6 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/inter"
         android:text="@string/main_sentence1"
-        android:textColor="#075E54"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.587"
         app:layout_constraintStart_toStartOf="parent"
@@ -207,7 +200,6 @@
         android:id="@+id/jangankecewakanpelanggan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#075E54"
         android:text="@string/main_sentence2"
         android:fontFamily="@font/inter"
         app:layout_constraintTop_toBottomOf="@id/tvservice"
@@ -226,7 +218,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="#075E54"
         app:layout_constraintWidth_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/jangankecewakanpelanggan">
@@ -253,7 +244,6 @@
                 android:text="@string/main_akun"
                 android:fontFamily="@font/inter"
                 android:textSize="14sp"
-                android:textColor="@color/white"
                 android:gravity="center"
                 app:layout_constraintTop_toBottomOf="@id/imgAkun"
                 app:layout_constraintStart_toStartOf="parent"
@@ -275,7 +265,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="#075E54"
         app:layout_constraintWidth_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/cardAkun"
         app:layout_constraintTop_toBottomOf="@id/jangankecewakanpelanggan">
@@ -290,7 +279,7 @@
                 android:id="@+id/imgLayanan"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/laundrymachine"
+                android:src="@drawable/service"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -302,7 +291,6 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="@string/main_layanan"
-                android:textColor="@color/white"
                 android:fontFamily="@font/inter"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -324,12 +312,12 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="#075E54"
         app:layout_constraintWidth_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/cardLayanan"
         app:layout_constraintTop_toBottomOf="@id/jangankecewakanpelanggan">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CLtambahan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="8dp">
@@ -338,7 +326,7 @@
                 android:id="@+id/imgTambahan"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/add"
+                android:src="@drawable/tambahan"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -350,7 +338,7 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="@string/main_tambahan"
-                android:textColor="@color/white"
+
                 android:fontFamily="@font/inter"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -371,7 +359,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="#075E54"
         app:layout_constraintWidth_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardAkun">
@@ -385,7 +372,7 @@
                 android:id="@+id/imgPegawai"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/workers"
+                android:src="@drawable/worker"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -397,7 +384,6 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="@string/main_pegawai"
-                android:textColor="@color/white"
                 android:fontFamily="@font/inter"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -419,7 +405,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="#075E54"
         app:layout_constraintWidth_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/cardPegawai"
         app:layout_constraintTop_toBottomOf="@id/cardLayanan">
@@ -433,7 +418,7 @@
                 android:id="@+id/imgCabang"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/store"
+                android:src="@drawable/storebranch"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -445,7 +430,6 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="@string/main_cabang"
-                android:textColor="@color/white"
                 android:fontFamily="@font/inter"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -467,7 +451,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="#075E54"
         app:layout_constraintWidth_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/cardCabang"
         app:layout_constraintTop_toBottomOf="@id/cardTambahan">
@@ -482,7 +465,7 @@
                 android:id="@+id/imgPrinter"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/printer"
+                android:src="@drawable/printering"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -495,7 +478,6 @@
                 android:gravity="center"
                 android:text="@string/main_printer"
                 android:fontFamily="@font/inter"
-                android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

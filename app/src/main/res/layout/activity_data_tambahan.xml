@@ -5,30 +5,29 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pegawai.DataPegawai"
+    tools:context=".Tambahan.DataTambahan"
     android:layout_margin="8dp">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDATA_PEGAWAI"
+        android:id="@+id/rvDATA_TAMBAHAN"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:listitem="@layout/card_data_tambahan"
         android:layout_marginHorizontal="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="16dp"
-        tools:listitem="@layout/card_data_pegawai" />
+        />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabDATA_PEGAWAI_TAMBAH"
+        android:id="@+id/fab_DATA_TAMBAH_TAMBAH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_person_add_24"
-        app:backgroundTint="@color/white"
+        android:src="@drawable/tambahan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="Tambah Pelanggan" />
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="Tambah Pelanggan"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

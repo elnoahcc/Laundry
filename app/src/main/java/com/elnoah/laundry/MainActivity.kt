@@ -2,30 +2,44 @@ package com.elnoah.laundry
 
 import android.os.Bundle
 import android.content.Intent
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.elnoah.laundry.Layanan.DataLayanan
+import com.elnoah.laundry.Layanan.DataLayanan // <-- pastikan import ini ada
 import com.elnoah.laundry.Transaksi.DataTransaksi
 import com.elnoah.laundry.laporan.DataLaporan
+import com.elnoah.laundry.Tambahan.DataTambahan
 import com.elnoah.laundry.pegawai.DataPegawai
 import com.elnoah.laundry.pelanggan.DataPelanggan
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         enableEdgeToEdge() // Panggil ini sebelum setContentView()
 
-        setContentView(R.layout.activity_main)
 
+        setContentView(R.layout.activity_main)
+        val dateTextView: TextView = findViewById(R.id.date)
+        val currentDate = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(Date())
+        dateTextView.text = currentDate
         // Redirect ke halaman pelanggan
         findViewById<ConstraintLayout>(R.id.clPelanggan)?.setOnClickListener {
             startActivity(Intent(this, DataPelanggan::class.java))
+        }
+
+        findViewById<ConstraintLayout>(R.id.CLtambahan)?.setOnClickListener{
+            startActivity(Intent(this, DataTambahan::class.java))
         }
 
         findViewById<ConstraintLayout>(R.id.clTransaksi)?.setOnClickListener {
@@ -46,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, DataLayanan::class.java))
         }
 
-        // Redirect ke halaman layanan
+        // Redirect ke halaman layanans
         findViewById<ConstraintLayout>(R.id.clLaporan)?.setOnClickListener {
             startActivity(Intent(this, DataLaporan::class.java))
         }

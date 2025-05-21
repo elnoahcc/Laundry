@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="8dp"
+    android:layout_margin="8dp"
     android:background="#FAF6F9">
 
     <!-- Search Bar -->
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:queryHint="Cari Data Pelanggan"
         android:iconifiedByDefault="false"
-        android:background="@android:color/white"
+        android:background="@drawable/rounded_et"
         android:layout_marginBottom="8dp"
         android:elevation="4dp"/>
 

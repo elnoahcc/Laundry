@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Layanan.DataLayanan">
+    tools:context=".Layanan.DataLayanan"
+    android:layout_margin="8dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDATA_LAYANAN"
@@ -18,7 +19,7 @@
         android:id="@+id/fabTambahLayanan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_person_add_24"
+        android:src="@drawable/baseline_local_laundry_service_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="32dp"
