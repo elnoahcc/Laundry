@@ -52,7 +52,7 @@ class InvoiceTransaksi : AppCompatActivity() {
         tvMetodePembayaran = findViewById(R.id.tv_metode_pembayaran_invoice)
         tvTambahan = findViewById(R.id.tv_tambahan_invoice)
         layoutListTambahan = findViewById(R.id.layout_list_tambahan)
-        btnKirimWA = findViewById(R.id.btn_kirim_wa) // Pastikan ada button di layout
+        btnKirimWA = findViewById(R.id.btn_kirim_wa)
 
         // Ambil data dari intent
         invoiceData = intent.getSerializableExtra("invoice") as? modelinvoice
@@ -64,15 +64,8 @@ class InvoiceTransaksi : AppCompatActivity() {
         metodePembayaran = intent.getStringExtra("metodePembayaran") ?: "-"
         listTambahanData = intent.getSerializableExtra("listTambahan") as? ArrayList<modeltransaksitambahan> ?: arrayListOf()
 
-        // Format waktu timestamp
-        val waktuFormat = invoiceData?.let {
-            val date = Date(it.tanggalTerdaftar)
-            SimpleDateFormat("dd MMM yyyy, HH:mm", Locale("id", "ID")).format(date)
-        } ?: "-"
-
-        // Set data ke tampilan
+        // Tampilkan data ke tampilan
         tvIdTransaksi.text = "ID Transaksi: ${invoiceData?.idTransaksi ?: "-"}"
-        tvWaktuTransaksi.text = "Waktu: $waktuFormat"
         tvNamaPelanggan.text = namaPelanggan
         tvNoHP.text = noHP
         tvNamaLayanan.text = namaLayanan
@@ -80,7 +73,19 @@ class InvoiceTransaksi : AppCompatActivity() {
         tvTotalBayar.text = "Total Rp. $totalHarga"
         tvMetodePembayaran.text = "Metode Pembayaran: $metodePembayaran"
 
-        // Tambahan layanan
+        // Format dan tampilkan waktu
+        val tanggalMillis = invoiceData?.tanggalTerdaftar
+        if (tanggalMillis != null && tanggalMillis > 0) {
+            val date = Date(tanggalMillis)
+            val sdf = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale("id", "ID"))
+            val waktuFormat = sdf.format(date)
+            tvWaktuTransaksi.text = "Waktu: $waktuFormat"
+        } else {
+            tvWaktuTransaksi.text = "Waktu: -"
+        }
+
+
+        // Tampilkan tambahan layanan
         var subtotalTambahan = 0
         layoutListTambahan.removeAllViews()
 
@@ -106,18 +111,17 @@ class InvoiceTransaksi : AppCompatActivity() {
             tvTambahan.text = "Tidak ada layanan tambahan"
         }
 
-        // Tombol kirim WA
+        // Tombol kirim ke WhatsApp
         btnKirimWA.setOnClickListener {
             kirimInvoiceKeWA()
         }
     }
 
     private fun kirimInvoiceKeWA() {
-        // Buat message invoice dalam format string
         val builder = StringBuilder()
         builder.append("Invoice Transaksi\n")
         builder.append("ID Transaksi: ${invoiceData?.idTransaksi ?: "-"}\n")
-        builder.append("Waktu: ${tvWaktuTransaksi.text}\n")
+        builder.append("${tvWaktuTransaksi.text}\n")
         builder.append("Nama Pelanggan: $namaPelanggan\n")
         builder.append("No HP: $noHP\n")
         builder.append("Layanan: $namaLayanan\n")
@@ -139,17 +143,20 @@ class InvoiceTransaksi : AppCompatActivity() {
         builder.append("Total Bayar: Rp $totalHarga")
 
         val pesan = builder.toString()
-        val noHPWhatsapp = noHP.replace("+", "").replace(" ", "") // Bersihkan nomor untuk WA
+        val cleanedNumber = noHP
+            .replace("+", "")
+            .replace(" ", "")
+            .replace("-", "")
+            .replace("(", "")
+            .replace(")", "")
 
-        val uri = Uri.parse("https://api.whatsapp.com/send?phone=$noHPWhatsapp&text=${Uri.encode(pesan)}")
-        val intent = Intent(Intent.ACTION_VIEW, uri)
+        val waUrl = "https://wa.me/$cleanedNumber?text=${Uri.encode(pesan)}"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(waUrl))
 
-        // Cek dulu apakah ada aplikasi WA yang bisa handle intent ini (optional)
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
         } else {
-            // Bisa kasih toast atau alert kalau WA gak ada
-            // Toast.makeText(this, "WhatsApp tidak ditemukan", Toast.LENGTH_SHORT).show()
+            // Bisa tambahkan toast kalau WA gak ada
         }
     }
 }

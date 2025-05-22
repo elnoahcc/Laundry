@@ -17,6 +17,8 @@
             android:layout_marginEnd="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:elevation="20dp"
+            app:cardCornerRadius="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -24,8 +26,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_et">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -212,6 +213,7 @@
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:text="Sunting"
+                        android:backgroundTint="@android:color/holo_orange_dark"
                         android:textColor="@color/white"
                       android:fontFamily="@font/interextrabold"
                         android:layout_marginEnd="20dp"/>
@@ -219,6 +221,7 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="Hapus"
+                        android:backgroundTint="@android:color/holo_red_dark"
                         android:fontFamily="@font/interblack"
                         />
                 </LinearLayout>

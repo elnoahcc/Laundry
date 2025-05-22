@@ -45,6 +45,20 @@ class TambahPelanggan : AppCompatActivity() {
         etCabang = findViewById(R.id.etTambahCabangPelanggan)
         btSimpan = findViewById(R.id.btnSimpanPelanggan)
 
+        val idPelanggan = intent.getStringExtra("idPelanggan")
+        val namaPelanggan = intent.getStringExtra("namaPelanggan")
+        val alamatPelanggan = intent.getStringExtra("alamatPelanggan")
+        val noHPPelanggan = intent.getStringExtra("noHPPelanggan")
+        val cabangPelanggan = intent.getStringExtra("cabangPelanggan")
+
+        if (idPelanggan != null) {
+            // Isi form untuk edit
+            etNama.setText(namaPelanggan)
+            etAlamat.setText(alamatPelanggan)
+            etNoHP.setText(noHPPelanggan)
+            etCabang.setText(cabangPelanggan)
+        }
+
         // Set event listener untuk tombol simpan
         btSimpan.setOnClickListener {
             validasi()

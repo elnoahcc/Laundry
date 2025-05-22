@@ -37,7 +37,7 @@ class DataPelanggan : AppCompatActivity() {
 
     private fun getDATA() {
         val query = myRef.orderByChild("idPelanggan").limitToLast(100)
-        query.addValueEventListener(object : ValueEventListener { // Ganti addListenerForSingleValueEvent
+        query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     pelangganList.clear()
@@ -45,7 +45,18 @@ class DataPelanggan : AppCompatActivity() {
                         val pelanggan = dataSnapshot.getValue(modelpelanggan::class.java)
                         pelanggan?.let { pelangganList.add(it) }
                     }
-                    val adapter = DataPelangganAdapter(pelangganList)
+                    val adapter = DataPelangganAdapter(pelangganList) { pelanggan ->
+                        // Pas item diklik, buka TambahPelanggan dengan data pelanggan
+                        val intent = Intent(this@DataPelanggan, TambahPelanggan::class.java).apply {
+                            putExtra("idPelanggan", pelanggan.idPelanggan)
+                            putExtra("namaPelanggan", pelanggan.namaPelanggan)
+                            putExtra("alamatPelanggan", pelanggan.alamatPelanggan)
+                            putExtra("noHPPelanggan", pelanggan.noHPPelanggan)
+                            putExtra("cabangPelanggan", pelanggan.cabangPelanggan)
+                            putExtra("tanggalTerdaftar", pelanggan.tanggalTerdaftar)
+                        }
+                        startActivity(intent)
+                    }
                     rvDataPelanggan.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }
@@ -56,6 +67,7 @@ class DataPelanggan : AppCompatActivity() {
             }
         })
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

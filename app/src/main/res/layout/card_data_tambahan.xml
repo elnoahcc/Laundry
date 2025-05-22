@@ -14,11 +14,21 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/tv_id_tambahan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID Layanan Tambahan"
+            android:textSize="14sp"
+            android:textColor="#4B5563"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter"/>
+
+        <TextView
             android:id="@+id/tv_nama_tambahan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Layanan Tambahan"
-            android:textSize="16sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#1F2937"
             android:fontFamily="@font/interextrabold" />

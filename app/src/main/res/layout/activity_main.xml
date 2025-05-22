@@ -65,14 +65,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/interextrabold"
-                android:text="Rp. 40.000,-"
+                android:text="Rp. 10.000.000,-"
                 android:textColor="#25D366"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/tvEstimation"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="2dp"
-                android:layout_marginStart="250dp"
+                android:layout_marginStart="170dp"
                 tools:ignore="MissingConstraints" />
 
             <!-- Icon Group -->

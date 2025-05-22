@@ -238,46 +238,30 @@
             android:paddingHorizontal="12dp"
             android:weightSum="2">
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btn_kirim_wa"
-                android:layout_width="0dp"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Kirim WhatsApp"
+                android:text="Kirim\nWhatsApp"
                 android:fontFamily="@font/interextrabold"
-                style="@style/Widget.MaterialComponents.Button"
                 android:backgroundTint="#25D366"
-                android:textColor="@android:color/white"
-                android:cornerRadius="12dp"
-                android:icon="@drawable/baseline_local_laundry_service_24"
-                android:iconTint="@android:color/white"
-                android:iconGravity="textStart"
-                android:iconPadding="8dp"
-                />
+                android:textColor="@android:color/white"/>
 
             <Space
                 android:layout_width="16dp"
                 android:layout_height="wrap_content" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btn_cetak_invoice"
-                android:layout_width="0dp"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Cetak\nInvoice"
                 android:fontFamily="@font/interextrabold"
-                style="@style/Widget.MaterialComponents.Button"
                 android:backgroundTint="#2196F3"
-                android:textColor="@android:color/white"
-                android:cornerRadius="12dp"
-                android:icon="@drawable/rounded_button"
-                android:iconTint="@android:color/white"
-                android:iconGravity="textStart"
-                android:iconPadding="8dp"
-                />
-
+                android:textColor="@android:color/white"/>
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

@@ -12,8 +12,10 @@ import com.elnoah.laundry.modeldata.modelpelanggan
 import org.w3c.dom.Text
 
 
-class DataPelangganAdapter(private val listPelanggan: ArrayList<modelpelanggan>) :
-    RecyclerView.Adapter<DataPelangganAdapter.ViewHolder>() {
+class DataPelangganAdapter(
+    private val listPelanggan: ArrayList<modelpelanggan>,
+    private val onItemClick: (modelpelanggan) -> Unit
+) : RecyclerView.Adapter<DataPelangganAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -30,13 +32,17 @@ class DataPelangganAdapter(private val listPelanggan: ArrayList<modelpelanggan>)
         holder.tvTerdaftar.text = "Terdaftar: ${item.tanggalTerdaftar ?: "-"}"
         holder.tvCabang.text = "Cabang ${item.cabangPelanggan ?: "Tidak Terdaftar"}"
 
+        // Contoh klik CardView (whole itemView) buat edit
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
 
         holder.btHubungi.setOnClickListener {
-            // Tambahkan aksi klik untuk menghubungi pelanggan
+            // Aksi hubungi pelanggan (boleh dikosongkan)
         }
 
         holder.btLihat.setOnClickListener {
-            // Tambahkan aksi klik untuk melihat detail pelanggan
+            // Aksi lihat detail pelanggan (boleh dikosongkan)
         }
     }
 
@@ -50,9 +56,8 @@ class DataPelangganAdapter(private val listPelanggan: ArrayList<modelpelanggan>)
         val tvAlamat: TextView = itemView.findViewById(R.id.tvDataAlamatPelanggan)
         val tvNoHP: TextView = itemView.findViewById(R.id.tvDataNoHpPelanggan)
         val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangPelanggan)
-        val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPelanggan) // Tampilkan tanggal terdaftar
+        val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPelanggan)
         val btHubungi: Button = itemView.findViewById(R.id.btDataHubungiPelanggan)
         val btLihat: Button = itemView.findViewById(R.id.btnDataLihatPelanggan)
     }
 }
-
