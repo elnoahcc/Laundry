@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pelanggan.TambahPelangganActivity"
-    android:background="@color/white">
+    tools:context=".pelanggan.TambahPelanggan">
 
     <TextView
         android:id="@+id/header"
@@ -42,6 +41,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_namalengkap"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter"
             android:textAlignment="textStart"
             android:padding="16dp"
             android:background="@drawable/rounded_et"/>
@@ -69,6 +71,9 @@
             android:hint="@string/card_pelanggan_alamat"
             android:textAlignment="textStart"
             android:padding="16dp"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter"
             android:background="@drawable/rounded_et"/>
     </LinearLayout>
     <LinearLayout
@@ -95,6 +100,9 @@
             android:inputType="phone"
             android:textAlignment="textStart"
             android:padding="16dp"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter"
             android:background="@drawable/rounded_et"/>
     </LinearLayout>
     <LinearLayout
@@ -120,6 +128,9 @@
             android:hint="@string/card_pelanggan_cabang"
             android:textAlignment="textStart"
             android:padding="16dp"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter"
             android:background="@drawable/rounded_et"/>
     </LinearLayout>
     <Button
@@ -128,7 +139,10 @@
         android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#3b82f6"
         android:text="@string/button_simpan"
+        android:fontFamily="@font/interextrabold"
+        android:textColor="#ffffff"
         android:textSize="16sp"
         android:padding="16dp"
         android:layout_marginTop="32dp"

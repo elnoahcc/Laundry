@@ -1,164 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="500dp"
-    android:background="@android:color/white">
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:padding="16dp">
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/titleTextView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Pembayaran"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/interextrabold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:orientation="vertical">
 
-    <!-- Subtitle -->
-    <TextView
-        android:id="@+id/subtitleTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="Pilih Metode Pembayaran"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:fontFamily="@font/inter"
-        app:layout_constraintTop_toBottomOf="@id/titleTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!-- Header Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginBottom="32dp">
 
-    <!-- Divider -->
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="#E0E0E0"
-        app:layout_constraintTop_toBottomOf="@id/subtitleTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Pembayaran"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/interextrabold"
+                android:textColor="?android:attr/textColorPrimary"
+                android:layout_marginBottom="8dp" />
 
-    <!-- Button: Bayar Nanti -->
-    <Button
-        android:id="@+id/btnBayarNanti"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:padding="12dp"
-        android:text="Bayar Nanti"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:fontFamily="@font/inter"
-        app:layout_constraintTop_toBottomOf="@id/divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/subtitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pilihmetodepembayaran"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter"
+                android:textColor="?android:attr/textColorSecondary" />
 
-    <!-- Button: Tunai -->
-    <Button
-        android:id="@+id/btnTunai"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@android:color/holo_green_light"
-        android:padding="12dp"
-        android:text="Tunai"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:fontFamily="@font/inter"
-        app:layout_constraintTop_toBottomOf="@id/btnBayarNanti"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        </LinearLayout>
 
-    <!-- Button: QRIS -->
-    <Button
-        android:id="@+id/btnQris"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@android:color/darker_gray"
-        android:padding="12dp"
-        android:text="QRIS"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:fontFamily="@font/inter"
-        app:layout_constraintTop_toBottomOf="@id/btnTunai"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!-- Payment Methods Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <!-- Button: DANA -->
-    <Button
-        android:id="@+id/btnDana"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:padding="12dp"
-        android:text="DANA"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:fontFamily="@font/inter"
-        app:layout_constraintTop_toBottomOf="@id/btnQris"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Primary Payment Methods -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBayarNanti"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@string/bayarnanti"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:fontFamily="@font/inter"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#FF5722"
+                android:textColor="@android:color/white"
+                app:cornerRadius="12dp"
+                style="@style/Widget.Material3.Button" />
 
-    <!-- Button: GoPay -->
-    <Button
-        android:id="@+id/btnGopay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:padding="12dp"
-        android:text="DANA"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:fontFamily="@font/inter"
-        app:layout_constraintTop_toBottomOf="@id/btnDana"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTunai"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@string/Tunai"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:fontFamily="@font/inter"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#4CAF50"
+                android:textColor="@android:color/white"
+                app:cornerRadius="12dp"
+                style="@style/Widget.Material3.Button" />
 
-    <!-- Button: OVO -->
-    <Button
-        android:id="@+id/btnOvo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/holo_purple"
-        android:padding="12dp"
-        android:text="OVO"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:fontFamily="@font/inter"
-        app:layout_constraintTop_toBottomOf="@id/btnGopay"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnQris"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="📱 QRIS"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:fontFamily="@font/inter"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="#2196F3"
+                android:textColor="@android:color/white"
+                app:cornerRadius="12dp"
+                style="@style/Widget.Material3.Button" />
 
+            <!-- Divider -->
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                android:layout_marginVertical="16dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- E-Wallet Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E-Wallet"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/interextrabold"
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_marginBottom="16dp" />
+
+            <!-- E-Wallet Grid -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDana"
+                    android:layout_width="0dp"
+                    android:layout_height="72dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="💎\nDANA"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter"
+                    android:backgroundTint="#118EEA"
+                    android:textColor="@android:color/white"
+                    app:cornerRadius="12dp"
+                    style="@style/Widget.Material3.Button" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGopay"
+                    android:layout_width="0dp"
+                    android:layout_height="72dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="🚗\nGoPay"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter"
+                    android:backgroundTint="#00AED6"
+                    android:textColor="@android:color/white"
+                    app:cornerRadius="12dp"
+                    style="@style/Widget.Material3.Button" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnOvo"
+                    android:layout_width="0dp"
+                    android:layout_height="72dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="🟣\nOVO"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter"
+                    android:backgroundTint="#4F3A96"
+                    android:textColor="@android:color/white"
+                    app:cornerRadius="12dp"
+                    style="@style/Widget.Material3.Button" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -84,6 +84,7 @@
                 android:padding="16dp"
                 android:fontFamily="@font/inter"
                 android:text="@string/card_pelanggan_hubungi"
+                android:textColor="@color/white"
                 android:layout_marginRight="5dp"/>
             <Button
                 android:layout_weight="1"
@@ -93,6 +94,7 @@
                 android:backgroundTint="#f59e0b"
                 android:padding="16dp"
                 android:fontFamily="@font/inter"
+                android:textColor="@color/white"
                 android:layout_marginLeft="5dp"
                 android:text="@string/card_pelanggan_lihat"/>
         </LinearLayout>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_pegawai"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/interextrabold"/>
+
+        <!-- Employee Info Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ID Pegawai -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:text="@string/card_pegawai_id"
+                    android:textSize="15sp"
+                    android:textColor="#7F8C8D"
+                    android:textStyle="normal"
+                    android:fontFamily="@font/inter"/>
+
+                <TextView
+                    android:id="@+id/tvDataIDPegawai"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="PG-001234"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/interextrabold"
+                    android:gravity="end" />
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE"/>
+
+            <!-- Nama Pegawai -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:text="@string/card_pegawai_nama"
+                    android:textSize="15sp"
+                    android:textColor="#7F8C8D"
+                    android:fontFamily="@font/inter"/>
+
+                <TextView
+                    android:id="@+id/tvDataNamaPegawai"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Jane Smith"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/interextrabold"
+                    android:gravity="end" />
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE"/>
+
+            <!-- Alamat Pegawai -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:text="@string/card_pelanggan_alamat"
+                    android:textSize="15sp"
+                    android:textColor="#7F8C8D"
+                    android:fontFamily="@font/inter"/>
+
+                <TextView
+                    android:id="@+id/tvDataAlamatPegawai"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Jl. Gatot Subroto No. 789"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/interextrabold"
+                    android:gravity="end" />
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE"/>
+
+            <!-- No HP Pegawai -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:text="@string/card_pelanggan_nohp"
+                    android:textSize="15sp"
+                    android:textColor="#7F8C8D"
+                    android:fontFamily="@font/inter"/>
+
+                <TextView
+                    android:id="@+id/tvDataNoHpPegawai"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0821-9876-5432"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/interextrabold"
+                    android:gravity="end" />
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE"/>
+
+            <!-- Cabang Pegawai -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:text="@string/card_pelanggan_cabang"
+                    android:textSize="15sp"
+                    android:textColor="#7F8C8D"
+                    android:fontFamily="@font/inter"/>
+
+                <TextView
+                    android:id="@+id/tvDataCabangPegawai"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Jakarta Selatan"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/interextrabold"
+                    android:gravity="end" />
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE"/>
+
+            <!-- Tanggal Terdaftar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:text="Tanggal Terdaftar"
+                    android:textSize="15sp"
+                    android:textColor="#7F8C8D"
+                    android:fontFamily="@font/inter"/>
+
+                <TextView
+                    android:id="@+id/tvDataTerdaftarPegawai"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="01/01/2024"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/interextrabold"
+                    android:gravity="end" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="32dp"
+            android:gravity="center">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_edit_pegawai"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="Sunting"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:backgroundTint="#3498DB"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/interextrabold"
+                android:layout_marginEnd="8dp"
+                app:cornerRadius="12dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_delete_pegawai"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="Hapus"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:backgroundTint="#E74C3C"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/interextrabold"
+                android:layout_marginStart="8dp"
+                app:cornerRadius="12dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

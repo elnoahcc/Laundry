@@ -21,6 +21,7 @@ class PilihTambahanAdapter(
             tvNama.text = tambahan.namaLayanan
             tvHarga.text = "Harga: ${tambahan.hargaLayanan}"
 
+            // Regular click untuk memilih tambahan (bukan long press)
             itemView.setOnClickListener {
                 onItemClick(tambahan)
             }

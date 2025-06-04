@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CVDATA_CABANG"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvIDCABANG"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID Cabang"
+            android:fontFamily="@font/inter" />
+
+        <TextView
+            android:id="@+id/tvNamaLokasiCabang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama Lokasi Cabang"
+            android:textSize="24sp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/interextrabold" />
+
+        <TextView
+            android:id="@+id/tvAlamatCabang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alamat Cabang"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/inter" />
+
+        <TextView
+            android:id="@+id/tvTeleponCabang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nomor Telepon Cabang"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/inter" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnContact"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:padding="16dp"
+                android:text="Contact"
+                android:backgroundTint="#10b981"
+                android:fontFamily="@font/inter" />
+
+            <Button
+                android:id="@+id/btnLihat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:padding="16dp"
+                android:text="Lihat"
+                android:backgroundTint="#f59e0b"
+                android:fontFamily="@font/inter" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

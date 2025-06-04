@@ -15,7 +15,6 @@ import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
 class TambahPelanggan : AppCompatActivity() {
 
     private val database = FirebaseDatabase.getInstance()
@@ -46,6 +45,7 @@ class TambahPelanggan : AppCompatActivity() {
         btSimpan = findViewById(R.id.btnSimpanPelanggan)
 
         val idPelanggan = intent.getStringExtra("idPelanggan")
+        val isEdit = idPelanggan != null
         val namaPelanggan = intent.getStringExtra("namaPelanggan")
         val alamatPelanggan = intent.getStringExtra("alamatPelanggan")
         val noHPPelanggan = intent.getStringExtra("noHPPelanggan")
@@ -102,31 +102,55 @@ class TambahPelanggan : AppCompatActivity() {
     }
 
     private fun simpan(nama: String, alamat: String, noHP: String, cabang: String) {
-        val pelangganBaru = myRef.push()
-        val pelangganId = pelangganBaru.key ?: return
+        val idPelanggan = intent.getStringExtra("idPelanggan")
+        val isEdit = idPelanggan != null
 
-        // Tambahkan tanggal saat ini
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val tanggalTerdaftar = sdf.format(Date())
+        val tanggalSekarang = sdf.format(Date())
 
+        if (isEdit) {
+            // MODE EDIT
+            val dataUpdate = mapOf<String, Any>(
+                "namaPelanggan" to nama,
+                "alamatPelanggan" to alamat,
+                "noHPPelanggan" to noHP,
+                "cabangPelanggan" to cabang,
+                "tanggalTerdaftar" to tanggalSekarang // Optional: bisa skip kalau gak mau ubah tanggal
+            )
 
-        val data = modelpelanggan(
-            idPelanggan = pelangganId,
-            namaPelanggan = nama,
-            alamatPelanggan = alamat,
-            noHPPelanggan = noHP,
-            cabangPelanggan = cabang, // Pastikan dikirim
-            tanggalTerdaftar = tanggalTerdaftar // Tambahkan tanggal
-        )
+            myRef.child(idPelanggan!!)
+                .updateChildren(dataUpdate)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Data berhasil diupdate", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Gagal update data", Toast.LENGTH_SHORT).show()
+                }
 
-        pelangganBaru.setValue(data)
-            .addOnSuccessListener {
-                Toast.makeText(this, getString(R.string.sukses_simpan_pelanggan), Toast.LENGTH_SHORT).show()
-                finish()
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, getString(R.string.gagal_simpan_pelanggan), Toast.LENGTH_SHORT).show()
-            }
+        } else {
+            // MODE TAMBAH BARU
+            val pelangganBaru = myRef.push()
+            val pelangganId = pelangganBaru.key ?: return
+
+            val dataBaru = modelpelanggan(
+                idPelanggan = pelangganId,
+                namaPelanggan = nama,
+                alamatPelanggan = alamat,
+                noHPPelanggan = noHP,
+                cabangPelanggan = cabang,
+                tanggalTerdaftar = tanggalSekarang
+            )
+
+            pelangganBaru.setValue(dataBaru)
+                .addOnSuccessListener {
+                    Toast.makeText(this, getString(R.string.sukses_simpan_pelanggan), Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, getString(R.string.gagal_simpan_pelanggan), Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 
 }

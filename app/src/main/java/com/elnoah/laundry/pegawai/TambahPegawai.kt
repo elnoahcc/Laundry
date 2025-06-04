@@ -3,10 +3,11 @@ package com.elnoah.laundry.pegawai
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.elnoah.laundry.R
 import com.elnoah.laundry.modeldata.modelpegawai
 import com.google.firebase.database.FirebaseDatabase
@@ -27,16 +28,34 @@ class TambahPegawai : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_tambah_pegawai)
 
-        // Inisialisasi View
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
         etNama = findViewById(R.id.etTambahNamaPegawai)
         etAlamat = findViewById(R.id.etTambahAlamatPegawai)
         etNoHP = findViewById(R.id.etTambahNoHpPegawai)
         etCabang = findViewById(R.id.etTambahCabangPegawai)
         btSimpan = findViewById(R.id.btnSimpanPegawai)
 
-        // Set event listener untuk tombol simpan
+        val idPegawai = intent.getStringExtra("idPegawai")
+        val namaPegawai = intent.getStringExtra("namaPegawai")
+        val alamatPegawai = intent.getStringExtra("alamatPegawai")
+        val noHPPegawai = intent.getStringExtra("noHPPegawai")
+        val cabangPegawai = intent.getStringExtra("cabangPegawai")
+
+        if (idPegawai != null) {
+            etNama.setText(namaPegawai)
+            etAlamat.setText(alamatPegawai)
+            etNoHP.setText(noHPPegawai)
+            etCabang.setText(cabangPegawai)
+        }
+
         btSimpan.setOnClickListener {
             validasi()
         }
@@ -74,34 +93,56 @@ class TambahPegawai : AppCompatActivity() {
             return
         }
 
-        // Jika semua validasi lolos, simpan data
         simpan(nama, alamat, noHP, cabang)
     }
 
     private fun simpan(nama: String, alamat: String, noHP: String, cabang: String) {
-        val pegawaiBaru = myRef.push()
-        val pegawaiId = pegawaiBaru.key ?: return
+        val idPegawai = intent.getStringExtra("idPegawai")
+        val isEdit = idPegawai != null
 
-        // Tambahkan tanggal saat ini
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val tanggalTerdaftar = sdf.format(Date())
+        val tanggalSekarang = sdf.format(Date())
 
-        val data = modelpegawai(
-            idPegawai = pegawaiId,
-            namaPegawai = nama,
-            alamatPegawai = alamat,
-            noHPPegawai = noHP,
-            cabangPegawai = cabang, // Pastikan dikirim
-            tanggalTerdaftar = tanggalTerdaftar // Tambahkan tanggal
-        )
+        if (isEdit) {
+            val dataUpdate = mapOf<String, Any>(
+                "namaPegawai" to nama,
+                "alamatPegawai" to alamat,
+                "noHPPegawai" to noHP,
+                "cabangPegawai" to cabang,
+                "tanggalTerdaftar" to tanggalSekarang
+            )
 
-        pegawaiBaru.setValue(data)
-            .addOnSuccessListener {
-                Toast.makeText(this, getString(R.string.sukses_simpan_pelanggan), Toast.LENGTH_SHORT).show()
-                finish()
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, getString(R.string.sukses_simpan_pelanggan), Toast.LENGTH_SHORT).show()
-            }
+            myRef.child(idPegawai!!)
+                .updateChildren(dataUpdate)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Data pegawai berhasil diupdate", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Gagal update data pegawai", Toast.LENGTH_SHORT).show()
+                }
+
+        } else {
+            val pegawaiBaru = myRef.push()
+            val pegawaiId = pegawaiBaru.key ?: return
+
+            val dataBaru = modelpegawai(
+                idPegawai = pegawaiId,
+                namaPegawai = nama,
+                alamatPegawai = alamat,
+                noHPPegawai = noHP,
+                cabangPegawai = cabang,
+                tanggalTerdaftar = tanggalSekarang
+            )
+
+            pegawaiBaru.setValue(dataBaru)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Data pegawai berhasil disimpan", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Gagal menyimpan data pegawai", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 }

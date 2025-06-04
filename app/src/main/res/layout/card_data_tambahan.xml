@@ -3,45 +3,61 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    card_view:cardCornerRadius="12dp"
-    card_view:cardElevation="4dp">
+    card_view:cardCornerRadius="16dp"
+    card_view:cardElevation="6dp"
+    card_view:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
-        <TextView
-            android:id="@+id/tv_id_tambahan"
-            android:layout_width="wrap_content"
+        <!-- Header Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ID Layanan Tambahan"
-            android:textSize="14sp"
-            android:textColor="#4B5563"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/inter"/>
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
 
-        <TextView
-            android:id="@+id/tv_nama_tambahan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama Layanan Tambahan"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#1F2937"
-            android:fontFamily="@font/interextrabold" />
+            <!-- ID Layanan -->
+            <TextView
+                android:id="@+id/tv_id_tambahan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:text="ID Layanan Tambahan"
+                android:textColor="#6B7280"
+                android:textSize="12sp"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1" />
 
-        <TextView
-            android:id="@+id/tv_harga_tambahan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rp. 0"
-            android:textSize="14sp"
-            android:textColor="#4B5563"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/inter" />
+            <!-- Nama Layanan -->
+            <TextView
+                android:id="@+id/tv_nama_tambahan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/interextrabold"
+                android:text="Nama Layanan Tambahan"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:lineSpacingExtra="2dp" />
+
+            <!-- Harga -->
+            <TextView
+                android:id="@+id/tv_harga_tambahan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/inter"
+                android:text="Rp. 0"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

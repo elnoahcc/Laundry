@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <!-- Search Bar -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/svCariDataTambahan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Cari Data Tambahan"
+        android:iconifiedByDefault="false"
+        android:background="@drawable/rounded_et"
+        android:layout_marginBottom="8dp"
+        android:elevation="4dp" />
+
+    <!-- TextView jika data kosong -->
+    <TextView
+        android:id="@+id/tvKosongTambahan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data tambahan tidak ditemukan."
+        android:textAlignment="center"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter"
+        android:textSize="16sp" />
+
+    <!-- RecyclerView untuk list tambahan -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDATA_TAMBAHAN"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="8dp"
+        tools:listitem="@layout/card_data_tambahan" />
+</LinearLayout>

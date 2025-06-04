@@ -28,7 +28,6 @@ class DataTambahan : AppCompatActivity() {
     private fun init() {
         rvDataTambahan = findViewById(R.id.rvDATA_TAMBAHAN)
         fabTambahTambahan = findViewById(R.id.fab_DATA_TAMBAH_TAMBAH)
-
         rvDataTambahan.layoutManager = LinearLayoutManager(this)
     }
 

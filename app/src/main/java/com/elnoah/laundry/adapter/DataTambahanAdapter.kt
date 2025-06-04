@@ -13,6 +13,7 @@ class DataTambahanAdapter(
 ) : RecyclerView.Adapter<DataTambahanAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val idLayanan: TextView = itemView.findViewById(R.id.tv_id_tambahan)
         val nama: TextView = itemView.findViewById(R.id.tv_nama_tambahan)
         val harga: TextView = itemView.findViewById(R.id.tv_harga_tambahan)
     }
@@ -25,6 +26,7 @@ class DataTambahanAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
+        holder.idLayanan.text = "ID: ${item.idLayanan}"
         holder.nama.text = item.namaLayanan
         holder.harga.text = "Rp. ${item.hargaLayanan}"
     }

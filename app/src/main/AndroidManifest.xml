@@ -2,18 +2,54 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Untuk Android < 12 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- Untuk Android 12 (API 31) ke atas -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_CONNECT"
+        tools:targetApi="31" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
+        tools:targetApi="31" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Optional fitur hardware -->
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/logolaundry"
-        android:label="Laundry Elnoah"
-        android:roundIcon="@drawable/logolaundry"
+        android:icon="@drawable/darksimplenolaundry"
+        android:label="CleanFresh Laundry"
+        android:roundIcon="@drawable/darksimplenolaundry"
         android:supportsRtl="true"
         android:theme="@style/Theme.Laundry"
         tools:targetApi="31">
+        <activity
+            android:name=".profile.DataProfile"
+            android:exported="false" />
+        <activity
+            android:name=".Authorize.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- Semua activity dengan android:exported sesuai aturan -->
+        <activity
+            android:name=".Authorize.Login"
+            android:exported="false" />
+        <activity
+            android:name=".Authorize.Register"
+            android:exported="false" />
+        <activity
+            android:name=".cabang.TambahCabang"
+            android:exported="false" />
+        <activity
+            android:name=".cabang.DataCabang"
+            android:exported="false" />
         <activity
             android:name=".Transaksi.InvoiceTransaksi"
             android:exported="false" />
@@ -22,12 +58,6 @@
             android:exported="false" />
         <activity
             android:name=".Transaksi.PilihTambahan"
-            android:exported="false" />
-        <activity
-            android:name=".Tambahan.TambahTambahan"
-            android:exported="false" />
-        <activity
-            android:name=".Tambahan.DataTambahan"
             android:exported="false" />
         <activity
             android:name=".Transaksi.PilihLayanan"
@@ -39,32 +69,29 @@
             android:name=".Transaksi.DataTransaksi"
             android:exported="false" />
         <activity
+            android:name=".Tambahan.TambahTambahan"
+            android:exported="false" />
+        <activity
+            android:name=".Tambahan.DataTambahan"
+            android:exported="false" />
+        <activity
             android:name=".laporan.DataLaporan"
             android:exported="false" />
         <activity
-            android:name=".Authorize.login"
-            android:exported="false" /> <!-- Main Activity (Home Page) -->
-        <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity> <!-- Layanan Activities -->
+            android:exported="false" />
         <activity
             android:name=".Layanan.TambahLayanan"
             android:exported="false" />
         <activity
             android:name=".Layanan.DataLayanan"
-            android:exported="false" /> <!-- Pegawai Activities -->
+            android:exported="false" />
         <activity
             android:name=".pegawai.TambahPegawai"
             android:exported="false" />
         <activity
             android:name=".pegawai.DataPegawai"
-            android:exported="false" /> <!-- Pelanggan Activities -->
+            android:exported="false" />
         <activity
             android:name=".pelanggan.TambahPelanggan"
             android:exported="false" />

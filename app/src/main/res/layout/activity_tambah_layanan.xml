@@ -6,14 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Layanan.TambahLayanan"
-    android:padding="20dp"
-    android:background="@color/white">
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tambah Layanan"
+        android:text="@string/title_tambahlayanan"
         android:fontFamily="@font/interextrabold"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +42,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/card_layanan_nama"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter"
+            android:textColorHint="@android:color/darker_gray"
             android:textAlignment="textStart"
             android:padding="16dp"
             android:background="@drawable/rounded_et"/>
@@ -59,7 +61,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Harga Layanan"
+            android:text="@string/harga_layanan_main_card"
             android:fontFamily="@font/inter"
             android:textSize="16sp"
             android:layout_marginBottom="12dp"/>
@@ -67,7 +69,9 @@
             android:id="@+id/etTambahHargaLayanan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Harga Layanan"
+            android:hint="@string/harga_layanan_main_card"
+            android:textColorHint="@android:color/darker_gray"
+            android:textColor="@color/black"
             android:fontFamily="@font/inter"
             android:textAlignment="textStart"
             android:padding="16dp"
@@ -95,7 +99,10 @@
             android:layout_height="wrap_content"
             android:hint="@string/main_cabang"
             android:textAlignment="textStart"
+            android:textColorHint="@android:color/darker_gray"
             android:padding="16dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter"
             android:background="@drawable/rounded_et"/>
     </LinearLayout>
     <Button
@@ -104,9 +111,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_simpan"
+        android:textColor="@color/white"
+        android:fontFamily="@font/interextrabold"
         android:textSize="16sp"
         android:padding="16dp"
         android:layout_marginTop="32dp"
+        android:backgroundTint="#3b82f6"
         android:id="@+id/btnSimpanLayanan"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

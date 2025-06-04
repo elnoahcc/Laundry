@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_margin="8dp"
-    android:background="#FAF6F9">
+    android:layout_margin="8dp">
 
     <!-- Search Bar -->
     <androidx.appcompat.widget.SearchView
@@ -18,6 +17,18 @@
         android:background="@drawable/rounded_et"
         android:layout_marginBottom="8dp"
         android:elevation="4dp"/>
+
+    <TextView
+        android:id="@+id/tvKosongLayanan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data pelanggan tidak ditemukan."
+        android:textAlignment="center"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter"
+        android:textSize="16sp" />
 
     <!-- RecyclerView for list -->
     <androidx.recyclerview.widget.RecyclerView
