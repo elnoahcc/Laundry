@@ -20,6 +20,22 @@ import com.google.firebase.database.*
 
 class DataProfile : AppCompatActivity() {
 
+    companion object {
+        // GUNAKAN KONSTANTA YANG SAMA DENGAN MainActivity
+        private const val PREF_NAME = "LoginPrefs"
+        private const val KEY_IS_LOGGED_IN = "isLoggedIn"
+        private const val KEY_LOGIN_TIME = "loginTime"
+        private const val KEY_USER_NAME = "userName"
+        private const val KEY_USER_PHONE = "userPhone"
+        private const val SESSION_DURATION_MS = 30 * 60 * 1000 // 30 menit
+
+        // Function untuk dipanggil dari Login atau activity lain
+        fun start(context: Context) {
+            val intent = Intent(context, DataProfile::class.java)
+            context.startActivity(intent)
+        }
+    }
+
     private lateinit var tvNamaLengkap: TextView
     private lateinit var tvNomorTelepon: TextView
     private lateinit var tvPassword: TextView
@@ -28,16 +44,12 @@ class DataProfile : AppCompatActivity() {
     private lateinit var ivBack: ImageView
 
     private lateinit var database: DatabaseReference
-    private lateinit var sessionManager: SessionManager
     private var currentUser: modeluser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_data_profile)
-
-        // Hapus bagian ViewCompat yang bermasalah dulu
-        // ViewCompat.setOnApplyWindowInsetsListener akan ditambah nanti jika diperlukan
 
         initViews()
         initComponents()
@@ -50,39 +62,63 @@ class DataProfile : AppCompatActivity() {
         tvNamaLengkap = findViewById(R.id.tvNamaLengkap)
         tvNomorTelepon = findViewById(R.id.tvNomorTelepon)
         tvPassword = findViewById(R.id.tvPassword)
-        btnEditProfile = findViewById(R.id.btnEditProfile)
         btnSignOut = findViewById(R.id.btnSignOut)
         ivBack = findViewById(R.id.ivBack)
     }
 
     private fun initComponents() {
         database = FirebaseDatabase.getInstance().reference
-        sessionManager = SessionManager(this)
     }
 
     private fun checkLoginStatus() {
-        if (!sessionManager.isLoggedIn()) {
-            Toast.makeText(this, "Silakan login terlebih dahulu", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, Login::class.java))
-            finish()
+        val sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val isLoggedIn = sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false)
+        val loginTime = sharedPreferences.getLong(KEY_LOGIN_TIME, 0L)
+        val currentTime = System.currentTimeMillis()
+        val sessionExpired = (currentTime - loginTime) > SESSION_DURATION_MS
+
+        if (!isLoggedIn || sessionExpired) {
+            Toast.makeText(this, "Sesi telah berakhir, silakan login kembali", Toast.LENGTH_SHORT).show()
+            redirectToLogin()
         }
     }
 
+    private fun redirectToLogin() {
+        // Clear login session
+        clearLoginSession()
+
+        val intent = Intent(this, Login::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+    }
+
+    private fun clearLoginSession() {
+        val sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
+    }
+
     private fun loadProfileData() {
-        val phoneNumber = sessionManager.getUserPhone()
+        val sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val phoneNumber = sharedPreferences.getString(KEY_USER_PHONE, null)
+        val userName = sharedPreferences.getString(KEY_USER_NAME, null)
+
+        android.util.Log.d("DataProfile", "Phone: $phoneNumber, Name: $userName")
 
         phoneNumber?.let { phone ->
-            val savedName = sessionManager.getUserName()
-            val savedPassword = sessionManager.getUserPassword()
+            if (userName != null && userName.isNotEmpty()) {
+                // Tampilkan data dari SharedPreferences dulu
+                displayUserData(phone, userName, "***")
 
-            if (savedName != null && savedPassword != null) {
-                displayUserData(phone, savedName, savedPassword)
+                // Kemudian load dari Firebase untuk update data terbaru
+                loadFromFirebase(phone)
             } else {
+                // Jika tidak ada nama di SharedPreferences, load dari Firebase
                 loadFromFirebase(phone)
             }
         } ?: run {
             Toast.makeText(this, "Data user tidak ditemukan", Toast.LENGTH_SHORT).show()
-            finish()
+            redirectToLogin()
         }
     }
 
@@ -102,24 +138,37 @@ class DataProfile : AppCompatActivity() {
                         val nama = user.nama ?: "Nama tidak tersedia"
                         val password = user.password ?: ""
 
-                        sessionManager.updateUserData(nama, password)
+                        // Update SharedPreferences dengan data terbaru
+                        updateUserDataInPrefs(nama)
                         displayUserData(phoneNumber, nama, password)
                     }
                 } else {
                     Toast.makeText(this@DataProfile, "Data user tidak ditemukan di server", Toast.LENGTH_SHORT).show()
-                    tvNamaLengkap.text = "Data tidak tersedia"
-                    tvPassword.text = "***"
+
+                    // Gunakan data dari SharedPreferences jika Firebase gagal
+                    val sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+                    val savedName = sharedPreferences.getString(KEY_USER_NAME, "Data tidak tersedia")
+                    displayUserData(phoneNumber, savedName ?: "Data tidak tersedia", "***")
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(this@DataProfile, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
 
-                val savedName = sessionManager.getUserName() ?: "Error loading data"
-                val savedPassword = sessionManager.getUserPassword() ?: ""
-                displayUserData(phoneNumber, savedName, savedPassword)
+                // Gunakan data dari SharedPreferences jika Firebase error
+                val sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+                val savedName = sharedPreferences.getString(KEY_USER_NAME, "Error loading data")
+                displayUserData(phoneNumber, savedName ?: "Error loading data", "***")
             }
         })
+    }
+
+    private fun updateUserDataInPrefs(nama: String) {
+        val sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        sharedPreferences.edit().apply {
+            putString(KEY_USER_NAME, nama)
+            apply()
+        }
     }
 
     private fun displayUserData(phoneNumber: String, nama: String, password: String) {
@@ -145,10 +194,6 @@ class DataProfile : AppCompatActivity() {
             finish()
         }
 
-        btnEditProfile.setOnClickListener {
-            Toast.makeText(this, "Edit Profile clicked", Toast.LENGTH_SHORT).show()
-            // TODO: Navigasi ke EditProfileActivity jika sudah tersedia
-        }
 
         btnSignOut.setOnClickListener {
             showSignOutDialog()
@@ -167,7 +212,9 @@ class DataProfile : AppCompatActivity() {
     }
 
     private fun signOut() {
-        sessionManager.logout()
+        // Clear login session menggunakan method yang sama dengan MainActivity
+        clearLoginSession()
+
         Toast.makeText(this, "Berhasil sign out", Toast.LENGTH_SHORT).show()
 
         val intent = Intent(this, Login::class.java)
@@ -176,81 +223,5 @@ class DataProfile : AppCompatActivity() {
         finish()
     }
 
-    // SessionManager sebagai inner class
-    class SessionManager(context: Context) {
 
-        private val sharedPref: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        private val editor: SharedPreferences.Editor = sharedPref.edit()
-
-        companion object {
-            private const val PREF_NAME = "LaundryApp"
-            private const val KEY_PHONE = "users_phone"
-            private const val KEY_NAME = "users_name"
-            private const val KEY_PASSWORD = "users_password"
-            private const val KEY_IS_LOGGED_IN = "is_logged_in"
-        }
-
-        // Login user - simpan session
-        fun createLoginSession(phoneNumber: String, nama: String, password: String) {
-            editor.apply {
-                putBoolean(KEY_IS_LOGGED_IN, true)
-                putString(KEY_PHONE, phoneNumber)
-                putString(KEY_NAME, nama)
-                putString(KEY_PASSWORD, password)
-                apply()
-            }
-        }
-
-        // Cek apakah user sudah login
-        fun isLoggedIn(): Boolean {
-            return sharedPref.getBoolean(KEY_IS_LOGGED_IN, false)
-        }
-
-        // Get user data
-        fun getUserPhone(): String? {
-            return sharedPref.getString(KEY_PHONE, null)
-        }
-
-        fun getUserName(): String? {
-            return sharedPref.getString(KEY_NAME, null)
-        }
-
-        fun getUserPassword(): String? {
-            return sharedPref.getString(KEY_PASSWORD, null)
-        }
-
-        // Update user data
-        fun updateUserData(nama: String, password: String) {
-            editor.apply {
-                putString(KEY_NAME, nama)
-                putString(KEY_PASSWORD, password)
-                apply()
-            }
-        }
-
-        // Logout user - clear session
-        fun logout() {
-            editor.apply {
-                clear()
-                apply()
-            }
-        }
-
-        // Get all user data as HashMap
-        fun getUserDetails(): HashMap<String, String?> {
-            return hashMapOf(
-                KEY_PHONE to getUserPhone(),
-                KEY_NAME to getUserName(),
-                KEY_PASSWORD to getUserPassword()
-            )
-        }
-    }
-
-    // Function untuk dipanggil dari Login atau activity lain
-    companion object {
-        fun start(context: Context) {
-            val intent = Intent(context, DataProfile::class.java)
-            context.startActivity(intent)
-        }
-    }
 }

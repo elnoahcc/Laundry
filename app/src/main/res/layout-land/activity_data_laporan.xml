@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:layout_marginTop="20dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Layanan.DataLayanan">
@@ -16,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="16dp"
-        tools:listitem="@layout/card_data_laporan" />
+        tools:listitem="@layout/card_data_transaksi_belumdibayar" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabDATA_LAPORAN_TAMBAH"

@@ -23,7 +23,7 @@
                 android:id="@+id/tv_judul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Konfirmasi Data"
+                android:text="@string/konfirmasidata"
                 android:fontFamily="@font/interextrabold"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Informasi Pelanggan"
+                android:text="@string/informasipelanggan"
                 android:fontFamily="@font/interextrabold"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -67,7 +67,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nama Pelanggan"
+                    android:text="@string/card_pelanggan_nama"
                     android:textSize="12sp"
                     android:textColor="?android:attr/textColorSecondary"
                     android:fontFamily="@font/interextrabold"
@@ -100,7 +100,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nomor Telepon"
+                    android:text="@string/card_pelanggan_nohp"
                     android:textSize="12sp"
                     android:textColor="?android:attr/textColorSecondary"
                     android:fontFamily="@font/interextrabold"
@@ -130,7 +130,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Layanan Utama"
+                android:text="@string/layanan_utama"
                 android:fontFamily="@font/interextrabold"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -147,7 +147,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Jenis Layanan"
+                    android:text="@string/jenislayanan"
                     android:textSize="12sp"
                     android:textColor="?android:attr/textColorSecondary"
                     android:fontFamily="@font/interextrabold"
@@ -187,7 +187,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Harga Layanan"
+                        android:text="@string/harga_layanan"
                         android:textSize="12sp"
                         android:textColor="?android:attr/textColorSecondary"
                         android:fontFamily="@font/interextrabold"
@@ -220,7 +220,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Layanan Tambahan"
+                android:text="@string/layanan_tambahan"
                 android:fontFamily="@font/interextrabold"
                 android:textStyle="bold"
                 android:textSize="16sp"
@@ -232,7 +232,8 @@
                 android:id="@+id/rv_tambahan_konfirmasi"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:nestedScrollingEnabled="false" />
+                android:nestedScrollingEnabled="true"
+                android:scrollbars="vertical" />
 
         </LinearLayout>
 
@@ -250,7 +251,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Total Bayar"
+                android:text="@string/totalbayar"
                 android:fontFamily="@font/interextrabold"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -280,7 +281,7 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:text="Batal"
+                android:text="@string/batal"
                 android:fontFamily="@font/interextrabold"
                 android:textStyle="bold"
                 android:textSize="16sp"
@@ -295,7 +296,7 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:text="Pembayaran"
+                android:text="@string/Pembayaran"
                 android:fontFamily="@font/interextrabold"
                 android:textStyle="bold"
                 android:textSize="16sp"

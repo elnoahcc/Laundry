@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.elnoah.laundry.R
 import com.elnoah.laundry.modeldata.modelcabang
 import com.google.firebase.database.FirebaseDatabase
+import java.text.SimpleDateFormat
+import java.util.*
 
 class TambahCabang : AppCompatActivity() {
 
@@ -20,6 +22,7 @@ class TambahCabang : AppCompatActivity() {
     private val refCabang = database.getReference("cabang")
 
     private var idCabang: String? = null  // Untuk update data
+    private var tanggalTerdaftar: String? = null // Untuk menyimpan tanggal terdaftar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +34,24 @@ class TambahCabang : AppCompatActivity() {
         btnSimpan = findViewById(R.id.btnSimpanCabang)
 
         // Cek apakah ini mode update
-        idCabang = intent.getStringExtra("idCabang")
+        idCabang = intent.getStringExtra(DataCabang.EXTRA_ID_CABANG)
         if (idCabang != null) {
-            etNamaCabang.setText(intent.getStringExtra("namaLokasiCabang"))
-            etAlamatCabang.setText(intent.getStringExtra("alamatCabang"))
-            etTeleponCabang.setText(intent.getStringExtra("teleponCabang"))
+            // Mode update - isi field dengan data existing
+            etNamaCabang.setText(intent.getStringExtra(DataCabang.EXTRA_NAMA_LOKASI))
+            etAlamatCabang.setText(intent.getStringExtra(DataCabang.EXTRA_ALAMAT))
+            etTeleponCabang.setText(intent.getStringExtra(DataCabang.EXTRA_TELEPON))
+            tanggalTerdaftar = intent.getStringExtra(DataCabang.EXTRA_TANGGAL_TERDAFTAR)
+
+            // Update title atau text button untuk mode edit
+            supportActionBar?.title = "Edit Cabang"
+            btnSimpan.text = "Update"
+        } else {
+            // Mode tambah baru - set tanggal terdaftar ke hari ini
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            tanggalTerdaftar = dateFormat.format(Date())
+
+            supportActionBar?.title = "Tambah Cabang"
+            btnSimpan.text = "Simpan"
         }
 
         btnSimpan.setOnClickListener {
@@ -45,6 +61,12 @@ class TambahCabang : AppCompatActivity() {
 
             if (nama.isEmpty() || alamat.isEmpty() || telepon.isEmpty()) {
                 Toast.makeText(this, (getString(R.string.isisemuafield)), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Validasi nomor telepon (opsional)
+            if (!isValidPhoneNumber(telepon)) {
+                Toast.makeText(this, "Format nomor telepon tidak valid", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -59,21 +81,38 @@ class TambahCabang : AppCompatActivity() {
         }
     }
 
+    private fun isValidPhoneNumber(phone: String): Boolean {
+        // Basic validation - bisa disesuaikan dengan kebutuhan
+        val phonePattern = Regex("^[+]?[0-9\\-\\s]{8,15}$")
+        return phonePattern.matches(phone)
+    }
+
     private fun simpanDataCabang(id: String, nama: String, alamat: String, telepon: String) {
         val cabang = modelcabang(
             idCabang = id,
             namaLokasiCabang = nama,
             alamatCabang = alamat,
-            teleponCabang = telepon
+            teleponCabang = telepon,
+            tanggalTerdaftar = tanggalTerdaftar ?: getCurrentDate()
         )
 
         refCabang.child(id).setValue(cabang)
             .addOnSuccessListener {
-                Toast.makeText(this, (getString(R.string.datacabangberhasildisimpan)), Toast.LENGTH_SHORT).show()
+                val message = if (idCabang != null) {
+                    "Data cabang berhasil diupdate"
+                } else {
+                    getString(R.string.datacabangberhasildisimpan)
+                }
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 finish()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Data Failed: ${e.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun getCurrentDate(): String {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        return dateFormat.format(Date())
     }
 }

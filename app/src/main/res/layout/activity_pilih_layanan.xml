@@ -22,7 +22,7 @@
         android:id="@+id/tvKosongLayanan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Data pelanggan tidak ditemukan."
+        android:text="Data layanan tidak ditemukan."
         android:textAlignment="center"
         android:textColor="@android:color/darker_gray"
         android:visibility="gone"

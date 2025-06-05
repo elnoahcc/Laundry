@@ -11,7 +11,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tambah Layanan Tambahan"
+        android:text="@string/tambahlayanantambahan"
         android:fontFamily="@font/interextrabold"
         android:textSize="24sp"
         android:textAlignment="center"
@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nama Layanan"
+            android:text="@string/card_layanan_nama"
             android:fontFamily="@font/inter"
             android:textSize="16sp"
             android:layout_marginBottom="12dp"/>
@@ -43,7 +43,7 @@
             android:id="@+id/etNamaLayananTambahan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Masukkan nama layanan tambahan"
+            android:hint="@string/card_layanan_nama"
             android:padding="16dp"
             android:textAlignment="textStart"
             android:background="@drawable/rounded_et"/>
@@ -63,7 +63,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Harga Layanan"
+            android:text="@string/harga_layanan_main_card"
             android:fontFamily="@font/inter"
             android:textSize="16sp"
             android:layout_marginBottom="12dp"/>
@@ -72,7 +72,7 @@
             android:id="@+id/etHargaLayananTambahan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Masukkan harga layanan tambahan"
+            android:hint="@string/harga_layanan_main_card"
             android:inputType="number"
             android:padding="16dp"
             android:textAlignment="textStart"
@@ -83,7 +83,7 @@
         android:id="@+id/btnSimpanTambahan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Simpan"
+        android:text="@string/button_simpan"
         android:textSize="16sp"
         android:padding="16dp"
         android:layout_marginTop="32dp"

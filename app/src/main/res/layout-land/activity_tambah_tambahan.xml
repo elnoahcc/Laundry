@@ -23,7 +23,7 @@
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tambah Layanan Tambahan"
+            android:text="@string/tambahlayanantambahan"
             android:fontFamily="@font/interextrabold"
             android:textSize="26sp"
             android:textAlignment="center"
@@ -68,7 +68,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Nama Layanan"
+                        android:text="@string/card_layanan_nama"
                         android:fontFamily="@font/inter"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -78,7 +78,7 @@
                         android:id="@+id/etNamaLayananTambahan"
                         android:layout_width="match_parent"
                         android:layout_height="52dp"
-                        android:hint="Masukkan nama layanan tambahan"
+                        android:hint="@string/card_layanan_nama"
                         android:padding="16dp"
                         android:textAlignment="textStart"
                         android:textSize="14sp"
@@ -97,7 +97,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Harga Layanan"
+                        android:text="@string/harga_layanan_main_card"
                         android:fontFamily="@font/inter"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -107,7 +107,7 @@
                         android:id="@+id/etHargaLayananTambahan"
                         android:layout_width="match_parent"
                         android:layout_height="52dp"
-                        android:hint="Masukkan harga layanan tambahan"
+                        android:hint="@string/harga_layanan_main_card"
                         android:inputType="number"
                         android:padding="16dp"
                         android:textAlignment="textStart"
@@ -127,35 +127,7 @@
                 android:paddingStart="20dp"
                 android:gravity="center">
 
-                <!-- Info box -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="106dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="24dp"
-                    android:background="#f0f9ff"
-                    android:orientation="vertical"
-                    android:padding="16dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/inter"
-                        android:text="💡 Tips"
-                        android:textColor="#0369a1"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter"
-                        android:lineSpacingExtra="2dp"
-                        android:text="Pastikan nama layanan jelas dan harga sesuai dengan kualitas layanan yang diberikan"
-                        android:textColor="#0369a1"
-                        android:textSize="12sp" />
-                </LinearLayout>
 
                 <!-- Action button -->
                 <Button
@@ -165,7 +137,7 @@
                     android:layout_marginHorizontal="8dp"
                     android:backgroundTint="#22c55e"
                     android:fontFamily="@font/interextrabold"
-                    android:text="Simpan"
+                    android:text="@string/button_simpan"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"

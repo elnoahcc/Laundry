@@ -4,6 +4,7 @@ import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -11,10 +12,12 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.elnoah.laundry.MainActivity
 import com.elnoah.laundry.R
 
 class SplashActivity : AppCompatActivity() {
@@ -26,10 +29,24 @@ class SplashActivity : AppCompatActivity() {
 
     private val handler = Handler(Looper.getMainLooper())
 
+    // Login session constants (sama seperti di Login.kt)
+    private val PREF_NAME = "LoginPrefs"
+    private val KEY_IS_LOGGED_IN = "isLoggedIn"
+    private val KEY_LOGIN_TIME = "loginTime"
+    private val KEY_USER_NAME = "userName"
+    private val KEY_USER_PHONE = "userPhone"
+    private val SESSION_DURATION_MS = 30 * 60 * 1000 // 30 menit dalam milliseconds
+
+    private lateinit var sharedPreferences: SharedPreferences
+    private val TAG = "SplashActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
+
+        // Inisialisasi SharedPreferences
+        sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
         checkRequirements()
     }
@@ -38,7 +55,7 @@ class SplashActivity : AppCompatActivity() {
         when {
             !isInternetAvailable() -> showInternetDialog()
             !isBluetoothEnabled() -> showBluetoothDialog()
-            else -> continueToLogin()
+            else -> continueAfterCheck()
         }
     }
 
@@ -76,7 +93,7 @@ class SplashActivity : AppCompatActivity() {
                     requestBluetoothPermission()
                 }
             }
-            .setNegativeButton(getString(R.string.remindmelater)) { _, _ -> continueToLogin() }
+            .setNegativeButton(getString(R.string.remindmelater)) { _, _ -> continueAfterCheck() }
             .show()
     }
 
@@ -109,11 +126,58 @@ class SplashActivity : AppCompatActivity() {
         handler.postDelayed({ checkRequirements() }, 2000)
     }
 
-    private fun continueToLogin() {
+    // Method baru untuk mengecek login session
+    private fun continueAfterCheck() {
         handler.postDelayed({
-            startActivity(Intent(this@SplashActivity, Login::class.java))
-            finish()
+            // Cek apakah user sudah login dan session masih berlaku
+            if (isLoggedIn() && !isSessionExpired()) {
+                Log.d(TAG, "User masih login, redirect ke MainActivity")
+                redirectToMainActivity()
+            } else {
+                Log.d(TAG, "User belum login atau session expired, redirect ke Login")
+                if (isLoggedIn()) {
+                    clearLoginSession() // hapus session jika kadaluarsa
+                }
+                redirectToLogin()
+            }
         }, SPLASH_DURATION)
+    }
+
+    private fun isLoggedIn(): Boolean {
+        return sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false)
+    }
+
+    private fun isSessionExpired(): Boolean {
+        val loginTime = sharedPreferences.getLong(KEY_LOGIN_TIME, 0L)
+        val currentTime = System.currentTimeMillis()
+        val sessionExpired = (currentTime - loginTime) > SESSION_DURATION_MS
+
+        if (sessionExpired) {
+            Log.d(TAG, "Session expired. Login time: $loginTime, Current time: $currentTime, Duration: ${(currentTime - loginTime) / 1000 / 60} minutes")
+        }
+
+        return sessionExpired
+    }
+
+    private fun clearLoginSession() {
+        sharedPreferences.edit().clear().apply()
+        Log.d(TAG, "Login session cleared due to expiration")
+    }
+
+    private fun redirectToMainActivity() {
+        val userName = sharedPreferences.getString(KEY_USER_NAME, "")
+        val userPhone = sharedPreferences.getString(KEY_USER_PHONE, "")
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("nama", userName)
+        intent.putExtra("phone", userPhone)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun redirectToLogin() {
+        startActivity(Intent(this, Login::class.java))
+        finish()
     }
 
     override fun onRequestPermissionsResult(

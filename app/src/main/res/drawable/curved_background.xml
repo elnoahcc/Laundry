@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="400dp"
+    android:height="300dp"
+    android:viewportWidth="400"
+    android:viewportHeight="300">
+
+    <path
+        android:fillColor="#3B82F6"
+        android:pathData="M0,0 L400,0 L400,250 Q400,280 380,290 Q200,320 20,290 Q0,280 0,250 Z" />
+
+    <gradient
+        android:startColor="#4F46E5"
+        android:endColor="#3B82F6"
+        android:angle="135" />
+</vector>

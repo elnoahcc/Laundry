@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
 class TambahPelanggan : AppCompatActivity() {
 
     private val database = FirebaseDatabase.getInstance()
@@ -51,18 +52,34 @@ class TambahPelanggan : AppCompatActivity() {
         val noHPPelanggan = intent.getStringExtra("noHPPelanggan")
         val cabangPelanggan = intent.getStringExtra("cabangPelanggan")
 
+        // Set judul halaman berdasarkan mode
+        setupTitle(isEdit)
+
         if (idPelanggan != null) {
             // Isi form untuk edit
             etNama.setText(namaPelanggan)
             etAlamat.setText(alamatPelanggan)
             etNoHP.setText(noHPPelanggan)
             etCabang.setText(cabangPelanggan)
+
+            // Ubah text tombol untuk mode edit
+            btSimpan.text = getString(R.string.update_pelanggan)
         }
 
         // Set event listener untuk tombol simpan
         btSimpan.setOnClickListener {
             validasi()
         }
+    }
+
+    private fun setupTitle(isEdit: Boolean) {
+
+        // Atau jika ada TextView khusus untuk title di layout
+        val titleTextView = findViewById<TextView>(R.id.headerpelanggan)
+        titleTextView?.text = if (isEdit)
+            getString(R.string.sunting_pelanggan)
+        else
+            getString(R.string.title_tambahpelanggan)
     }
 
     private fun validasi() {
@@ -121,11 +138,11 @@ class TambahPelanggan : AppCompatActivity() {
             myRef.child(idPelanggan!!)
                 .updateChildren(dataUpdate)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Data berhasil diupdate", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.sukses_update_pelanggan), Toast.LENGTH_SHORT).show()
                     finish()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this, "Gagal update data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.gagal_update_pelanggan), Toast.LENGTH_SHORT).show()
                 }
 
         } else {
@@ -152,5 +169,4 @@ class TambahPelanggan : AppCompatActivity() {
                 }
         }
     }
-
 }

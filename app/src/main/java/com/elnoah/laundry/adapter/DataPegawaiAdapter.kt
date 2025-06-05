@@ -1,6 +1,7 @@
 package com.elnoah.laundry.adapter
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
@@ -8,15 +9,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.elnoah.laundry.R
 import com.elnoah.laundry.modeldata.modelpegawai
 import com.google.android.material.button.MaterialButton
 
 class DataPegawaiAdapter(
-    private val listPegawai: ArrayList<modelpegawai>,
-    private val onItemClick: (modelpegawai) -> Unit
+    private val pegawaiList: ArrayList<modelpegawai>,
+    private val onItemClick: (modelpegawai) -> Unit,
+    private val onDeleteClick: ((modelpegawai) -> Unit)? = null
 ) : RecyclerView.Adapter<DataPegawaiAdapter.ViewHolder>() {
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvDataIDPegawai: TextView = itemView.findViewById(R.id.tvDataIDPegawai)
+        val tvDataNamaPegawai: TextView = itemView.findViewById(R.id.tvDataNamaPegawai)
+        val tvDataAlamatPegawai: TextView = itemView.findViewById(R.id.tvDataAlamatPegawai)
+        val tvDataNoHpPegawai: TextView = itemView.findViewById(R.id.tvDataNoHpPegawai)
+        val tvDataCabangPegawai: TextView = itemView.findViewById(R.id.tvDataCabangPegawai)
+        val tvDataTerdaftarPegawai: TextView = itemView.findViewById(R.id.tvDataTerdaftarPegawai)
+        val btDataHubungiPegawai: Button = itemView.findViewById(R.id.btDataHubungiPegawai)
+        val btnDataLihatPegawai: Button = itemView.findViewById(R.id.btnDataLihatPegawai)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -25,122 +39,90 @@ class DataPegawaiAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = listPegawai[position]
+        val pegawai = pegawaiList[position]
 
-        holder.tvDataIDPegawai.text = item.idPegawai ?: ""
-        holder.tvNama.text = item.namaPegawai ?: ""
-        holder.tvAlamat.text = item.alamatPegawai ?: ""
-        holder.tvNoHP.text = item.noHPPegawai ?: ""
-        holder.tvTerdaftar.text = "Terdaftar: ${item.tanggalTerdaftar ?: "-"}"
-        holder.tvCabang.text = "Cabang ${item.cabangPegawai ?: "Tidak Ada Cabang"}"
+        holder.tvDataIDPegawai.text = pegawai.idPegawai ?: "N/A"
+        holder.tvDataNamaPegawai.text = pegawai.namaPegawai ?: "Nama tidak tersedia"
+        holder.tvDataAlamatPegawai.text = pegawai.alamatPegawai ?: "Alamat tidak tersedia"
+        holder.tvDataNoHpPegawai.text = pegawai.noHPPegawai ?: "No HP tidak tersedia"
+        holder.tvDataCabangPegawai.text = pegawai.cabangPegawai ?: "Cabang tidak tersedia"
+        holder.tvDataTerdaftarPegawai.text = pegawai.tanggalTerdaftar ?: "Tanggal tidak tersedia"
 
-        // Klik card view (itemView)
-        holder.itemView.setOnClickListener {
-            onItemClick(item)
-        }
-
-        // Tombol hubungi - WhatsApp
-        holder.btHubungi.setOnClickListener {
-            val context = holder.itemView.context
-            val phoneNumber = item.noHPPegawai?.replace(Regex("[^0-9]"), "") // Remove non-numeric characters
-
+        // Tombol Hubungi - membuka WhatsApp atau dialer
+        holder.btDataHubungiPegawai.setOnClickListener {
+            val phoneNumber = pegawai.noHPPegawai
             if (!phoneNumber.isNullOrEmpty()) {
-                // Format phone number for WhatsApp (remove leading 0, add 62 for Indonesia)
-                val formattedNumber = if (phoneNumber.startsWith("0")) {
-                    "62${phoneNumber.substring(1)}"
-                } else if (!phoneNumber.startsWith("62")) {
-                    "62$phoneNumber"
-                } else {
-                    phoneNumber
-                }
-
-                val message = "Halo ${item.namaPegawai}, saya ingin menghubungi Anda mengenai layanan laundry."
-                val whatsappIntent = Intent(Intent.ACTION_VIEW)
-                whatsappIntent.data = Uri.parse("https://wa.me/$formattedNumber?text=${Uri.encode(message)}")
-
                 try {
-                    context.startActivity(whatsappIntent)
+                    // Coba buka WhatsApp terlebih dahulu
+                    val whatsappIntent = Intent(Intent.ACTION_VIEW).apply {
+                        data = Uri.parse("https://wa.me/${phoneNumber.removePrefix("0")}")
+                    }
+                    holder.itemView.context.startActivity(whatsappIntent)
                 } catch (e: Exception) {
-                    // Fallback to regular phone call if WhatsApp is not available
-                    val phoneIntent = Intent(Intent.ACTION_DIAL)
-                    phoneIntent.data = Uri.parse("tel:${item.noHPPegawai}")
-                    context.startActivity(phoneIntent)
+                    // Jika WhatsApp tidak tersedia, buka dialer
+                    val dialIntent = Intent(Intent.ACTION_DIAL).apply {
+                        data = Uri.parse("tel:$phoneNumber")
+                    }
+                    holder.itemView.context.startActivity(dialIntent)
                 }
+            } else {
+                Toast.makeText(holder.itemView.context, "Nomor telepon tidak tersedia", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Tombol lihat - Show dialog
-        holder.btLihat.setOnClickListener {
-            showEmployeeDetailDialog(holder.itemView.context, item)
+        // Tombol Lihat - menampilkan dialog detail
+        holder.btnDataLihatPegawai.setOnClickListener {
+            showDetailDialog(holder.itemView.context, pegawai)
+        }
+
+        // Click pada item untuk edit
+        holder.itemView.setOnClickListener {
+            onItemClick(pegawai)
         }
     }
 
-    private fun showEmployeeDetailDialog(context: android.content.Context, pegawai: modelpegawai) {
-        val dialog = Dialog(context)
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_mod_pegawai, null)
-        dialog.setContentView(dialogView)
+    override fun getItemCount(): Int = pegawaiList.size
 
-        // Set dialog properties
+    private fun showDetailDialog(context: Context, pegawai: modelpegawai) {
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.dialog_mod_pegawai)
         dialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-        // Fill dialog with employee data
-        dialogView.findViewById<TextView>(R.id.tvDataIDPegawai).text = pegawai.idPegawai ?: ""
-        dialogView.findViewById<TextView>(R.id.tvDataNamaPegawai).text = pegawai.namaPegawai ?: ""
-        dialogView.findViewById<TextView>(R.id.tvDataAlamatPegawai).text = pegawai.alamatPegawai ?: ""
-        dialogView.findViewById<TextView>(R.id.tvDataNoHpPegawai).text = pegawai.noHPPegawai ?: ""
-        dialogView.findViewById<TextView>(R.id.tvDataCabangPegawai).text = pegawai.cabangPegawai ?: ""
+        // Bind data ke dialog
+        val tvIdPegawai = dialog.findViewById<TextView>(R.id.tvDataIDPegawai)
+        val tvNama = dialog.findViewById<TextView>(R.id.tvDataNamaPegawai)
+        val tvAlamat = dialog.findViewById<TextView>(R.id.tvDataAlamatPegawai)
+        val tvNoHP = dialog.findViewById<TextView>(R.id.tvDataNoHpPegawai)
+        val tvCabang = dialog.findViewById<TextView>(R.id.tvDataCabangPegawai)
+        val tvTerdaftar = dialog.findViewById<TextView>(R.id.tvDataTerdaftarPegawai)
+        val btnEdit = dialog.findViewById<MaterialButton>(R.id.btn_edit_pegawai)
+        val btnDelete = dialog.findViewById<MaterialButton>(R.id.btn_delete_pegawai)
 
-        // Set tanggal terdaftar instead of status
-        val tanggalTerdaftarTextView = dialogView.findViewById<TextView>(R.id.tvDataTerdaftarPegawai)
-        tanggalTerdaftarTextView.text = pegawai.tanggalTerdaftar ?: "-"
+        // Set data
+        tvIdPegawai.text = pegawai.idPegawai ?: "N/A"
+        tvNama.text = pegawai.namaPegawai ?: "Nama tidak tersedia"
+        tvAlamat.text = pegawai.alamatPegawai ?: "Alamat tidak tersedia"
+        tvNoHP.text = pegawai.noHPPegawai ?: "No HP tidak tersedia"
+        tvCabang.text = pegawai.cabangPegawai ?: "Cabang tidak tersedia"
+        tvTerdaftar.text = pegawai.tanggalTerdaftar ?: "Tanggal tidak tersedia"
 
-        // Handle dialog buttons
-        val btnEdit = dialogView.findViewById<MaterialButton>(R.id.btn_edit_pegawai)
-        val btnDelete = dialogView.findViewById<MaterialButton>(R.id.btn_delete_pegawai)
-
+        // Tombol Edit
         btnEdit.setOnClickListener {
-            // Handle edit action here
-            // You can add your edit functionality or navigate to edit activity
             dialog.dismiss()
+            onItemClick(pegawai) // Memanggil fungsi edit yang sudah ada
         }
 
+        // Tombol Delete
         btnDelete.setOnClickListener {
-            // Show confirmation dialog before deleting
-            val confirmDialog = android.app.AlertDialog.Builder(context)
-                .setTitle("Konfirmasi Hapus")
-                .setMessage("Apakah Anda yakin ingin menghapus pegawai ${pegawai.namaPegawai}?")
-                .setPositiveButton("Hapus") { _, _ ->
-                    // Remove from list and notify adapter
-                    val position = listPegawai.indexOf(pegawai)
-                    if (position != -1) {
-                        listPegawai.removeAt(position)
-                        notifyItemRemoved(position)
-                        notifyItemRangeChanged(position, listPegawai.size)
-                    }
-                    dialog.dismiss()
-                }
-                .setNegativeButton("Batal", null)
-                .create()
-            confirmDialog.show()
+            dialog.dismiss()
+            // Panggil callback delete jika tersedia
+            onDeleteClick?.invoke(pegawai)
         }
 
         dialog.show()
-    }
-
-    override fun getItemCount(): Int = listPegawai.size
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvDataIDPegawai: TextView = itemView.findViewById(R.id.tvDataIDPegawai)
-        val tvNama: TextView = itemView.findViewById(R.id.tvDataNamaPegawai)
-        val tvAlamat: TextView = itemView.findViewById(R.id.tvDataAlamatPegawai)
-        val tvNoHP: TextView = itemView.findViewById(R.id.tvDataNoHpPegawai)
-        val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangPegawai)
-        val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPegawai)
-        val btHubungi: Button = itemView.findViewById(R.id.btDataHubungiPegawai)
-        val btLihat: Button = itemView.findViewById(R.id.btnDataLihatPegawai)
     }
 }

@@ -49,6 +49,15 @@
             android:paddingTop="8dp"
             android:fontFamily="@font/inter" />
 
+        <TextView
+            android:id="@+id/tvTanggalTerdaftar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tanggal Terdaftar"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/inter" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,8 +71,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="5dp"
+                android:textColor="@color/white"
                 android:padding="16dp"
-                android:text="Contact"
+                android:text="@string/card_pelanggan_hubungi"
                 android:backgroundTint="#10b981"
                 android:fontFamily="@font/inter" />
 
@@ -74,7 +84,8 @@
                 android:layout_weight="1"
                 android:layout_marginStart="5dp"
                 android:padding="16dp"
-                android:text="Lihat"
+                android:text="@string/card_pelanggan_lihat"
+                android:textColor="@color/white"
                 android:backgroundTint="#f59e0b"
                 android:fontFamily="@font/inter" />
         </LinearLayout>

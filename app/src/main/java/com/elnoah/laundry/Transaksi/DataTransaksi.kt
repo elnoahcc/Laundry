@@ -116,19 +116,24 @@ class DataTransaksi : AppCompatActivity() {
 
         return when {
             !isPelangganSelected && !isLayananSelected -> {
-                Toast.makeText(this, "Pilih Pelanggan dan Layanan terlebih dahulu", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.validasitransaksi1), Toast.LENGTH_SHORT).show()
                 false
             }
             !isPelangganSelected -> {
-                Toast.makeText(this, "Pilih Pelanggan terlebih dahulu", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.validasitransaksi2), Toast.LENGTH_SHORT).show()
                 false
             }
             !isLayananSelected -> {
-                Toast.makeText(this, "Pilih Layanan terlebih dahulu", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.validasitransaksi3), Toast.LENGTH_SHORT).show()
                 false
             }
             else -> true
         }
+    }
+
+    // Fungsi untuk mengecek apakah item sudah ada
+    private fun isItemAlreadySelected(idLayanan: String): Boolean {
+        return dataList.any { it.idLayanan == idLayanan }
     }
 
     // Fungsi untuk mengupdate RecyclerView dengan callback hapus item
@@ -139,7 +144,8 @@ class DataTransaksi : AppCompatActivity() {
             // Update RecyclerView lagi setelah item dihapus
             updateRecyclerView()
             // Tampilkan pesan konfirmasi
-            Toast.makeText(this, "Layanan tambahan ${selectedTambahan.namaLayanan} dihapus", Toast.LENGTH_SHORT).show()
+            val message = getString(R.string.layanan_dihapus, selectedTambahan.namaLayanan)
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -155,12 +161,12 @@ class DataTransaksi : AppCompatActivity() {
                     val nomorHP = data.getStringExtra("noHPPelanggan")
 
                     tvPelangganNama.text = getString(R.string.nama_pelanggan_trans, nama)
-                    tvPelangganNoHP.text = "No HP : $nomorHP"
+                    tvPelangganNoHP.text = getString(R.string.no_hp_trans, nomorHP)
 
                     namaPelanggan = nama.toString()
                     noHP = nomorHP.toString()
                 } else if (resultCode == RESULT_CANCELED) {
-                    Toast.makeText(this, "Batal Memilih Pelanggan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,getString(R.string.batalmemilihpelanggan) , Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -170,13 +176,13 @@ class DataTransaksi : AppCompatActivity() {
                     val nama = data.getStringExtra("namaLayanan")
                     val harga = data.getStringExtra("hargaLayanan")
 
-                    tvLayananNama.text = "Layanan : $nama"
-                    tvLayananHarga.text = "Harga : Rp. $harga"
+                    tvLayananNama.text = getString(R.string.nama_layanan_trans, nama)
+                    tvLayananHarga.text = getString(R.string.harga_layanan_trans, harga)
 
                     namaLayanan = nama.toString()
                     hargaLayanan = harga.toString()
                 } else if (resultCode == RESULT_CANCELED) {
-                    Toast.makeText(this, "Batal Memilih Layanan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.batal_memilih_layanan), Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -186,8 +192,17 @@ class DataTransaksi : AppCompatActivity() {
                     val nama = data.getStringExtra("namaLayanan").toString()
                     val harga = data.getStringExtra("hargaLayanan").toString()
 
-                    // Fixed: Use constructor directly instead of apply block
-                    // Since properties are val (immutable), create object with constructor parameters
+                    // Cek apakah item sudah dipilih sebelumnya
+                    if (isItemAlreadySelected(id)) {
+                        Toast.makeText(
+                            this,
+                            "Item $nama sudah dipilih sebelumnya!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return
+                    }
+
+                    // Jika belum ada, tambahkan ke list
                     val tambahan = modeltransaksitambahan(
                         idLayanan = id,
                         namaLayanan = nama,
@@ -197,6 +212,13 @@ class DataTransaksi : AppCompatActivity() {
 
                     dataList.add(tambahan)
                     updateRecyclerView()
+
+                    // Tampilkan pesan konfirmasi berhasil ditambahkan
+                    Toast.makeText(
+                        this,
+                        "$nama berhasil ditambahkan!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else if (resultCode == RESULT_CANCELED) {
                     Toast.makeText(this, "Batal Memilih Tambahan", Toast.LENGTH_SHORT).show()
                 }

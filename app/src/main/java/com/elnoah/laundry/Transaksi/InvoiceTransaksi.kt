@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothSocket
+import com.google.firebase.database.FirebaseDatabase
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -18,6 +19,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.elnoah.laundry.R
 import com.elnoah.laundry.adapter.DataTambahanAdapter
 import com.elnoah.laundry.modeldata.modelinvoice
+import com.elnoah.laundry.modeldata.modellaporan
 import com.elnoah.laundry.modeldata.modeltransaksitambahan
 import java.io.OutputStream
 import java.text.NumberFormat
@@ -83,6 +86,11 @@ class InvoiceTransaksi : AppCompatActivity() {
 
         // Setup modern back press handling
         setupBackPressHandler()
+
+        // ===== TAMBAHAN BARU: Auto-save ke laporan saat invoice dibuat =====
+        Handler(Looper.getMainLooper()).postDelayed({
+            autoSaveLaporan()
+        }, 1000) // Delay 1 detik untuk memastikan semua data sudah ter-load
     }
 
     private fun setupBackPressHandler() {
@@ -165,12 +173,47 @@ class InvoiceTransaksi : AppCompatActivity() {
     }
 
     private fun initializeBluetooth() {
-        bluetoothAdapter = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-            bluetoothManager.adapter
+        try {
+            bluetoothAdapter = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+                bluetoothManager.adapter
+            } else {
+                @Suppress("DEPRECATION")
+                BluetoothAdapter.getDefaultAdapter()
+            }
+        } catch (e: SecurityException) {
+            Log.e(TAG, "SecurityException initializing Bluetooth", e)
+            showToast("Tidak dapat mengakses Bluetooth: ${e.message}")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error initializing Bluetooth", e)
+            showToast("Error initializing Bluetooth: ${e.message}")
+        }
+    }
+
+    // PERBAIKAN: Fungsi yang lebih komprehensif untuk cek permission
+    private fun hasAllBluetoothPermissions(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            // Android 12+ memerlukan BLUETOOTH_CONNECT dan BLUETOOTH_SCAN
+            val connectPermission = ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.BLUETOOTH_CONNECT
+            ) == PackageManager.PERMISSION_GRANTED
+
+            val scanPermission = ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.BLUETOOTH_SCAN
+            ) == PackageManager.PERMISSION_GRANTED
+
+            connectPermission && scanPermission
         } else {
-            @Suppress("DEPRECATION")
-            BluetoothAdapter.getDefaultAdapter()
+            // Android 11 dan dibawah
+            val bluetoothPermission = ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.BLUETOOTH
+            ) == PackageManager.PERMISSION_GRANTED
+
+            val bluetoothAdminPermission = ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.BLUETOOTH_ADMIN
+            ) == PackageManager.PERMISSION_GRANTED
+
+            bluetoothPermission && bluetoothAdminPermission
         }
     }
 
@@ -178,23 +221,42 @@ class InvoiceTransaksi : AppCompatActivity() {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
         } else {
-            true
+            // Untuk Android dibawah 12, cek permission BLUETOOTH
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED
         }
     }
 
     private fun requestBluetoothPermissions() {
+        val permissionsNeeded = mutableListOf<String>()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val permissions = arrayOf(
-                Manifest.permission.BLUETOOTH_CONNECT,
-                Manifest.permission.BLUETOOTH_SCAN
-            )
-            val permissionsNeeded = permissions.filter {
-                ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                permissionsNeeded.add(Manifest.permission.BLUETOOTH_CONNECT)
             }
-            if (permissionsNeeded.isNotEmpty()) {
-                ActivityCompat.requestPermissions(this, permissionsNeeded.toTypedArray(), REQUEST_BLUETOOTH_PERMISSIONS)
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+                permissionsNeeded.add(Manifest.permission.BLUETOOTH_SCAN)
+            }
+        } else {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
+                permissionsNeeded.add(Manifest.permission.BLUETOOTH)
+            }
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADMIN) != PackageManager.PERMISSION_GRANTED) {
+                permissionsNeeded.add(Manifest.permission.BLUETOOTH_ADMIN)
             }
         }
+        if (permissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                this,
+                permissionsNeeded.toTypedArray(),
+                REQUEST_BLUETOOTH_PERMISSIONS
+            )
+        }
+    }
+
+    private fun showPermissionSettingsPrompt() {
+        showToast("Harap aktifkan izin Bluetooth di pengaturan aplikasi")
+        val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        intent.data = Uri.fromParts("package", packageName, null)
+        startActivity(intent)
     }
 
     private fun setupRecyclerView() {
@@ -363,19 +425,24 @@ class InvoiceTransaksi : AppCompatActivity() {
 
     private fun setupButtons() {
         btnCetak.setOnClickListener {
-            if (!hasBluetoothConnectPermission()) {
+            // PERBAIKAN: Cek permission sebelum mencoba print
+            if (!hasAllBluetoothPermissions()) {
                 showToast("Izin Bluetooth diperlukan untuk mencetak")
+                requestBluetoothPermissions()
                 return@setOnClickListener
             }
 
             val message = buildPrintMessage()
             printToBluetooth(message)
+
+            // Add laporan after successful print attempt
+            addLaporanToDataLaporan()
         }
 
         btnKirimWhatsapp.setOnClickListener {
             Log.d(TAG, "WhatsApp button clicked. noHPPelanggan = '$noHPPelanggan'")
 
-            // Validasi nomor HP sebelum mengirim
+            // Validate phone number before sending
             if (noHPPelanggan.isEmpty() || noHPPelanggan.isBlank() || noHPPelanggan == "Tidak tersedia") {
                 showToast("Nomor HP pelanggan tidak tersedia atau tidak valid")
                 Log.w(TAG, "WhatsApp failed: No valid phone number. Value: '$noHPPelanggan'")
@@ -384,8 +451,228 @@ class InvoiceTransaksi : AppCompatActivity() {
 
             val message = buildWhatsappMessage()
             sendWhatsappMessage(message)
+
+            // Add laporan after WhatsApp message is sent
+            addLaporanToDataLaporan()
         }
     }
+
+    // ===== FUNGSI-FUNGSI BARU UNTUK AUTO-SAVE LAPORAN =====
+
+    private fun autoSaveLaporan() {
+        // Panggil ini di onCreate() setelah loadDataFromIntent()
+        if (shouldAutoSaveLaporan()) {
+            debugLaporanData()
+            addLaporanToDataLaporan()
+        }
+    }
+
+    private fun shouldAutoSaveLaporan(): Boolean {
+        // Cek apakah data sudah pernah disimpan sebelumnya
+        val transactionId = tvIdTransaksi.text.toString()
+        return transactionId.isNotEmpty() && transactionId != "-"
+    }
+
+    private fun debugLaporanData() {
+        Log.d(TAG, "=== DEBUG LAPORAN DATA ===")
+        Log.d(TAG, "Transaction ID: ${tvIdTransaksi.text}")
+        Log.d(TAG, "Customer Name: ${tvNamaPelanggan.text}")
+        Log.d(TAG, "Service Name: ${tvLayananUtama.text}")
+        Log.d(TAG, "Total Amount: ${tvTotalBayar.text}")
+        Log.d(TAG, "Status: ${tvStatus?.text}")
+        Log.d(TAG, "=== END DEBUG LAPORAN ===")
+    }
+
+    private fun createNewLaporan(transactionId: String) {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val formattedDate = sdf.format(Date())
+
+        val customerName = tvNamaPelanggan.text.toString()
+        val serviceName = tvLayananUtama.text.toString()
+        val totalAmountText = tvTotalBayar.text.toString()
+        val totalAmount = extractNumericValue(totalAmountText)
+        val status = determinePaymentStatus()
+
+        val newLaporan = modellaporan(
+            noTransaksi = transactionId,
+            tanggal = formattedDate,
+            namaPelanggan = customerName,
+            namaLayanan = serviceName,
+            totalHarga = totalAmount,
+            status = status
+        )
+
+        val database = FirebaseDatabase.getInstance().getReference("Laporan")
+        database.child(transactionId).setValue(newLaporan)
+            .addOnSuccessListener {
+                Log.d(TAG, "Data laporan berhasil disimpan untuk ID: $transactionId")
+                showToast("Data transaksi berhasil disimpan!")
+            }
+            .addOnFailureListener { exception ->
+                Log.e(TAG, "Failed to save laporan for ID: $transactionId", exception)
+                showToast("Gagal menyimpan data transaksi: ${exception.message}")
+            }
+    }
+
+    private fun updateExistingLaporan(transactionId: String) {
+        // Update status atau data lain jika diperlukan
+        val updates = mapOf<String, Any>(
+            "status" to determinePaymentStatus(),
+            "lastUpdated" to System.currentTimeMillis()
+        )
+
+        val database = FirebaseDatabase.getInstance().getReference("Laporan")
+        database.child(transactionId).updateChildren(updates)
+            .addOnSuccessListener {
+                Log.d(TAG, "Laporan has uploaded / Data Laporan terdaftar: $transactionId")
+            }
+            .addOnFailureListener { exception ->
+                Log.e(TAG, "Failed to update laporan for ID: $transactionId", exception)
+            }
+    }
+
+    // ===== FUNGSI addLaporanToDataLaporan() YANG SUDAH DIPERBAIKI =====
+
+    private fun addLaporanToDataLaporan() {
+        try {
+            val transactionId = tvIdTransaksi.text.toString()
+
+            // Validasi data wajib
+            if (transactionId.isEmpty() || transactionId == "-") {
+                Log.w(TAG, "Transaction ID tidak valid / doesn't valid : $transactionId")
+                return
+            }
+
+            val customerName = tvNamaPelanggan.text.toString()
+            if (customerName.isEmpty() || customerName == "-") {
+                Log.w(TAG, "Nama pelanggan tidak valid / Customer name is not valid : $customerName")
+                return
+            }
+
+            // Cek dulu apakah data sudah ada di database
+            val database = FirebaseDatabase.getInstance().getReference("Laporan")
+            database.child(transactionId).get()
+                .addOnSuccessListener { dataSnapshot ->
+                    if (dataSnapshot.exists()) {
+                        Log.d(TAG, "Data laporan sudah ada untuk ID: $transactionId")
+                        // Optional: Update data yang sudah ada
+                        updateExistingLaporan(transactionId)
+                    } else {
+                        // Data belum ada, buat baru
+                        createNewLaporan(transactionId)
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.e(TAG, "Error checking existing laporan", exception)
+                    // Fallback: tetap coba buat data baru
+                    createNewLaporan(transactionId)
+                }
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Error in addLaporanToDataLaporan", e)
+            showToast("Error menyimpan laporan: ${e.message}")
+        }
+    }
+
+    private fun extractNumericValue(currencyText: String): Int {
+        return try {
+            Log.d(TAG, "Extracting numeric value from: '$currencyText'")
+
+            // Hapus semua karakter kecuali digit dan titik/koma
+            val cleanText = currencyText.replace("[^\\d.,]".toRegex(), "")
+
+            // Jika ada titik DAN koma, anggap format Indonesia (12.000,50)
+            if (cleanText.contains(".") && cleanText.contains(",")) {
+                val parts = cleanText.split(",")
+                val integerPart = parts[0].replace(".", "")
+                return integerPart.toIntOrNull() ?: 0
+            }
+
+            // Jika hanya ada titik, cek posisinya
+            if (cleanText.contains(".")) {
+                val dotIndex = cleanText.lastIndexOf(".")
+                val afterDot = cleanText.substring(dotIndex + 1)
+
+                // Jika setelah titik ada 3 digit atau lebih, anggap pemisah ribuan
+                if (afterDot.length >= 3) {
+                    return cleanText.replace(".", "").toIntOrNull() ?: 0
+                } else {
+                    // Jika setelah titik kurang dari 3 digit, anggap desimal
+                    return cleanText.split(".")[0].toIntOrNull() ?: 0
+                }
+            }
+
+            // Jika hanya ada koma, anggap pemisah ribuan (format US) atau desimal
+            if (cleanText.contains(",")) {
+                val commaIndex = cleanText.lastIndexOf(",")
+                val afterComma = cleanText.substring(commaIndex + 1)
+
+                // Jika setelah koma ada 3 digit atau lebih, anggap pemisah ribuan
+                if (afterComma.length >= 3) {
+                    return cleanText.replace(",", "").toIntOrNull() ?: 0
+                } else {
+                    // Jika setelah koma kurang dari 3 digit, anggap desimal
+                    return cleanText.split(",")[0].toIntOrNull() ?: 0
+                }
+            }
+
+            // Hanya digit
+            cleanText.toIntOrNull() ?: 0
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Error extracting numeric value from: '$currencyText'", e)
+            0
+        }
+    }
+
+    // DEBUGGING: Fungsi untuk test berbagai format
+    private fun testExtractNumericValue() {
+        val testCases = listOf(
+            "Rp 12.000",
+            "Rp12.000",
+            "12.000",
+            "12,000",
+            "Rp 12.000,50",
+            "Rp 1.200.000",
+            "1200000",
+            "12000"
+        )
+
+        testCases.forEach { testCase ->
+            val result = extractNumericValue(testCase)
+            Log.d(TAG, "Test: '$testCase' -> $result")
+        }
+    }
+
+    // Helper function to determine payment status - DIPERBAIKI
+    private fun determinePaymentStatus(): String {
+        return try {
+            val statusText = tvStatus?.text?.toString()
+            Log.d(TAG, "Status text from tvStatus: '$statusText'")
+
+            when {
+                statusText?.contains("Selesai", ignoreCase = true) == true -> "Lunas"
+                statusText?.contains("Lunas", ignoreCase = true) == true -> "Lunas"
+                statusText?.contains("Paid", ignoreCase = true) == true -> "Lunas"
+                statusText?.contains("Proses", ignoreCase = true) == true -> "Dalam Proses"
+                statusText?.contains("Menunggu", ignoreCase = true) == true -> "Belum Lunas"
+                statusText?.contains("Pending", ignoreCase = true) == true -> "Belum Lunas"
+                else -> {
+                    // Jika tvStatus null atau tidak ada, coba dari intent
+                    val intentStatus = intent.getStringExtra("status")
+                        ?: intent.getStringExtra("metodePembayaran")
+                        ?: "Belum Lunas"
+                    Log.d(TAG, "Using status from intent: '$intentStatus'")
+                    intentStatus
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error determining payment status", e)
+            "Belum Lunas"
+        }
+    }
+
+    // ===== SISA FUNGSI YANG SAMA SEPERTI SEBELUMNYA =====
 
     private fun buildPrintMessage(): String {
         return buildString {
@@ -524,127 +811,80 @@ class InvoiceTransaksi : AppCompatActivity() {
         return result
     }
 
-    private fun closeBluetoothConnection() {
+    @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
+    private fun printToBluetooth(message: String) {
         try {
-            outputStream?.close()
-            bluetoothSocket?.close()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error closing bluetooth connection", e)
-        } finally {
-            outputStream = null
-            bluetoothSocket = null
-        }
-    }
-
-    private fun isBluetoothConnected(): Boolean {
-        return bluetoothSocket?.isConnected == true
-    }
-
-    private fun createBluetoothSocket(device: BluetoothDevice): BluetoothSocket? {
-        if (!hasBluetoothConnectPermission()) {
-            showToastOnMainThread("Izin Bluetooth diperlukan")
-            return null
-        }
-
-        return try {
-            device.createRfcommSocketToServiceRecord(printerUUID)
-        } catch (e: SecurityException) {
-            showToastOnMainThread("Izin Bluetooth diperlukan")
-            null
-        } catch (e: Exception) {
-            try {
-                val m = device.javaClass.getMethod("createRfcommSocket", Int::class.javaPrimitiveType)
-                m.invoke(device, 1) as BluetoothSocket
-            } catch (e2: Exception) {
-                Log.e(TAG, "Failed to create bluetooth socket", e2)
-                null
+            if (bluetoothAdapter == null) {
+                showToast("Bluetooth tidak tersedia")
+                return
             }
-        }
-    }
 
-    private fun printToBluetooth(text: String) {
-        Thread {
+            if (!bluetoothAdapter!!.isEnabled) {
+                showToast("Bluetooth tidak aktif")
+                return
+            }
+
             if (!hasBluetoothConnectPermission()) {
-                showToastOnMainThread("Izin Bluetooth diperlukan untuk mencetak")
-                return@Thread
+                showToast("Izin Bluetooth diperlukan untuk mencetak")
+                requestBluetoothPermissions()
+                showPermissionSettingsPrompt() // Direct user to settings
+                return
             }
 
-            var socket: BluetoothSocket? = null
-            var stream: OutputStream? = null
+            val pairedDevices = try {
+                bluetoothAdapter!!.bondedDevices
+            } catch (e: SecurityException) {
+                Log.e(TAG, "SecurityException accessing bonded devices", e)
+                showToast("Izin Bluetooth tidak cukup untuk mengakses perangkat")
+                requestBluetoothPermissions()
+                showPermissionSettingsPrompt() // Direct user to settings
+                return
+            }
+
+            var printerDevice: BluetoothDevice? = null
+            for (device in pairedDevices) {
+                if (device.address == printerMAC) {
+                    printerDevice = device
+                    break
+                }
+            }
+
+            if (printerDevice == null) {
+                showToast("Printer tidak ditemukan. Printer not found.")
+                return
+            }
 
             try {
-                if (bluetoothAdapter == null) {
-                    showToastOnMainThread("Bluetooth tidak tersedia")
-                    return@Thread
-                }
-
-                if (!bluetoothAdapter!!.isEnabled) {
-                    showToastOnMainThread("Bluetooth tidak aktif")
-                    return@Thread
-                }
-
-                val device: BluetoothDevice? = try {
-                    bluetoothAdapter?.getRemoteDevice(printerMAC)
-                } catch (e: SecurityException) {
-                    showToastOnMainThread("Izin Bluetooth diperlukan untuk mengakses perangkat")
-                    return@Thread
-                } catch (e: Exception) {
-                    showToastOnMainThread("Printer tidak ditemukan: ${e.message}")
-                    return@Thread
-                }
-
-                if (device == null) {
-                    showToastOnMainThread("Printer tidak ditemukan")
-                    return@Thread
-                }
-
-                socket = createBluetoothSocket(device)
-                if (socket == null) {
-                    showToastOnMainThread("Gagal membuat socket Bluetooth")
-                    return@Thread
-                }
-
-                try {
-                    bluetoothAdapter?.cancelDiscovery()
-                } catch (e: SecurityException) {
-                    showToastOnMainThread("Izin Bluetooth diperlukan")
-                    return@Thread
-                }
-
-                showToastOnMainThread("Menghubungkan ke printer...")
-                socket.connect()
-
-                stream = socket.outputStream
-                stream.write(text.toByteArray())
-                stream.flush()
-
-                showToastOnMainThread("Cetak berhasil")
-
+                bluetoothSocket = printerDevice.createRfcommSocketToServiceRecord(printerUUID)
+                bluetoothSocket?.connect()
+                outputStream = bluetoothSocket?.outputStream
+                outputStream?.write(message.toByteArray())
+                outputStream?.flush()
+                showToast(getString(R.string.Berhasildicetak))
             } catch (e: SecurityException) {
-                showToastOnMainThread("Izin Bluetooth diperlukan")
-                Log.e(TAG, "Bluetooth security exception", e)
+                Log.e(TAG, "SecurityException during Bluetooth connection", e)
+                showToast("Bluetooth permission: ${e.message}")
+                requestBluetoothPermissions()
+                showPermissionSettingsPrompt() // Direct user to settings
             } catch (e: Exception) {
-                showToastOnMainThread("Gagal mencetak: ${e.message}")
-                Log.e(TAG, "Bluetooth print error", e)
+                Log.e(TAG, "Error printing to Bluetooth", e)
+                showToast("Failed print: ${e.message}")
             } finally {
                 try {
-                    stream?.close()
-                    socket?.close()
+                    outputStream?.close()
+                    bluetoothSocket?.close()
                 } catch (e: Exception) {
-                    Log.e(TAG, "Error closing bluetooth resources", e)
+                    Log.e(TAG, "Error closing Bluetooth connection", e)
                 }
             }
-        }.start()
+        } catch (e: Exception) {
+            Log.e(TAG, "Unexpected error in printToBluetooth", e)
+            showToast("Error saat mencetak: ${e.message}")
+        }
     }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun showToastOnMainThread(message: String) {
-        Handler(Looper.getMainLooper()).post {
-            showToast(message)
-        }
     }
 
     override fun onRequestPermissionsResult(
@@ -653,19 +893,26 @@ class InvoiceTransaksi : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == REQUEST_BLUETOOTH_PERMISSIONS) {
-            val allGranted = grantResults.all { it == PackageManager.PERMISSION_GRANTED }
-            if (allGranted) {
-                showToast("Izin Bluetooth diberikan")
-            } else {
-                showToast("Izin Bluetooth diperlukan untuk fitur cetak")
+        when (requestCode) {
+            REQUEST_BLUETOOTH_PERMISSIONS -> {
+                if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+                    Log.d(TAG, "Bluetooth permissions granted")
+                } else {
+                    showToast("Izin Bluetooth ditolak. Fungsi cetak tidak dapat digunakan.")
+                    Log.w(TAG, "Bluetooth permissions denied")
+                    showPermissionSettingsPrompt() // Guide user to settings
+                }
             }
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        closeBluetoothConnection()
+        try {
+            outputStream?.close()
+            bluetoothSocket?.close()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error closing Bluetooth connection in onDestroy", e)
+        }
     }
 }

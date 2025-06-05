@@ -1,7 +1,13 @@
 package com.elnoah.laundry.laporan
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract.Data
+import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,72 +15,121 @@ import androidx.recyclerview.widget.RecyclerView
 import com.elnoah.laundry.R
 import com.elnoah.laundry.Transaksi.InvoiceTransaksi
 import com.elnoah.laundry.adapter.DataLaporanAdapter
-import com.elnoah.laundry.modeldata.modelinvoice
+import com.elnoah.laundry.modeldata.modellaporan
+import com.elnoah.laundry.modeldata.StatusLaporan
 import com.google.firebase.database.*
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-class DataLaporan : AppCompatActivity() {
+class DataLaporan : AppCompatActivity(), DataLaporanAdapter.OnStatusChangeListener, DataLaporanAdapter.OnDeleteListener {
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: DataLaporanAdapter
-    private val listInvoice = arrayListOf<modelinvoice>()
+    private val laporanList = ArrayList<modellaporan>()
     private lateinit var database: DatabaseReference
 
-    companion object {
-        const val REQUEST_CODE_INVOICE = 1001
-    }
-
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_laporan)
 
+        database = FirebaseDatabase.getInstance().getReference("Laporan")
+
         recyclerView = findViewById(R.id.rvDATA_LAPORAN)
-        adapter = DataLaporanAdapter(listInvoice) { invoice ->
-            // Aksi pas item diklik, misalnya buka detail
-            val intent = Intent(this, InvoiceTransaksi::class.java)
-            intent.putExtra("invoice", invoice)
-            startActivity(intent)
-        }
-        recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Ambil data dari Firebase
-        database = FirebaseDatabase.getInstance().getReference("invoice")
-        loadDataInvoice()
+        // Pass listener ke adapter
+        adapter = DataLaporanAdapter(laporanList, this, this)
+        recyclerView.adapter = adapter
+
+        loadData()
     }
 
-    private fun loadDataInvoice() {
-        database.addValueEventListener(object : ValueEventListener {
+    private fun loadData() {
+        database.orderByChild("tanggal").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                listInvoice.clear()
-                if (snapshot.exists()) {
-                    for (data in snapshot.children) {
-                        val invoice = data.getValue(modelinvoice::class.java)
-                        if (invoice != null) {
-                            listInvoice.add(invoice)
-                        }
+                laporanList.clear()
+                for (dataSnapshot in snapshot.children) {
+                    val laporan = dataSnapshot.getValue(modellaporan::class.java)
+                    laporan?.let {
+                        laporanList.add(it)
                     }
-                    Toast.makeText(this@DataLaporan, "Data ditemukan: ${listInvoice.size}", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this@DataLaporan, "Snapshot kosong", Toast.LENGTH_SHORT).show()
                 }
                 adapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@DataLaporan, "Gagal ambil data: ${error.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DataLaporan, "Data load failed", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
+    // Helper function to convert StatusLaporan enum to String
+    private fun getStringFromStatus(status: StatusLaporan): String {
+        return when (status) {
+            StatusLaporan.SUDAH_DIBAYAR -> "SUDAH_DIBAYAR"
+            StatusLaporan.BELUM_DIBAYAR -> "BELUM_DIBAYAR"
+            StatusLaporan.SELESAI -> "SELESAI"
+        }
+    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_INVOICE && resultCode == RESULT_OK) {
-            val newInvoice = data?.getSerializableExtra("invoice") as? modelinvoice
-            if (newInvoice != null) {
-                listInvoice.add(newInvoice)
-                adapter.notifyItemInserted(listInvoice.size - 1)
-                Toast.makeText(this, "Invoice baru berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+    override fun onStatusChanged(position: Int, newStatus: StatusLaporan) {
+        if (position < laporanList.size) {
+            val laporan = laporanList[position]
+            val statusString = getStringFromStatus(newStatus)
+            laporan.status = statusString // Assign String value instead of enum
+
+            // Jika status berubah ke SELESAI, set tanggal pengambilan
+            if (newStatus == StatusLaporan.SELESAI) {
+                val currentDateTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
+                laporan.tanggalPengambilan = currentDateTime
+
+                // Update status dan tanggal pengambilan di Firebase
+                val updateMap = mapOf(
+                    "status" to statusString, // Use String instead of enum
+                    "tanggalPengambilan" to currentDateTime
+                )
+
+                database.child(laporan.noTransaksi ?: "").updateChildren(updateMap)
+                    .addOnSuccessListener {
+                        adapter.notifyItemChanged(position)
+                        Toast.makeText(this, "Status berhasil diubah menjadi Selesai", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Gagal update status", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                // Update hanya status di Firebase
+                database.child(laporan.noTransaksi ?: "").child("status").setValue(statusString) // Use String instead of enum
+                    .addOnSuccessListener {
+                        adapter.notifyItemChanged(position)
+                        val statusMessage = when (newStatus) {
+                            StatusLaporan.SUDAH_DIBAYAR -> "Status : Sudah dibayar"
+                            StatusLaporan.BELUM_DIBAYAR -> "Status berhasil diubah menjadi Belum Dibayar"
+                            StatusLaporan.SELESAI -> "Status : sudah selesai"
+                        }
+                        Toast.makeText(this, statusMessage, Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Gagal update status", Toast.LENGTH_SHORT).show()
+                    }
             }
+        }
+    }
+
+    override fun onDeleteItem(position: Int) {
+        if (position < laporanList.size) {
+            val laporan = laporanList[position]
+            database.child(laporan.noTransaksi ?: "").removeValue()
+                .addOnSuccessListener {
+                    laporanList.removeAt(position)
+                    adapter.notifyItemRemoved(position)
+                    Toast.makeText(this, "Laporan berhasil dihapus", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this,"Laporan gagal dihapus", Toast.LENGTH_SHORT).show()
+                }
         }
     }
 }

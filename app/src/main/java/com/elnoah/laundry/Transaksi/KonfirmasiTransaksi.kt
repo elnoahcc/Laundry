@@ -100,9 +100,8 @@ class KonfirmasiTransaksi : AppCompatActivity() {
             btnDana.setOnClickListener { bayarDanKeInvoice("DANA") }
             btnGopay.setOnClickListener { bayarDanKeInvoice("GoPay") }
             btnQris.setOnClickListener { bayarDanKeInvoice("QRIS") }
-            btnTunai.setOnClickListener { bayarDanKeInvoice("Tunai") }
-            btnBayarNanti.setOnClickListener { bayarDanKeInvoice("Bayar Nanti") }
-
+            btnTunai.setOnClickListener { bayarDanKeInvoice("Tunai/Cash") }
+            btnBayarNanti.setOnClickListener { bayarDanKeInvoice("Bayar Nanti/PayLater") }
 
         }
 

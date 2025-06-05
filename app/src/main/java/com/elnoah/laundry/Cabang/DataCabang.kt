@@ -31,6 +31,7 @@ class DataCabang : AppCompatActivity() {
         const val EXTRA_NAMA_LOKASI = "namaCabang"
         const val EXTRA_ALAMAT = "alamatCabang"
         const val EXTRA_TELEPON = "teleponCabang"
+        const val EXTRA_TANGGAL_TERDAFTAR = "tanggalTerdaftar"
     }
 
     private val database = FirebaseDatabase.getInstance()
@@ -88,6 +89,7 @@ class DataCabang : AppCompatActivity() {
             intent.putExtra(EXTRA_NAMA_LOKASI, it.namaLokasiCabang)
             intent.putExtra(EXTRA_ALAMAT, it.alamatCabang)
             intent.putExtra(EXTRA_TELEPON, it.teleponCabang)
+            intent.putExtra(EXTRA_TANGGAL_TERDAFTAR, it.tanggalTerdaftar)
         }
         startActivity(intent)
     }
@@ -111,6 +113,14 @@ class DataCabang : AppCompatActivity() {
         dialogView.findViewById<TextView>(R.id.dialog_nama_cabang).text = cabang.namaLokasiCabang ?: "-"
         dialogView.findViewById<TextView>(R.id.dialog_alamat_cabang).text = cabang.alamatCabang ?: "-"
         dialogView.findViewById<TextView>(R.id.dialog_telepon_cabang).text = cabang.teleponCabang ?: "-"
+
+        // Format and set registration date
+        val tanggalTerdaftar = if (cabang.tanggalTerdaftar.isNullOrEmpty()) {
+            "-"
+        } else {
+            cabang.tanggalTerdaftar
+        }
+        dialogView.findViewById<TextView>(R.id.dialog_tanggal_terdaftar).text = tanggalTerdaftar
 
         val dialog = AlertDialog.Builder(this)
             .setView(dialogView)

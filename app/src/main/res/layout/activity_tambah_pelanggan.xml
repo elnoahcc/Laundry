@@ -8,7 +8,7 @@
     tools:context=".pelanggan.TambahPelanggan">
 
     <TextView
-        android:id="@+id/header"
+        android:id="@+id/headerpelanggan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Tambah Pelanggan"
@@ -22,7 +22,7 @@
         />
     <LinearLayout
         android:id="@+id/containerNama"
-        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintTop_toBottomOf="@id/headerpelanggan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

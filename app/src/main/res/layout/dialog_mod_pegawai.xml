@@ -227,7 +227,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.2"
-                    android:text="Tanggal Terdaftar"
+                    android:text="@string/terdaftar_pelanggan"
                     android:textSize="15sp"
                     android:textColor="#7F8C8D"
                     android:fontFamily="@font/inter"/>
@@ -258,7 +258,7 @@
                 android:layout_width="0dp"
                 android:layout_height="52dp"
                 android:layout_weight="1"
-                android:text="Sunting"
+                android:text="@string/sunting"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:backgroundTint="#3498DB"

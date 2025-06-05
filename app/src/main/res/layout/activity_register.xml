@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Daftar Akun"
+        android:text="@string/daftarakun"
         android:textSize="28sp"
         android:textStyle="bold"
         android:fontFamily="@font/interextrabold"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Silakan isi data untuk membuat akun baru"
+        android:text="@string/isi_data_regis"
         android:textSize="14sp"
         android:textColor="#7F8C8D"
         android:fontFamily="@font/inter"
@@ -55,7 +55,7 @@
                     android:id="@+id/editTextNama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nama Lengkap"
+                    android:hint="@string/hint_namalengkap"
                     android:inputType="textPersonName"
                     android:padding="16dp"
                     android:textSize="16sp" />
@@ -75,7 +75,7 @@
                     android:id="@+id/editTextPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nomor Telepon"
+                    android:hint="@string/card_pelanggan_nohp"
                     android:inputType="phone"
                     android:padding="16dp"
                     android:textSize="16sp" />
@@ -108,7 +108,7 @@
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="DAFTAR"
+                android:text="@string/daftar"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
@@ -124,7 +124,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sudah punya akun? Masuk di sini"
+        android:text="@string/sudahpunyakun"
         android:textSize="16sp"
         android:textColor="#3498DB"
         android:clickable="true"

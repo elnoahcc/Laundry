@@ -23,7 +23,7 @@
 
             <!-- Nama -->
             <TextView
-                android:id="@+id/tvNama"
+                android:id="@+id/tvNamaSudahDibayar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -34,15 +34,15 @@
 
             <!-- Status -->
             <TextView
-                android:id="@+id/tvStatus"
+                android:id="@+id/tvTanggalSudahDibayar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status"
+                android:text="@string/sudah_dibayar"
                 android:textSize="12sp"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/inter"
                 android:textStyle="bold"
-                android:background="@drawable/bg_status_red"
+                android:background="@drawable/bg_status_yellow"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp" />
         </LinearLayout>
@@ -98,7 +98,7 @@
 
         <!-- Total Bayar -->
         <TextView
-            android:id="@+id/tvTotal"
+            android:id="@+id/tvTotalBayarsudahdibayar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Bayar"
@@ -109,10 +109,10 @@
 
         <!-- Tombol -->
         <Button
-            android:id="@+id/btnAksi"
+            android:id="@+id/btnPickup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bayar Sekarang"
+            android:text="@string/ambil_sekarang"
             android:fontFamily="@font/inter"
             android:textStyle="bold"
             android:layout_marginTop="8dp"

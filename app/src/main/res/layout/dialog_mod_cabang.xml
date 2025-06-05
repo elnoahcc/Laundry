@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Detail Cabang"
+            android:text="@string/detail_cabang"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textAlignment="center"
@@ -46,7 +46,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.2"
-                    android:text="ID Cabang"
+                    android:text="@string/id_cabang"
                     android:textSize="15sp"
                     android:textColor="#7F8C8D"
                     android:textStyle="normal"
@@ -83,7 +83,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.2"
-                    android:text="Nama Cabang"
+                    android:text="@string/nama_cabang"
                     android:textSize="15sp"
                     android:textColor="#7F8C8D"
                     android:fontFamily="@font/inter"/>
@@ -119,7 +119,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.2"
-                    android:text="Alamat"
+                    android:text="@string/alamat_cabang"
                     android:textSize="15sp"
                     android:textColor="#7F8C8D"
                     android:fontFamily="@font/inter"/>
@@ -155,7 +155,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.2"
-                    android:text="Telepon"
+                    android:text="@string/Nohp"
                     android:textSize="15sp"
                     android:textColor="#7F8C8D"
                     android:fontFamily="@font/inter"/>
@@ -166,6 +166,42 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="021-1234-5678"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/interextrabold"
+                    android:gravity="end" />
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEEEEE"/>
+
+            <!-- Tanggal Terdaftar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:text="@string/terdaftar_pelanggan"
+                    android:textSize="15sp"
+                    android:textColor="#7F8C8D"
+                    android:fontFamily="@font/inter"/>
+
+                <TextView
+                    android:id="@+id/dialog_tanggal_terdaftar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="01/01/2024"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/interextrabold"
@@ -186,7 +222,7 @@
                 android:layout_width="0dp"
                 android:layout_height="52dp"
                 android:layout_weight="1"
-                android:text="Sunting"
+                android:text="@string/sunting"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:backgroundTint="#3498DB"
@@ -200,7 +236,7 @@
                 android:layout_width="0dp"
                 android:layout_height="52dp"
                 android:layout_weight="1"
-                android:text="Hapus"
+                android:text="@string/Hapus"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:backgroundTint="#E74C3C"

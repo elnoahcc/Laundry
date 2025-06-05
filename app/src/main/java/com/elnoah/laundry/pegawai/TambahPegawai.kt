@@ -3,6 +3,7 @@ package com.elnoah.laundry.pegawai
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -37,6 +38,7 @@ class TambahPegawai : AppCompatActivity() {
             insets
         }
 
+        // Inisialisasi View
         etNama = findViewById(R.id.etTambahNamaPegawai)
         etAlamat = findViewById(R.id.etTambahAlamatPegawai)
         etNoHP = findViewById(R.id.etTambahNoHpPegawai)
@@ -44,21 +46,39 @@ class TambahPegawai : AppCompatActivity() {
         btSimpan = findViewById(R.id.btnSimpanPegawai)
 
         val idPegawai = intent.getStringExtra("idPegawai")
+        val isEdit = idPegawai != null
         val namaPegawai = intent.getStringExtra("namaPegawai")
         val alamatPegawai = intent.getStringExtra("alamatPegawai")
         val noHPPegawai = intent.getStringExtra("noHPPegawai")
         val cabangPegawai = intent.getStringExtra("cabangPegawai")
 
+        // Set judul halaman berdasarkan mode
+        setupTitle(isEdit)
+
         if (idPegawai != null) {
+            // Isi form untuk edit
             etNama.setText(namaPegawai)
             etAlamat.setText(alamatPegawai)
             etNoHP.setText(noHPPegawai)
             etCabang.setText(cabangPegawai)
+
+            // Ubah text tombol untuk mode edit
+            btSimpan.text = getString(R.string.update_pelanggan)
         }
 
+        // Set event listener untuk tombol simpan
         btSimpan.setOnClickListener {
             validasi()
         }
+    }
+
+    private fun setupTitle(isEdit: Boolean) {
+        // Atau jika ada TextView khusus untuk title di layout
+        val titleTextView = findViewById<TextView>(R.id.headerpegawai)
+        titleTextView?.text = if (isEdit)
+            getString(R.string.sunting_pegawai)
+        else
+            getString(R.string.title_tambahpegawai)
     }
 
     private fun validasi() {
@@ -68,22 +88,22 @@ class TambahPegawai : AppCompatActivity() {
         val cabang = etCabang.text.toString().trim()
 
         if (nama.isEmpty()) {
-            etNama.error = getString(R.string.validasi_nama_pelanggan)
+            etNama.error = getString(R.string.validasi_nama_pegawai)
             etNama.requestFocus()
             return
         }
         if (alamat.isEmpty()) {
-            etAlamat.error = getString(R.string.validasi_alamat_pelanggan)
+            etAlamat.error = getString(R.string.validasi_alamat_pegawai)
             etAlamat.requestFocus()
             return
         }
         if (noHP.isEmpty()) {
-            etNoHP.error = getString(R.string.validasi_nohp_pelanggan)
+            etNoHP.error = getString(R.string.validasi_nohp_pegawai)
             etNoHP.requestFocus()
             return
         }
         if (cabang.isEmpty()) {
-            etCabang.error = getString(R.string.validasi_cabang_pelanggan)
+            etCabang.error = getString(R.string.validasi_cabang_pegawai)
             etCabang.requestFocus()
             return
         }
@@ -93,6 +113,7 @@ class TambahPegawai : AppCompatActivity() {
             return
         }
 
+        // Jika semua validasi lolos, simpan data
         simpan(nama, alamat, noHP, cabang)
     }
 
@@ -104,25 +125,27 @@ class TambahPegawai : AppCompatActivity() {
         val tanggalSekarang = sdf.format(Date())
 
         if (isEdit) {
+            // MODE EDIT
             val dataUpdate = mapOf<String, Any>(
                 "namaPegawai" to nama,
                 "alamatPegawai" to alamat,
                 "noHPPegawai" to noHP,
                 "cabangPegawai" to cabang,
-                "tanggalTerdaftar" to tanggalSekarang
+                "tanggalTerdaftar" to tanggalSekarang // Optional: bisa skip kalau gak mau ubah tanggal
             )
 
             myRef.child(idPegawai!!)
                 .updateChildren(dataUpdate)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Data pegawai berhasil diupdate", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.sukses_update_pegawai), Toast.LENGTH_SHORT).show()
                     finish()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this, "Gagal update data pegawai", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.gagal_update_pegawai), Toast.LENGTH_SHORT).show()
                 }
 
         } else {
+            // MODE TAMBAH BARU
             val pegawaiBaru = myRef.push()
             val pegawaiId = pegawaiBaru.key ?: return
 
@@ -137,11 +160,11 @@ class TambahPegawai : AppCompatActivity() {
 
             pegawaiBaru.setValue(dataBaru)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Data pegawai berhasil disimpan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.sukses_simpan_pegawai), Toast.LENGTH_SHORT).show()
                     finish()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this, "Gagal menyimpan data pegawai", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.gagal_simpan_pegawai), Toast.LENGTH_SHORT).show()
                 }
         }
     }

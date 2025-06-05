@@ -50,7 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:text="Nama Pelanggan:"
+                        android:text="@string/nama_pelanggan_tr"
                         android:textSize="16sp"
                         android:fontFamily="@font/inter"/>
 
@@ -59,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
-                        android:text="No HP:"
+                        android:text="@string/no_hp_transaksi"
                         android:textSize="16sp"
                         android:fontFamily="@font/inter"/>
 
@@ -67,7 +67,7 @@
                         android:id="@+id/btn_pilih_pelanggan"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
-                        android:text="Pilih Pelanggan"
+                        android:text="@string/pilih_pelanggan"
                         android:textColor="#ffffff"
                         android:textSize="16sp"
                         android:fontFamily="@font/interextrabold"
@@ -106,7 +106,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:text="Nama Layanan:"
+                        android:text="@string/nama_layanan"
                         android:textSize="16sp"
                         android:fontFamily="@font/inter"/>
 
@@ -115,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
-                        android:text="Harga:"
+                        android:text="@string/harga_layanan"
                         android:textSize="16sp"
                         android:fontFamily="@font/inter"/>
 
@@ -123,7 +123,7 @@
                         android:id="@+id/btn_pilih_layanan"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
-                        android:text="Pilih Layanan"
+                        android:text="@string/pilih_layanan"
                         android:textColor="#ffffff"
                         android:textSize="16sp"
                         android:fontFamily="@font/interextrabold"

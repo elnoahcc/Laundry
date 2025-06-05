@@ -18,6 +18,18 @@
         android:layout_marginBottom="8dp"
         android:elevation="4dp"/>
 
+    <TextView
+        android:id="@+id/tvKosongLayanan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data layanan tidak ditemukan."
+        android:textAlignment="center"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter"
+        android:textSize="16sp" />
+
     <!-- RecyclerView for list -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDATA_TRANSAKSI_LAYANAN"
