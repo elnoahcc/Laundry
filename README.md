@@ -47,3 +47,16 @@ We welcome contributions from the community! To contribute to Aplication Laundry
 <h3>Design Transaksi</h3>
 ![image](https://github.com/user-attachments/assets/2526b734-9752-4110-b74b-8ceea3238c52)
 
+<h3>Design Pelanggan</h3>
+![image](https://github.com/user-attachments/assets/6cbb349c-c8c0-48ba-ae53-c75962c63b30)
+
+<h3>Design Cabang</h3>
+![image](https://github.com/user-attachments/assets/a5c12602-3a29-4c17-baba-31b04038b284)
+
+<h3>Design Tambahan</h3>
+![image](https://github.com/user-attachments/assets/5098d78b-e526-495a-852a-504a68f28555)
+
+
+
+
+
