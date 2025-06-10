@@ -15,11 +15,13 @@ class PilihTambahanAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNama: TextView = itemView.findViewById(R.id.tv_nama_tambahan)
+        val tvID: TextView = itemView.findViewById(R.id.tv_id_tambahan)
         val tvHarga: TextView = itemView.findViewById(R.id.tv_harga_tambahan)
 
         fun bind(tambahan: modeltransaksitambahan) {
             tvNama.text = tambahan.namaLayanan
-            tvHarga.text = "Harga: ${tambahan.hargaLayanan}"
+            tvID.text = "ID: ${tambahan.idLayanan}"
+            tvHarga.text = "Rp. ${tambahan.hargaLayanan}"
 
             // Regular click untuk memilih tambahan (bukan long press)
             itemView.setOnClickListener {

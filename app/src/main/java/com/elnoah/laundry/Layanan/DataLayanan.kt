@@ -188,12 +188,12 @@ class DataLayanan : AppCompatActivity() {
                 100 -> {
                     // Edit result - refresh data
                     getDATA()
-                    Toast.makeText(this, "Data layanan berhasil diperbarui", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,  getString(R.string.sukses_simpan_layanan), Toast.LENGTH_SHORT).show()
                 }
                 200 -> {
                     // Add result - refresh data
                     getDATA()
-                    Toast.makeText(this, "Layanan baru berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                 }
             }
         }

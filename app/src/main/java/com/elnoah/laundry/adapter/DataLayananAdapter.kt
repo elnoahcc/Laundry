@@ -27,9 +27,9 @@ class DataLayananAdapter(
         val item = listLayanan[position]
         holder.tvDataIDLayanan.text = item.idLayanan ?: ""
         holder.tvNama.text = item.namaLayanan ?: ""
-        holder.tvHarga.text = item.hargaLayanan ?: ""
-        holder.tvTerdaftar.text = "Terdaftar: ${item.tanggalTerdaftar ?: "-"}"
-        holder.tvCabang.text = "Cabang ${item.cabangLayanan ?: "Tidak Ada Cabang"}"
+        holder.tvHarga.text = "Rp. ${item.hargaLayanan}"
+        holder.tvTerdaftar.text = item.tanggalTerdaftar ?: ""
+        holder.tvCabang.text = item.cabangLayanan ?: ""
 
         // Click listener untuk card view (edit/sunting)
         holder.itemView.setOnClickListener {
@@ -49,12 +49,12 @@ class DataLayananAdapter(
 
     private fun showDeleteConfirmation(view: View, item: modellayanan, position: Int) {
         AlertDialog.Builder(view.context)
-            .setTitle("Konfirmasi Hapus")
-            .setMessage("Apakah Anda yakin ingin menghapus layanan \"${item.namaLayanan}\"?")
-            .setPositiveButton("Hapus") { _, _ ->
+            .setTitle(view.context.getString(R.string.Hapus))
+            .setMessage(view.context.getString(R.string.konfirmasi_hapus, item.namaLayanan))
+            .setPositiveButton(view.context.getString(R.string.layanan_dihapus)) { _, _ ->
                 onDeleteClick?.invoke(item, position)
             }
-            .setNegativeButton("Batal", null)
+            .setNegativeButton(view.context.getString(R.string.Hapus),null)
             .show()
     }
 

@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
-            android:text="Terdaftar"
+            android:text="-"
             android:textSize="16sp"
             android:paddingTop="8dp"
             />
@@ -76,7 +76,7 @@
                 android:backgroundTint="#dc2626"
                 android:padding="16dp"
                 android:fontFamily="@font/inter"
-                android:text="Hapus"
+                android:text="@string/Hapus"
                 android:textColor="@color/white"
                 android:layout_marginRight="5dp"/>
             <Button

@@ -59,8 +59,8 @@ class TambahLayanan : AppCompatActivity() {
 
         if (isEditMode) {
             // Ubah title dan button text untuk mode edit
-            title = "Edit Layanan"
-            btSimpan.text = "Update"
+            title = getString(R.string.edit_layanan)
+            btSimpan.text = getString(R.string.update)
 
             // Ambil data dari intent dan set sebagai placeholder
             layananId = intent.getStringExtra("LAYANAN_ID")
@@ -76,8 +76,8 @@ class TambahLayanan : AppCompatActivity() {
 
         } else {
             // Mode tambah baru
-            title = "Tambah Layanan"
-            btSimpan.text = "Simpan"
+            title = getString(R.string.button_simpan)
+            btSimpan.text = getString(R.string.button_simpan)
         }
     }
 
@@ -124,12 +124,12 @@ class TambahLayanan : AppCompatActivity() {
 
             myRef.child(id).updateChildren(updatedLayanan)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Layanan berhasil diperbarui", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.layanan_berhasil_diperbaharui), Toast.LENGTH_SHORT).show()
                     setResult(RESULT_OK)
                     finish()
                 }
                 .addOnFailureListener { exception ->
-                    Toast.makeText(this, "Gagal memperbarui layanan: ${exception.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Failed : ${exception.message}", Toast.LENGTH_SHORT).show()
                 }
         }
     }
@@ -154,7 +154,7 @@ class TambahLayanan : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(
                     this,
-                    getString(R.string.sukses_simpan_pelanggan),
+                    getString(R.string.sukses_simpan_layanan),
                     Toast.LENGTH_SHORT
                 ).show()
                 setResult(RESULT_OK)
@@ -163,7 +163,7 @@ class TambahLayanan : AppCompatActivity() {
             .addOnFailureListener {
                 Toast.makeText(
                     this,
-                    getString(R.string.gagal_simpan_pelanggan),
+                    getString(R.string.gagal_simpan_layanan),
                     Toast.LENGTH_SHORT
                 ).show()
             }

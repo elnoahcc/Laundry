@@ -1,249 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="8dp"
-    android:background="@android:color/white">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        android:background="@android:color/white">
 
-        <!-- Title -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/detail_cabang"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/interextrabold"/>
-
-        <!-- Branch Info Container -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="24dp">
 
-            <!-- ID Cabang -->
+            <!-- Title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_cabang"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/interextrabold"/>
+
+            <!-- Branch Info Container -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:gravity="center_vertical">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <TextView
-                    android:layout_width="0dp"
+                <!-- ID Cabang -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:text="@string/id_cabang"
-                    android:textSize="15sp"
-                    android:textColor="#7F8C8D"
-                    android:textStyle="normal"
-                    android:fontFamily="@font/inter"/>
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/dialog_id_cabang"
-                    android:layout_width="0dp"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:text="@string/id_cabang"
+                        android:textSize="15sp"
+                        android:textColor="#7F8C8D"
+                        android:textStyle="normal"
+                        android:fontFamily="@font/inter"/>
+
+                    <TextView
+                        android:id="@+id/dialog_id_cabang"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="CB-001234"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/interextrabold"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EEEEEE"/>
+
+                <!-- Nama Lokasi Cabang -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="CB-001234"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/interextrabold"
-                    android:gravity="end" />
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:text="@string/nama_cabang"
+                        android:textSize="15sp"
+                        android:textColor="#7F8C8D"
+                        android:fontFamily="@font/inter"/>
+
+                    <TextView
+                        android:id="@+id/dialog_nama_cabang"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Jakarta Pusat"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/interextrabold"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EEEEEE"/>
+
+                <!-- Alamat Cabang -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:text="@string/alamat_cabang"
+                        android:textSize="15sp"
+                        android:textColor="#7F8C8D"
+                        android:fontFamily="@font/inter"/>
+
+                    <TextView
+                        android:id="@+id/dialog_alamat_cabang"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Jl. Thamrin No. 456"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/interextrabold"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EEEEEE"/>
+
+                <!-- Telepon Cabang -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:text="@string/Nohp"
+                        android:textSize="15sp"
+                        android:textColor="#7F8C8D"
+                        android:fontFamily="@font/inter"/>
+
+                    <TextView
+                        android:id="@+id/dialog_telepon_cabang"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="021-1234-5678"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/interextrabold"
+                        android:gravity="end" />
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EEEEEE"/>
+
+                <!-- Tanggal Terdaftar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:text="@string/terdaftar_pelanggan"
+                        android:textSize="15sp"
+                        android:textColor="#7F8C8D"
+                        android:fontFamily="@font/inter"/>
+
+                    <TextView
+                        android:id="@+id/dialog_tanggal_terdaftar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="01/01/2024"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/interextrabold"
+                        android:gravity="end" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Divider -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#EEEEEE"/>
-
-            <!-- Nama Lokasi Cabang -->
+            <!-- Action Buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:gravity="center_vertical">
+                android:layout_marginTop="32dp"
+                android:gravity="center">
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_edit_cabang"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:text="@string/nama_cabang"
-                    android:textSize="15sp"
-                    android:textColor="#7F8C8D"
-                    android:fontFamily="@font/inter"/>
-
-                <TextView
-                    android:id="@+id/dialog_nama_cabang"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="52dp"
                     android:layout_weight="1"
-                    android:text="Jakarta Pusat"
+                    android:text="@string/sunting"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:backgroundTint="#3498DB"
+                    android:textColor="@android:color/white"
                     android:fontFamily="@font/interextrabold"
-                    android:gravity="end" />
-            </LinearLayout>
+                    android:layout_marginEnd="8dp"
+                    app:cornerRadius="12dp"/>
 
-            <!-- Divider -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#EEEEEE"/>
-
-            <!-- Alamat Cabang -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:gravity="center_vertical">
-
-                <TextView
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_delete_cabang"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:text="@string/alamat_cabang"
-                    android:textSize="15sp"
-                    android:textColor="#7F8C8D"
-                    android:fontFamily="@font/inter"/>
-
-                <TextView
-                    android:id="@+id/dialog_alamat_cabang"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="52dp"
                     android:layout_weight="1"
-                    android:text="Jl. Thamrin No. 456"
+                    android:text="@string/Hapus"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:backgroundTint="#E74C3C"
+                    android:textColor="@android:color/white"
                     android:fontFamily="@font/interextrabold"
-                    android:gravity="end" />
-            </LinearLayout>
-
-            <!-- Divider -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#EEEEEE"/>
-
-            <!-- Telepon Cabang -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:text="@string/Nohp"
-                    android:textSize="15sp"
-                    android:textColor="#7F8C8D"
-                    android:fontFamily="@font/inter"/>
-
-                <TextView
-                    android:id="@+id/dialog_telepon_cabang"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="021-1234-5678"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/interextrabold"
-                    android:gravity="end" />
-            </LinearLayout>
-
-            <!-- Divider -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#EEEEEE"/>
-
-            <!-- Tanggal Terdaftar -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:text="@string/terdaftar_pelanggan"
-                    android:textSize="15sp"
-                    android:textColor="#7F8C8D"
-                    android:fontFamily="@font/inter"/>
-
-                <TextView
-                    android:id="@+id/dialog_tanggal_terdaftar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="01/01/2024"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/interextrabold"
-                    android:gravity="end" />
+                    android:layout_marginStart="8dp"
+                    app:cornerRadius="12dp"/>
             </LinearLayout>
         </LinearLayout>
-
-        <!-- Action Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="32dp"
-            android:gravity="center">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_edit_cabang"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:text="@string/sunting"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:backgroundTint="#3498DB"
-                android:textColor="@android:color/white"
-                android:fontFamily="@font/interextrabold"
-                android:layout_marginEnd="8dp"
-                app:cornerRadius="12dp"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_delete_cabang"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:text="@string/Hapus"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:backgroundTint="#E74C3C"
-                android:textColor="@android:color/white"
-                android:fontFamily="@font/interextrabold"
-                android:layout_marginStart="8dp"
-                app:cornerRadius="12dp"/>
-        </LinearLayout>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</ScrollView>

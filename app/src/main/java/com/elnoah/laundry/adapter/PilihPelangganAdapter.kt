@@ -30,8 +30,8 @@ class PilihPelangganAdapter(
         fun bind(pelanggan: modelpelanggan) {
             tvNama.text = pelanggan.namaPelanggan
             tvID.text = "ID: ${pelanggan.idPelanggan}"
-            tvNoHp.text = "No HP: ${pelanggan.noHPPelanggan}"
-            tvAlamat.text = "Alamat: ${pelanggan.alamatPelanggan}"
+            tvNoHp.text = itemView.context.getString(R.string.no_hp_trans, pelanggan.noHPPelanggan)
+            tvAlamat.text = pelanggan.alamatPelanggan
 
             itemView.setOnClickListener {
                 onItemClick(pelanggan)

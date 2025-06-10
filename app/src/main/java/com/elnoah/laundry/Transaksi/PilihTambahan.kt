@@ -28,7 +28,6 @@ class PilihTambahan : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pilih_tambahan)
-
         // Initialize views
         recyclerView = findViewById(R.id.rvDATA_TAMBAHAN)
         searchView = findViewById(R.id.svCariDataTambahan)

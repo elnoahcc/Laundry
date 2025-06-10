@@ -33,6 +33,11 @@ import java.io.OutputStream
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Paint
+import java.io.ByteArrayOutputStream
 
 class InvoiceTransaksi : AppCompatActivity() {
 
@@ -432,8 +437,9 @@ class InvoiceTransaksi : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val message = buildPrintMessage()
-            printToBluetooth(message)
+            val message = buildPrintMessageWithLogo()
+            // FIX: Change from printToBluetooth to printToBluetoothWithLogo
+            printToBluetoothWithLogo(message)
 
             // Add laporan after successful print attempt
             addLaporanToDataLaporan()
@@ -674,68 +680,227 @@ class InvoiceTransaksi : AppCompatActivity() {
 
     // ===== SISA FUNGSI YANG SAMA SEPERTI SEBELUMNYA =====
 
-    private fun buildPrintMessage(): String {
+    private fun buildPrintMessageWithLogo(): String {
         return buildString {
+            // Header dengan logo dan border
+            append("================================\n")
+            append("${centerText("LAUNDRY ELNOAH", 32)}\n")
+            append("${centerText("CleanFresh Permata Indah", 32)}\n")
+            append("================================\n")
             append("\n")
-            append("Laundry Elnoah\n")
-            append("Alamat Laundry\n")
-            append("==============================\n")
-            append("ID Transaksi: ${tvIdTransaksi.text}\n")
-            append("Tanggal: ${tvTanggal.text}\n")
-            append("Pelanggan: ${tvNamaPelanggan.text}\n")
+
+            // Info transaksi
+            append("ID Transaksi : ${tvIdTransaksi.text}\n")
+            append("Tanggal      : ${tvTanggal.text}\n")
+            append("Pelanggan    : ${tvNamaPelanggan.text}\n")
 
             // Tampilkan nomor HP di struk jika tersedia
             if (noHPPelanggan.isNotEmpty() && noHPPelanggan != "Tidak tersedia") {
-                append("No. HP: $noHPPelanggan\n")
+                append("No. HP       : $noHPPelanggan\n")
             }
 
-            tvStatus?.let { append("Status: ${it.text}\n") }
-            append("------------------------------\n")
+            tvStatus?.let { append("Status       : ${it.text}\n") }
+            append("\n")
+            append("--------------------------------\n")
+            append("           RINCIAN              \n")
+            append("--------------------------------\n")
 
-            val namaUtama = tvLayananUtama.text.toString().take(20).padEnd(20)
-            val hargaUtama = tvHargaLayanan.text.toString().padStart(12)
-            append("$namaUtama$hargaUtama\n")
+            // Layanan utama dengan format yang rapi
+            val namaUtama = tvLayananUtama.text.toString()
+            val hargaUtama = tvHargaLayanan.text.toString()
 
-            if (listTambahan.isNotEmpty()) {
-                append("\nLayanan Tambahan:\n")
-                listTambahan.forEachIndexed { index, item ->
-                    val nama = "${index + 1}. ${item.namaLayanan ?: ""}".take(20).padEnd(20)
-                    val harga = (item.hargaLayanan ?: "0").padStart(12)
-                    append("$nama Rp $harga\n")
+            when {
+                namaUtama.length <= 18 -> {
+                    append("${namaUtama.padEnd(18)} ${hargaUtama.padStart(10)}\n")
                 }
-                append("------------------------------\n")
-                append("Subtotal Tambahan: ${tvSubtotalTambahan.text}\n")
+                else -> {
+                    append("$namaUtama\n")
+                    append("${"".padEnd(18)} ${hargaUtama.padStart(10)}\n")
+                }
             }
 
-            append("TOTAL BAYAR: ${tvTotalBayar.text}\n")
-            append("==============================\n")
-            append("Terima kasih telah memilih\n")
-            append("Laundry Elnoah\n")
+            // Layanan tambahan
+            if (listTambahan.isNotEmpty()) {
+                append("\n")
+                append("Layanan Tambahan:\n")
+                listTambahan.forEachIndexed { index, item ->
+                    val nama = "${index + 1}. ${item.namaLayanan ?: ""}"
+                    val harga = "Rp ${item.hargaLayanan ?: "0"}"
+
+                    when {
+                        nama.length <= 18 -> {
+                            append("${nama.padEnd(18)} ${harga.padStart(10)}\n")
+                        }
+                        else -> {
+                            append("$nama\n")
+                            append("${"".padEnd(18)} ${harga.padStart(10)}\n")
+                        }
+                    }
+                }
+
+                append("\n")
+                append("Subtotal Tambahan:\n")
+                append("${"".padEnd(18)} ${tvSubtotalTambahan.text.padStart(10)}\n")
+            }
+
+            append("\n")
+            append("================================\n")
+            append("TOTAL BAYAR:\n")
+
+            // Format total dengan font yang lebih besar secara visual
+            val totalBayar = tvTotalBayar.text.toString()
+            append("${totalBayar.padStart(32)}\n")
+            append("================================\n")
+            append("\n")
+
+            // Footer
+            append("     Terima kasih atas\n")
+            append("     kepercayaan Anda\n")
+            append("\n")
+            append("    ** LAUNDRY ELNOAH **\n")
+            append("   Kepuasan Anda Prioritas\n")
+            append("         Kami\n")
+            append("\n")
+            append("--------------------------------\n")
+            append("   Simpan struk ini sebagai\n")
+            append("      bukti pembayaran\n")
+            append("--------------------------------\n")
             append("\n\n\n")
         }
     }
+    private fun getLogoBytes(): ByteArray {
+        return try {
+            val bitmap = BitmapFactory.decodeResource(resources, R.drawable.darksimplerev)
+            val resizedBitmap = resizeBitmapForPrinter(bitmap, 200, 100) // Ukuran logo
+            convertBitmapToESCPOS(resizedBitmap)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading logo", e)
+            ByteArray(0)
+        }
+    }
+
+    // Fungsi untuk resize bitmap agar sesuai dengan printer
+    private fun resizeBitmapForPrinter(bitmap: Bitmap, maxWidth: Int, maxHeight: Int): Bitmap {
+        val width = bitmap.width
+        val height = bitmap.height
+
+        val scaleWidth = maxWidth.toFloat() / width
+        val scaleHeight = maxHeight.toFloat() / height
+        val scale = minOf(scaleWidth, scaleHeight)
+
+        val newWidth = (width * scale).toInt()
+        val newHeight = (height * scale).toInt()
+
+        return Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true)
+    }
+
+    // Fungsi untuk convert bitmap ke format ESC/POS
+    private fun convertBitmapToESCPOS(bitmap: Bitmap): ByteArray {
+        val outputStream = ByteArrayOutputStream()
+
+        try {
+            // ESC/POS commands untuk print image
+            outputStream.write(byteArrayOf(0x1B, 0x40)) // Initialize printer
+            outputStream.write(byteArrayOf(0x1B, 0x61, 0x01)) // Center alignment
+
+            // Convert bitmap to monochrome
+            val width = bitmap.width
+            val height = bitmap.height
+            val pixels = IntArray(width * height)
+            bitmap.getPixels(pixels, 0, width, 0, 0, width, height)
+
+            // Convert to ESC/POS bitmap format
+            val widthBytes = (width + 7) / 8
+            val data = ByteArray(widthBytes * height)
+
+            for (y in 0 until height) {
+                for (x in 0 until width) {
+                    val pixel = pixels[y * width + x]
+                    val luminance = (0.299 * ((pixel shr 16) and 0xFF) +
+                            0.587 * ((pixel shr 8) and 0xFF) +
+                            0.114 * (pixel and 0xFF)).toInt()
+
+                    if (luminance < 128) { // Threshold untuk hitam/putih
+                        val byteIndex = y * widthBytes + x / 8
+                        val bitIndex = 7 - (x % 8)
+                        data[byteIndex] = (data[byteIndex].toInt() or (1 shl bitIndex)).toByte()
+                    }
+                }
+            }
+
+            // ESC/POS image command
+            outputStream.write(byteArrayOf(0x1D, 0x76, 0x30, 0x00))
+            outputStream.write(byteArrayOf((widthBytes and 0xFF).toByte(), (widthBytes shr 8).toByte()))
+            outputStream.write(byteArrayOf((height and 0xFF).toByte(), (height shr 8).toByte()))
+            outputStream.write(data)
+
+            // Reset alignment
+            outputStream.write(byteArrayOf(0x1B, 0x61, 0x00))
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Error converting bitmap to ESC/POS", e)
+        }
+
+        return outputStream.toByteArray()
+    }
+
+    // Fungsi helper untuk center text
+    private fun centerText(text: String, width: Int): String {
+        return if (text.length >= width) {
+            text
+        } else {
+            val padding = (width - text.length) / 2
+            " ".repeat(padding) + text + " ".repeat(width - text.length - padding)
+        }
+    }
+
 
     private fun buildWhatsappMessage(): String {
         return buildString {
-            append("*Hai ${tvNamaPelanggan.text}* 👋\n\n")
-            append("*Berikut rincian laundry Anda:*\n")
-            append("• ID Transaksi: ${tvIdTransaksi.text}\n")
-            append("• Tanggal: ${tvTanggal.text}\n")
-            tvStatus?.let { append("• Status: ${it.text}\n") }
+            // Header yang menarik dengan emoji
+            append("✨ *Hai ${tvNamaPelanggan.text}!* 👋\n")
+            append("🎉 *Wahhhh, laundry kamu sudah siap nih!* 🎉\n\n")
+
+            append("📋 *DETAIL TRANSAKSI LAUNDRY* 📋\n")
+            append("━━━━━━━━━━━━━━━━━━━━━━━━━━\n")
+            append("🆔 *ID Transaksi:* ${tvIdTransaksi.text}\n")
+            append("📅 *Tanggal:* ${tvTanggal.text}\n")
+            tvStatus?.let {
+                val statusEmoji = when {
+                    it.text.toString().contains("selesai", ignoreCase = true) -> "✅"
+                    it.text.toString().contains("proses", ignoreCase = true) -> "🔄"
+                    it.text.toString().contains("tunggu", ignoreCase = true) -> "⏳"
+                    else -> "📌"
+                }
+                append("$statusEmoji *Status:* ${it.text}\n")
+            }
             append("\n")
-            append("*Layanan Utama:*\n")
-            append("• ${tvLayananUtama.text} - ${tvHargaLayanan.text}\n\n")
+
+            append("🧺 *LAYANAN UTAMA:*\n")
+            append("• ${tvLayananUtama.text} ➜ ${tvHargaLayanan.text} 💰\n\n")
 
             if (listTambahan.isNotEmpty()) {
-                append("*Layanan Tambahan:*\n")
+                append("✨ *LAYANAN TAMBAHAN:*\n")
                 listTambahan.forEachIndexed { index, item ->
-                    append("${index + 1}. ${item.namaLayanan ?: ""} - Rp ${item.hargaLayanan ?: "0"}\n")
+                    val emoji = when (index % 4) {
+                        0 -> "🌟"
+                        1 -> "⭐"
+                        2 -> "💫"
+                        else -> "✨"
+                    }
+                    append("$emoji ${item.namaLayanan ?: ""} ➜ Rp ${item.hargaLayanan ?: "0"}\n")
                 }
                 append("\n")
             }
 
-            append("*Total Bayar:* ${tvTotalBayar.text}\n\n")
-            append("Terima kasih telah menggunakan Laundry Elnoah 💙")
+            append("💎 *TOTAL BAYAR:* ${tvTotalBayar.text} 💎\n")
+            append("━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n")
+
+            append("🎊 *Wowww! Cucian kamu bersih banget!* 🎊\n")
+            append("🤩 *Harum dan fresh seperti baru!* 🌸\n\n")
+            append("💙 Terima kasih sudah percaya sama *Laundry Elnoah* 💙\n")
+            append("🙏 Sampai ketemu lagi ya! 🙏\n\n")
+            append("📱 _Pesan otomatis dari Laundry Elnoah_ 📱")
         }
     }
 
@@ -759,7 +924,7 @@ class InvoiceTransaksi : AppCompatActivity() {
 
             // Langsung start tanpa cek resolveActivity dulu
             startActivity(intent)
-            showToast("Membuka WhatsApp...")
+            showToast(getString(R.string.Membukawa))
 
         } catch (e: Exception) {
             Log.e(TAG, "Error sending WhatsApp message", e)
@@ -769,7 +934,7 @@ class InvoiceTransaksi : AppCompatActivity() {
                 val fallbackUrl = "https://api.whatsapp.com/send?phone=$formattedNumber&text=${Uri.encode(message)}"
                 val fallbackIntent = Intent(Intent.ACTION_VIEW, Uri.parse(fallbackUrl))
                 startActivity(fallbackIntent)
-                showToast("Membuka WhatsApp...")
+                showToast(getString(R.string.Membukawa))
             } catch (e2: Exception) {
                 showToast("Tidak dapat membuka WhatsApp")
             }
@@ -812,7 +977,7 @@ class InvoiceTransaksi : AppCompatActivity() {
     }
 
     @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
-    private fun printToBluetooth(message: String) {
+    private fun printToBluetoothWithLogo(message: String) {
         try {
             if (bluetoothAdapter == null) {
                 showToast("Bluetooth tidak tersedia")
@@ -827,7 +992,7 @@ class InvoiceTransaksi : AppCompatActivity() {
             if (!hasBluetoothConnectPermission()) {
                 showToast("Izin Bluetooth diperlukan untuk mencetak")
                 requestBluetoothPermissions()
-                showPermissionSettingsPrompt() // Direct user to settings
+                showPermissionSettingsPrompt()
                 return
             }
 
@@ -837,7 +1002,7 @@ class InvoiceTransaksi : AppCompatActivity() {
                 Log.e(TAG, "SecurityException accessing bonded devices", e)
                 showToast("Izin Bluetooth tidak cukup untuk mengakses perangkat")
                 requestBluetoothPermissions()
-                showPermissionSettingsPrompt() // Direct user to settings
+                showPermissionSettingsPrompt()
                 return
             }
 
@@ -858,14 +1023,25 @@ class InvoiceTransaksi : AppCompatActivity() {
                 bluetoothSocket = printerDevice.createRfcommSocketToServiceRecord(printerUUID)
                 bluetoothSocket?.connect()
                 outputStream = bluetoothSocket?.outputStream
+
+                // TAMBAHAN: Print logo terlebih dahulu
+                val logoBytes = getLogoBytes()
+                if (logoBytes.isNotEmpty()) {
+                    outputStream?.write(logoBytes)
+                    outputStream?.flush()
+                    Thread.sleep(500) // Delay untuk memastikan logo terprint
+                }
+
+                // Kemudian print teks
                 outputStream?.write(message.toByteArray())
                 outputStream?.flush()
                 showToast(getString(R.string.Berhasildicetak))
+
             } catch (e: SecurityException) {
                 Log.e(TAG, "SecurityException during Bluetooth connection", e)
                 showToast("Bluetooth permission: ${e.message}")
                 requestBluetoothPermissions()
-                showPermissionSettingsPrompt() // Direct user to settings
+                showPermissionSettingsPrompt()
             } catch (e: Exception) {
                 Log.e(TAG, "Error printing to Bluetooth", e)
                 showToast("Failed print: ${e.message}")

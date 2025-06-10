@@ -146,7 +146,7 @@ class MainActivity : AppCompatActivity() {
 
         // Format: Hari, dd MMMM yyyy - HH:mm
         // Contoh: Rabu, 04 Juni 2025 - 14:30
-        val dateTimeFormat = SimpleDateFormat("EEEE, dd MMMM yyyy - HH:mm", Locale("id", "ID"))
+        val dateTimeFormat = SimpleDateFormat("EEEE, dd MMMM yyyy - HH:mm", Locale.getDefault())
         val currentDateTime = dateTimeFormat.format(Date())
 
         dateTextView.text = currentDateTime

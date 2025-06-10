@@ -3,21 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <!-- Background with Curved Shape -->
-    <View
-        android:id="@+id/backgroundCurve"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/curved_background"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/cardEstimation"
-        android:layout_marginBottom="-50dp" />
 
     <!-- Header Section -->
     <TextView
@@ -122,8 +113,8 @@
 
                     <ImageView
                         android:id="@+id/imgTransaksi"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/transaksibaru"
                         android:padding="8dp"
                         android:scaleType="centerInside" />
@@ -137,7 +128,7 @@
                         android:gravity="center"
                         android:text="@string/main_transaksi"
                         android:textColor="#FFFFFF"
-                        android:textSize="11sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!-- Pelanggan -->
@@ -153,8 +144,8 @@
 
                     <ImageView
                         android:id="@+id/imgPelanggan"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/pelanggan"
                         android:padding="8dp"
                         android:scaleType="centerInside" />
@@ -165,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/main_pelanggan"
                         android:fontFamily="@font/inter"
-                        android:textSize="11sp"
+                        android:textSize="14sp"
                         android:textColor="#FFFFFF"
                         android:gravity="center"
                         android:layout_marginTop="8dp" />
@@ -184,8 +175,8 @@
 
                     <ImageView
                         android:id="@+id/imgLaporan"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/report"
                         android:padding="8dp"
                         android:scaleType="centerInside" />
@@ -195,7 +186,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/main_laporan"
-                        android:textSize="11sp"
+                        android:textSize="14sp"
                         android:textColor="#FFFFFF"
                         android:fontFamily="@font/inter"
                         android:gravity="center"
@@ -210,7 +201,7 @@
         android:id="@+id/tvservice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/inter"
         android:textSize="16sp"
         android:textStyle="bold"

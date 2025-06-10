@@ -89,7 +89,7 @@
     <string name="layanan_utama">⚡ Layanan Utama</string>
     <string name="layanan_tambahan">🛠️ Layanan Tambahan</string>
     <string name="nama_pelanggan_transaksi">Nama Pelanggan:</string>
-    <string name="no_hp_transaksi">No HP:</string>
+    <string name="no_hp_transaksi">"No HP: "</string>
     <string name="sunting">Sunting</string>
     <string name="Hapus">Hapus</string>
     <string name="detail_pelanggan">Detail Pelanggan</string>
@@ -151,4 +151,11 @@
     <string name="Printertidakditemukan">Printer tidak ditemukan</string>
     <string name="Berhasildicetak">Berhasil Dicetak</string>
     <string name="tambahlayanantambahan">Tambah Layanan Tambahan</string>
+    <string name="confirm_delete">Konfirmasi Hapus</string>
+    <string name="konfirmasi_hapus">Apakah anda yakin ingin menghapus layanan %1$s ?</string>
+    <string name="telepon_tidak_tersedia">Telepon tidak tersedia</string>
+    <string name="edit_layanan">Edit Layanan</string>
+    <string name="update">Update</string>
+    <string name="layanan_berhasil_diperbaharui">Layanan berhasil diperbarui</string>
+    <string name="Membukawa">Membuka Whatsapp...</string>
 </resources>

@@ -66,7 +66,9 @@ class DataPegawaiAdapter(
                     holder.itemView.context.startActivity(dialIntent)
                 }
             } else {
-                Toast.makeText(holder.itemView.context, "Nomor telepon tidak tersedia", Toast.LENGTH_SHORT).show()
+                Toast.makeText(holder.itemView.context,
+                    holder.itemView.context.getString(R.string.telepon_tidak_tersedia),
+                    Toast.LENGTH_SHORT).show()
             }
         }
 

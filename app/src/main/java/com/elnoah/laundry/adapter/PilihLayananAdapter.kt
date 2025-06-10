@@ -26,7 +26,8 @@ class PilihLayananAdapter(
         fun bind(layanan: modellayanan) {
             tvNama.text = layanan.namaLayanan
             tvID.text = "ID: ${layanan.idLayanan}"
-            tvHarga.text = "Harga: ${layanan.hargaLayanan}"
+            tvHarga.text = itemView.context.getString(R.string.harga_layanan_trans, "Rp. ${layanan.hargaLayanan}")
+
 
             itemView.setOnClickListener {
                 onItemClick(layanan)

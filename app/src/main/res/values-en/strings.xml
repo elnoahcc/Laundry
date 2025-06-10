@@ -152,4 +152,11 @@
     <string name="Printertidakditemukan">Printer not found</string>
     <string name="Berhasildicetak">Print Success</string>
     <string name="tambahlayanantambahan">Add Additional Service</string>
+    <string name="confirm_delete">Confirm Delete</string>
+    <string name="konfirmasi_hapus">Are you sure to delete this %1$s</string>
+    <string name="telepon_tidak_tersedia">Number Phone is not found</string>
+    <string name="edit_layanan">Edit Service</string>
+    <string name="update">Update</string>
+    <string name="layanan_berhasil_diperbaharui">Service update succeed</string>
+    <string name="Membukawa">Open Whatsapp...</string>
 </resources>

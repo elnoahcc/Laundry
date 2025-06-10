@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Laundry" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">#25D366</item>
-        <item name="colorPrimaryVariant">#25d366</item>
+        <item name="colorPrimary">#1591EA</item>
+        <item name="colorPrimaryVariant">#1591EA</item>
     </style>
     <style name="Theme.Laundry" parent="Base.Theme.Laundry" />
 </resources>
