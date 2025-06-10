@@ -43,16 +43,20 @@ We welcome contributions from the community! To contribute to Aplication Laundry
 4. Push to the branch (`git push origin feature/your-feature`).
 5. Create a pull request.
 
-## License
+## Design Activity
+<h3>Design Transaksi</h3>
+![image](https://github.com/user-attachments/assets/2526b734-9752-4110-b74b-8ceea3238c52)
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+<h3>Design Pelanggan</h3>
+![image](https://github.com/user-attachments/assets/6cbb349c-c8c0-48ba-ae53-c75962c63b30)
 
-## Connect with Us
+<h3>Design Cabang</h3>
+![image](https://github.com/user-attachments/assets/a5c12602-3a29-4c17-baba-31b04038b284)
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/elnoahcc/)
-[![Twitter](https://img.shields.io/badge/Twitter-Follow-blue)](https://twitter.com/elnoahcc)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-blue)](https://github.com/elnoahcc)
+<h3>Design Tambahan</h3>
+![image](https://github.com/user-attachments/assets/5098d78b-e526-495a-852a-504a68f28555)
 
-Thank you for choosing Aplication Laundry! We hope our application makes your laundry management easier and more efficient. If you have any questions or need support, feel free to [contact us](mailto:support@aplicationlaundry.com).
 
-Happy laundering! 😊
+
+
+
