@@ -54,18 +54,18 @@ CleanFresh Laundry merevolusi bisnis laundry dengan solusi digital all-in-one ya
 <tr>
 <td align="center" width="33%">
 <img src="https://github.com/user-attachments/assets/15980a89-ea02-4c7f-a38d-316d61925617" width="250"/>
-<br><b>Dashboard Utama</b>
-<br><i>Overview bisnis real-time</i>
+<br><b>Dashboard Login</b>
+<br><i>Login Native</i>
 </td>
 <td align="center" width="33%">
 <img src="https://github.com/user-attachments/assets/635719f9-cddf-459f-82b2-8b5740252de7" width="250"/>
-<br><b>Manajemen Pesanan</b>
-<br><i>Kelola semua pesanan dengan mudah</i>
+<br><b>Pilih Layanan dan Pelanggan serta lainnya</b>
+<br><i>Kelola semua pilihan dengan mudah</i>
 </td>
 <td align="center" width="33%">
 <img src="https://github.com/user-attachments/assets/c67037c6-f0d5-4241-ba4d-a6622259b20d" width="250"/>
-<br><b>Profil Pelanggan</b>
-<br><i>Database pelanggan lengkap</i>
+<br><b>Laporan Transaksi</b>
+<br><i>Memudahkan pencatatan pengelolaan keuangan</i>
 </td>
 </tr>
 </table>
@@ -79,13 +79,13 @@ CleanFresh Laundry merevolusi bisnis laundry dengan solusi digital all-in-one ya
 </td>
 <td align="center" width="33%">
 <img src="https://github.com/user-attachments/assets/df55ed48-58e1-44b5-a3be-5a0a424d0de5" width="250"/>
-<br><b>Sistem Pembayaran</b>
-<br><i>Multiple payment methods</i>
+<br><b>Manage Profile</b>
+<br><i>Atur Profil Pengguna</i>
 </td>
 <td align="center" width="33%">
 <img src="https://github.com/user-attachments/assets/ed21f485-b52f-4f6f-b7dc-1322f4e529b4" width="250"/>
-<br><b>Laporan Analytics</b>
-<br><i>Business intelligence dashboard</i>
+<br><b>Invoice Transaksi</b>
+<br><i>Invoice Transaksi dilengkapi fitur print dan whatsapp</i>
 </td>
 </tr>
 </table>
@@ -94,23 +94,23 @@ CleanFresh Laundry merevolusi bisnis laundry dengan solusi digital all-in-one ya
 <tr>
 <td align="center" width="25%">
 <img src="https://github.com/user-attachments/assets/e0039809-7300-4f0d-b6ac-fff29e51f4dc" width="200"/>
-<br><b>Notifikasi</b>
-<br><i>Push notifications</i>
+<br><b>Data Layanan Tambahan</b>
+<br><i>Atur Data Layanan Anda</i>
 </td>
 <td align="center" width="25%">
 <img src="https://github.com/user-attachments/assets/3014fa22-8f0c-42f2-985a-90e3c702f716" width="200"/>
-<br><b>Settings</b>
-<br><i>Konfigurasi aplikasi</i>
+<br><b>View Panel Data</b>
+<br><i>Lihat Data lebih Detail</i>
 </td>
 <td align="center" width="25%">
 <img src="https://github.com/user-attachments/assets/999e6c9d-11c8-4c7f-82ba-03fc32adef71" width="200"/>
-<br><b>User Management</b>
-<br><i>Kelola akses pengguna</i>
+<br><b>Data Pelanggan</b>
+<br><i>Kelola data pelanggan</i>
 </td>
 <td align="center" width="25%">
 <img src="https://github.com/user-attachments/assets/6ea61b67-5aca-4208-95ac-1d7c53cdc30d" width="200"/>
-<br><b>Inventory</b>
-<br><i>Manajemen stok & supplies</i>
+<br><b>Data Transaksi</b>
+<br><i>Data Transaksi yang mudah diakses</i>
 </td>
 </tr>
 </table>
@@ -119,7 +119,7 @@ CleanFresh Laundry merevolusi bisnis laundry dengan solusi digital all-in-one ya
 <tr>
 <td align="center" width="50%">
 <img src="https://github.com/user-attachments/assets/a20b1d1a-f750-4ed8-bac7-ca2b17a97c20" width="300"/>
-<br><b>Mobile Responsive Design</b>
+<br><b>Main Dashboard Responsive Design</b>
 <br><i>Optimized untuk semua device</i>
 </td>
 </tr>
