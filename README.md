@@ -252,10 +252,8 @@ Kontribusi dari komunitas sangat diterima! Berikut cara Anda bisa membantu:
 
 ### 🆘 **Need Help?**
 
-- 📧 **Email**: support@cleanfresh.com
-- 💬 **Telegram**: [@CleanFreshSupport](#)
-- 📞 **WhatsApp**: +62 812-3456-7890
-- 🌐 **Website**: [www.cleanfresh.com](#)
+- 📧 **Email**: nimroterikson6@gmail.com
+- 📞 **WhatsApp**: +62 882-1611-8101
 
 </div>
 
